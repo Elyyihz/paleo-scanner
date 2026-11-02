@@ -2,10 +2,17 @@
 
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query, status
+from sqlalchemy.orm import Session
 from app.core.domain.entities.dinosaur import Dinosaur
+from app.core.domain.gateways.dinosaur_repository_gateway import (
+    IDinosaurRepositoryGateway,
+)
 from app.core.use_cases.get_dinosaur import GetDinosaurUseCase
 from app.core.use_cases.list_dinosaurs import ListDinosaursUseCase
-from app.infrastructure.repositories.json_dinosaur_repository import JSONDinosaurRepository
+from app.infrastructure.database.session import get_db_session
+from app.infrastructure.repositories.sql_dinosaur_repository import (
+    SQLAlchemyDinosaurRepository,
+)
 from app.presentation.schemas.scan_dto import (
     DinosaurDTO,
     PaleoPinesProfileDTO,
@@ -15,9 +22,11 @@ from app.presentation.schemas.scan_dto import (
 router = APIRouter()
 
 
-def get_repository() -> JSONDinosaurRepository:
-    """Dependency provider for the repository."""
-    return JSONDinosaurRepository()
+def get_repository(
+    db: Session = Depends(get_db_session),
+) -> IDinosaurRepositoryGateway:
+    """Dependency provider returning the relational database repository."""
+    return SQLAlchemyDinosaurRepository(session=db)
 
 
 def to_dto(dino: Dinosaur) -> DinosaurDTO:
@@ -62,7 +71,7 @@ def to_dto(dino: Dinosaur) -> DinosaurDTO:
 def list_dinosaurs(
     biome: Optional[str] = Query(None, description="Filtrar por bioma (Valley, Forest, Desert)"),
     diet: Optional[str] = Query(None, description="Filtrar por dieta (Herbivore, Carnivore, Omnivore)"),
-    repo: JSONDinosaurRepository = Depends(get_repository),
+    repo: IDinosaurRepositoryGateway = Depends(get_repository),
 ):
     """Retrieve catalog of all dinosaur species in Paleo Pines."""
     use_case = ListDinosaursUseCase(repo)
@@ -73,7 +82,7 @@ def list_dinosaurs(
 @router.get("/dinosaurs/{slug}", response_model=DinosaurDTO, tags=["Dinosaurs"])
 def get_dinosaur(
     slug: str,
-    repo: JSONDinosaurRepository = Depends(get_repository),
+    repo: IDinosaurRepositoryGateway = Depends(get_repository),
 ):
     """Retrieve details and real fossil comparison profile for a specific species."""
     use_case = GetDinosaurUseCase(repo)

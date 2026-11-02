@@ -1,12 +1,35 @@
 """FastAPI main application entrypoint."""
 
+import logging
+from contextlib import asynccontextmanager
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from app.infrastructure.database.seeder import seed_database_if_empty
+from app.infrastructure.database.session import SessionLocal, init_db
 from app.presentation.api.v1.api_router import api_router
 
+logger = logging.getLogger("paleo_scanner")
+logging.basicConfig(level=logging.INFO)
+
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan event handler initializing relational database and seed data."""
+    logger.info("Initializing Paleo-Scanner relational database...")
+    init_db()
+    db = SessionLocal()
+    try:
+        count = seed_database_if_empty(db)
+        logger.info("Paleo-Scanner relational catalog ready with %d species.", count)
+    finally:
+        db.close()
+    yield
+    logger.info("Shutting down Paleo-Scanner API.")
+
 
 app = FastAPI(
     title="🦖 Paleo-Scanner API",
@@ -14,6 +37,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # CORS setup for Angular frontend integration

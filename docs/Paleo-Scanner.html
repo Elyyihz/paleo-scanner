@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paleo-Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{
+  --bg:#06202e; --surface:#0b3247; --surface2:#114560; --line:#1d5a78;
+  --scan:#22d3ee; --scan-soft:#67e8f9; --fossil:#e8dcc2; --text:#e6f6fb; --muted:#8fb6c6;
+  --on-scan:#04202b;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#eaf6f9; --surface:#ffffff; --surface2:#d6eef4; --line:#9ccbd9;
+    --scan:#0891b2; --scan-soft:#0e7490; --fossil:#7a5c2e; --text:#06202e; --muted:#3d6677; --on-scan:#ffffff;
+    color-scheme:light;
+  }
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:40px 40px;background-position:-1px -1px}
+body::before{content:"";position:fixed;inset:0;background:var(--bg);opacity:.9;z-index:-1}
+.mono{font-family:'JetBrains Mono',monospace}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.c-scan{color:var(--scan)} .c-muted{color:var(--muted)} .c-fossil{color:var(--fossil)}
+.btn{background:var(--scan);color:var(--on-scan);font-weight:700;border-radius:8px;padding:.6rem 1.1rem;cursor:pointer;border:0}
+.btn:focus-visible,.chip:focus-visible,.drop:focus-visible{outline:2px solid var(--scan-soft);outline-offset:3px}
+.chip{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:999px;padding:.35rem .9rem;cursor:pointer;font:inherit;font-size:.85rem}
+.chip[aria-pressed="true"]{background:var(--scan);color:var(--on-scan);border-color:var(--scan)}
+/* visor */
+.drop{position:relative;border:1px dashed var(--line);border-radius:6px;min-height:280px;display:grid;place-items:center;text-align:center;padding:2rem;cursor:pointer;background:color-mix(in srgb,var(--surface) 80%,transparent)}
+.drop.over{border-color:var(--scan)}
+.corner{position:absolute;width:26px;height:26px;border:3px solid var(--scan)}
+.corner.tl{top:-2px;left:-2px;border-right:0;border-bottom:0}
+.corner.tr{top:-2px;right:-2px;border-left:0;border-bottom:0}
+.corner.bl{bottom:-2px;left:-2px;border-right:0;border-top:0}
+.corner.br{bottom:-2px;right:-2px;border-left:0;border-top:0}
+.scanline{position:absolute;left:0;right:0;height:3px;background:var(--scan);box-shadow:0 0 18px 6px color-mix(in srgb,var(--scan) 60%,transparent);animation:sweep 1.6s ease-in-out infinite alternate}
+@keyframes sweep{from{top:0}to{top:calc(100% - 3px)}}
+@media (prefers-reduced-motion: reduce){.scanline{animation:none;top:50%}}
+.link{position:relative}
+.node{width:34px;height:34px;border-radius:50%;background:var(--surface2);border:1px solid var(--scan);display:grid;place-items:center}
+.ring-bg{stroke:var(--surface2)} .ring-fg{stroke:var(--scan);transition:stroke-dashoffset 1s}
+.hidden-x{display:none}
+.tab[aria-selected="true"]{background:var(--scan);color:var(--on-scan)}
+</style>
+</head>
+<body>
+<div class="max-w-5xl mx-auto px-4 py-8 sm:py-12">
+
+<header class="flex items-center justify-between gap-4 mb-8">
+  <div class="flex items-center gap-3">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--scan)" stroke-width="1.8" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 13c1-3 3-4 6-4 1 0 2 .5 2 1.5S15 12 14 12l-1 3-2-1-1 2"/></svg>
+    <div>
+      <h1 class="text-2xl font-bold leading-none">Paleo-Scanner</h1>
+      <p class="text-sm c-muted mt-1">Do jogo Paleo Pines ao registro fóssil</p>
+    </div>
+  </div>
+  <span class="mono text-xs c-muted hidden sm:block">protótipo · dados de exemplo</span>
+</header>
+
+<!-- SCANNER -->
+<section id="scanner" aria-labelledby="t-scan">
+  <h2 id="t-scan" class="sr-only">Enviar captura de tela</h2>
+  <div id="drop" class="drop" tabindex="0" role="button" aria-label="Enviar captura de tela do jogo">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div id="dropIdle">
+      <p class="text-xl font-medium">Solte aqui o print do seu dinossauro</p>
+      <p class="c-muted mt-2 text-sm">Arraste, cole com Ctrl+V ou clique para escolher um arquivo</p>
+    </div>
+    <div id="dropBusy" class="hidden-x absolute inset-0 overflow-hidden rounded-md">
+      <img id="preview" alt="Captura enviada" class="w-full h-full object-contain p-4" src="">
+      <div class="scanline"></div>
+      <p id="msg" class="mono text-sm c-scan absolute bottom-3 left-0 right-0 text-center" aria-live="polite"></p>
+    </div>
+    <input id="file" type="file" accept="image/*" class="hidden">
+  </div>
+  <div class="flex flex-wrap items-center gap-3 mt-4">
+    <button id="demo" class="btn">Escanear exemplo</button>
+    <span class="text-sm c-muted">Sem print à mão? Veja um resultado de demonstração.</span>
+  </div>
+</section>
+
+<!-- RESULTADO -->
+<section id="result" class="hidden-x mt-12" aria-labelledby="t-res">
+  <div class="flex flex-wrap items-end justify-between gap-3 mb-4">
+    <div>
+      <h2 id="t-res" class="text-3xl font-bold">Parasaurolophus</h2>
+      <p class="c-muted text-sm mt-1">Identificado no estilo visual do jogo</p>
+    </div>
+    <div class="panel p-3 w-full sm:w-72" aria-label="Previsões da rede neural">
+      <p class="text-xs c-muted mb-2">Confiança da CNN</p>
+      <div class="space-y-1.5 mono text-xs" id="conf"></div>
+      <button class="text-xs c-scan underline mt-2">Errou? Corrija</button>
+    </div>
+  </div>
+
+  <!-- abas mobile -->
+  <div class="flex gap-2 mb-3 md:hidden" role="tablist">
+    <button class="tab chip" role="tab" aria-selected="true" data-t="game">Jogo</button>
+    <button class="tab chip" role="tab" aria-selected="false" data-t="real">Real</button>
+  </div>
+
+  <div class="grid md:grid-cols-[1fr_64px_1fr] gap-4 items-stretch">
+    <!-- JOGO -->
+    <div id="colGame" class="panel p-5">
+      <h3 class="font-bold mb-4">Lado do jogo</h3>
+      <div class="rounded-md overflow-hidden mb-4 h-40 grid place-items-center" style="background:var(--surface2)">
+        <img id="preview2" alt="" class="max-h-full object-contain hidden-x">
+        <svg id="ph" viewBox="0 0 200 100" width="200" aria-hidden="true"><path d="M20 70c10-20 30-30 60-30l30-20c8-4 18 0 20 8l-8 6 10 6c-3 8-12 10-22 8l-14 8c-4 12-6 20-4 28h-12c-2-8-2-14 0-20-14 2-30 2-42-4l-6 14H18z" fill="var(--scan)" opacity=".75"/></svg>
+      </div>
+      <dl id="gameRows" class="divide-y" style="--tw-divide-opacity:1"></dl>
+    </div>
+
+    <!-- CONECTORES -->
+    <div id="links" class="hidden md:flex flex-col pt-[236px] pb-5 gap-0 items-center" aria-hidden="true"></div>
+
+    <!-- REAL -->
+    <div id="colReal" class="panel p-5">
+      <h3 class="font-bold mb-4">Lado real</h3>
+      <div class="rounded-md mb-4 h-40 grid place-items-center" style="background:var(--surface2)">
+        <svg viewBox="0 0 200 100" width="200" role="img" aria-label="Silhueta do animal real"><path d="M14 66c8-16 28-26 56-26l34-24c8-6 22-4 26 4 1 3-1 6-4 8l-8 4 12 6c-3 8-12 10-22 8l-12 6c-6 12-8 22-6 30h-12c-2-8-1-14 1-20-16 2-32 2-46-4l-8 14H12z" fill="var(--fossil)"/><path d="M104 16c-6-10-4-14 4-12" stroke="var(--fossil)" stroke-width="5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <dl id="realRows" class="divide-y"></dl>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-[280px_1fr] gap-4 mt-4">
+    <!-- fidelidade -->
+    <div class="panel p-5">
+      <h3 class="font-bold mb-3">Fidelidade científica</h3>
+      <div class="relative w-36 mx-auto">
+        <svg viewBox="0 0 120 120" class="-rotate-90" role="img" aria-label="Fidelidade de 72 por cento">
+          <circle class="ring-bg" cx="60" cy="60" r="50" fill="none" stroke-width="10"/>
+          <circle id="ring" class="ring-fg" cx="60" cy="60" r="50" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314"/>
+        </svg>
+        <div class="absolute inset-0 grid place-items-center"><span class="text-3xl font-bold mono">72%</span></div>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-4 justify-center text-xs">
+        <span class="chip">Crista confirmada</span><span class="chip">Cores inventadas</span><span class="chip">Tamanho reduzido</span>
+      </div>
+    </div>
+
+    <!-- linha do tempo + escala -->
+    <div class="panel p-5">
+      <h3 class="font-bold mb-3">Linha do tempo geológica</h3>
+      <div class="relative mt-6 mb-2">
+        <div class="flex h-9 rounded overflow-hidden text-xs font-medium text-center" style="color:var(--on-scan)">
+          <div style="flex:51;background:var(--muted)" class="grid place-items-center">Triássico</div>
+          <div style="flex:56;background:var(--scan-soft)" class="grid place-items-center">Jurássico</div>
+          <div style="flex:79;background:var(--scan)" class="grid place-items-center">Cretáceo</div>
+        </div>
+        <div class="absolute -top-6" style="left:calc(100% * (51+56+22)/186)" title="76 milhões de anos">
+          <svg width="16" height="20" viewBox="0 0 16 20" aria-hidden="true"><path d="M8 20 0 4h16z" fill="var(--fossil)"/></svg>
+        </div>
+      </div>
+      <div class="flex justify-between mono text-xs c-muted"><span>252 Ma</span><span>201 Ma</span><span>145 Ma</span><span>66 Ma</span></div>
+      <p class="text-sm c-muted mt-2">Marcador em ~76 milhões de anos, no Cretáceo Superior.</p>
+
+      <h3 class="font-bold mt-6 mb-3">Comparativo de tamanho</h3>
+      <div class="flex gap-2 mb-3" role="group" aria-label="Referência de escala">
+        <button class="chip" aria-pressed="true" data-ref="1.7" data-n="Humano">Humano</button>
+        <button class="chip" aria-pressed="false" data-ref="4.5" data-n="Carro">Carro</button>
+        <button class="chip" aria-pressed="false" data-ref="12" data-n="Ônibus">Ônibus</button>
+      </div>
+      <div class="flex items-end gap-4 h-28 overflow-x-auto">
+        <div class="flex flex-col items-center shrink-0">
+          <div id="refBar" class="rounded-t" style="background:var(--surface2);border:1px solid var(--scan);width:20px;height:20px"></div>
+        </div>
+        <div class="flex flex-col items-center shrink-0">
+          <div id="dinoBar" class="rounded-t" style="background:var(--fossil);width:20px;height:20px"></div>
+        </div>
+        <p id="sizeTxt" class="mono text-xs c-muted self-center"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="mt-12 text-xs c-muted">Protótipo visual. Dados do jogo são ilustrativos; dados reais são aproximados.</footer>
+</div>
+
+<script>
+const ico = {
+  biome:'<path d="M12 3 6 12h4l-4 7h12l-4-7h4z"/>',
+  diet:'<path d="M12 21v-9M12 12c-4 0-6-3-6-7 4 0 6 3 6 7zM12 14c3 0 5-2 5-5-3 0-5 2-5 5z"/>',
+  time:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  place:'<path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>'
+};
+const svg = (k,c='var(--scan)') => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ico[k]}</svg>`;
+const rows = [
+  {k:'biome', gl:'Bioma', gv:'Floresta de pinheiros', rl:'Hábitat fóssil', rv:'Planícies costeiras e florestas'},
+  {k:'diet',  gl:'Dieta poppins', gv:'Flores e frutas', rl:'Dieta fóssil', rv:'Herbívoro (folhas, galhos, pinhas)'},
+  {k:'time',  gl:'Temperamento', gv:'Calmo e curioso', rl:'Período', rv:'Cretáceo Superior, ~76 Ma'},
+  {k:'place', gl:'Habilidade', gv:'Corrida em manada', rl:'Fósseis achados', rv:'Alberta, Novo México, Utah'}
+];
+const row=(i,l,v)=>`<div class="py-3 flex gap-3 items-start" style="border-color:var(--line)">${svg(i)}<div><dt class="text-xs c-muted">${l}</dt><dd class="font-medium">${v}</dd></div></div>`;
+document.getElementById('gameRows').innerHTML = rows.map(r=>row(r.k,r.gl,r.gv)).join('');
+document.getElementById('realRows').innerHTML = rows.map(r=>row(r.k,r.rl,r.rv)).join('');
+document.getElementById('links').innerHTML = rows.map(()=>`<div class="node mb-[44px]">${svg('time').replace(/<path.*<\/svg>/,'<path d="M5 12h14M13 6l6 6-6 6"/></svg>')}</div>`).join('');
+document.getElementById('conf').innerHTML = [['Parasaurolophus',87],['Saurolophus',9],['Corythosaurus',4]].map(([n,p],i)=>
+ `<div><div class="flex justify-between"><span>${n}</span><span>${p}%</span></div><div class="h-1.5 rounded" style="background:var(--surface2)"><div class="h-1.5 rounded" style="width:${p}%;background:${i?'var(--muted)':'var(--scan)'}"></div></div></div>`).join('');
+
+const $=id=>document.getElementById(id);
+const drop=$('drop'), file=$('file');
+function setImg(src){ $('preview').src=src; $('preview2').src=src; $('preview2').classList.remove('hidden-x'); $('ph').classList.add('hidden-x'); }
+function run(){
+  $('dropIdle').classList.add('hidden-x'); $('dropBusy').classList.remove('hidden-x');
+  const m=['Analisando padrões de cor...','Classificando a espécie...','Comparando com o registro fóssil...']; let i=0;
+  $('msg').textContent=m[0]; const t=setInterval(()=>{ $('msg').textContent=m[++i%m.length]; },900);
+  setTimeout(()=>{ clearInterval(t); $('dropBusy').classList.add('hidden-x'); $('dropIdle').classList.remove('hidden-x');
+    $('result').classList.remove('hidden-x'); $('ring').style.strokeDashoffset=314*(1-.72);
+    sizeUpdate(); $('result').scrollIntoView({behavior:'smooth'}); },2700);
+}
+function load(f){ if(!f||!f.type.startsWith('image/'))return; const r=new FileReader(); r.onload=e=>{setImg(e.target.result);run()}; r.readAsDataURL(f); }
+drop.addEventListener('click',()=>file.click());
+drop.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click();} });
+file.addEventListener('change',()=>load(file.files[0]));
+['dragover','dragenter'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over')}));
+drop.addEventListener('drop',e=>load(e.dataTransfer.files[0]));
+document.addEventListener('paste',e=>{ const it=[...(e.clipboardData?.items||[])].find(i=>i.type.startsWith('image/')); if(it) load(it.getAsFile()); });
+$('demo').addEventListener('click',()=>{ $('preview').removeAttribute('src'); $('preview2').classList.add('hidden-x'); $('ph').classList.remove('hidden-x'); run(); });
+
+// escala
+let ref={v:1.7,n:'Humano'}; const DINO=9.5;
+function sizeUpdate(){ const px=10; // px por metro
+  $('refBar').style.height=Math.max(ref.v*px*1.6,10)+'px'; $('refBar').style.width='20px';
+  $('dinoBar').style.height=(DINO*px*1.0)+'px'; $('dinoBar').style.width='46px';
+  $('sizeTxt').textContent=`Parasaurolophus: ~9,5 m de comprimento. ${ref.n}: ${String(ref.v).replace('.',',')} m.`; }
+document.querySelectorAll('[data-ref]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-ref]').forEach(x=>x.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true');
+  ref={v:parseFloat(b.dataset.ref),n:b.dataset.n}; sizeUpdate(); }));
+
+// abas mobile
+const mq=window.matchMedia('(min-width:768px)');
+function tabs(t){ if(mq.matches){$('colGame').style.display='';$('colReal').style.display='';return;}
+  $('colGame').style.display=t==='game'?'':'none'; $('colReal').style.display=t==='real'?'':'none'; }
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false')); b.setAttribute('aria-selected','true'); tabs(b.dataset.t); }));
+mq.addEventListener('change',()=>tabs('game')); tabs('game');
+</script>
+</body>
+</html>

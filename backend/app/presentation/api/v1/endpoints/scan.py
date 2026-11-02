@@ -1,10 +1,12 @@
 """Endpoint for scanning and classifying dinosaur screenshots."""
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from app.core.domain.gateways.dinosaur_repository_gateway import (
+    IDinosaurRepositoryGateway,
+)
 from app.core.use_cases.scan_dinosaur import ScanDinosaurUseCase
 from app.infrastructure.ml.keras_vision_classifier import KerasVisionClassifierGateway
-from app.infrastructure.repositories.json_dinosaur_repository import JSONDinosaurRepository
-from app.presentation.api.v1.endpoints.dinosaurs import to_dto
+from app.presentation.api.v1.endpoints.dinosaurs import get_repository, to_dto
 from app.presentation.schemas.scan_dto import (
     ComparisonReportDTO,
     PredictionCandidateDTO,
@@ -18,11 +20,12 @@ MAX_FILE_SIZE_MB = 10
 ALLOWED_MIME_TYPES = ["image/jpeg", "image/png", "image/webp"]
 
 
-def get_scan_use_case() -> ScanDinosaurUseCase:
+def get_scan_use_case(
+    repo: IDinosaurRepositoryGateway = Depends(get_repository),
+) -> ScanDinosaurUseCase:
     """Dependency provider for ScanDinosaurUseCase."""
     vision_gw = KerasVisionClassifierGateway()
-    dino_repo = JSONDinosaurRepository()
-    return ScanDinosaurUseCase(vision_gateway=vision_gw, dinosaur_repo=dino_repo)
+    return ScanDinosaurUseCase(vision_gateway=vision_gw, dinosaur_repo=repo)
 
 
 @router.post(
