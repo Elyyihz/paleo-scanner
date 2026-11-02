@@ -29,17 +29,17 @@ def in_memory_session():
 
 
 def test_database_seeding_count(in_memory_session):
-    """Verify that exactly 39 species are seeded with complete relationships."""
+    """Verify that exactly 40 species are seeded with complete relationships."""
     repo = SQLAlchemyDinosaurRepository(in_memory_session)
     dinosaurs = repo.list_all()
-    assert len(dinosaurs) == 39
+    assert len(dinosaurs) == 40
 
     # Re-running seeder should be idempotent
     count = seed_database_if_empty(in_memory_session)
-    assert count == 39
+    assert count == 40
 
 
-def test_all_39_species_have_rich_fossil_profiles(in_memory_session):
+def test_all_40_species_have_rich_fossil_profiles(in_memory_session):
     """Verify 100% fossil record coverage: every single species must have real scientific data."""
     repo = SQLAlchemyDinosaurRepository(in_memory_session)
     dinosaurs = repo.list_all()
@@ -77,10 +77,15 @@ def test_find_by_slug_and_aliases(in_memory_session):
     trex_dash = repo.find_by_slug("t-rex")
     assert trex_dash is not None
 
-    # Lucky companion
-    lucky = repo.find_by_slug("lucky")
-    assert lucky is not None
-    assert "Parasaurolophus" in lucky.fossil_profile.scientific_name
+    # Spinosaurus
+    spino = repo.find_by_slug("spinosaurus")
+    assert spino is not None
+    assert "Spinosaurus" in spino.fossil_profile.scientific_name
+
+    # Sarcosuchus
+    sarco = repo.find_by_slug("sarcosuchus")
+    assert sarco is not None
+    assert "Sarcosuchus" in sarco.fossil_profile.scientific_name
 
     # Non-existent slug
     unknown = repo.find_by_slug("godzillasaurus_rex")

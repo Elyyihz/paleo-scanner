@@ -342,25 +342,6 @@
     "speed_sprint": null
   },
   {
-    "slug": "lucky",
-    "common_name": "Lucky",
-    "diet": "Herbivore",
-    "social": "Herd",
-    "biome": "None",
-    "poppin_favorite": "Juicy",
-    "wild_skill": "Sprinter",
-    "farm_skill": "Clearer",
-    "size": "Medium",
-    "ridable": true,
-    "pen_m2": 25.0,
-    "friendcall": "",
-    "description": "We caught a glimpse of one of those Parasaurolophus! It must have wandered far from home.",
-    "wiki_link": "https://paleo-pines.fandom.com/wiki/Lucky",
-    "paleo_gg_link": "https://www.paleo.gg/games/paleo-pines/dinosaurs/lucky",
-    "speed_trot": 17.0,
-    "speed_sprint": 36.0
-  },
-  {
     "slug": "megalosaurus",
     "common_name": "Megalosaurus",
     "diet": "Carnivore",
@@ -551,6 +532,25 @@
     "speed_sprint": null
   },
   {
+    "slug": "sarcosuchus",
+    "common_name": "Sarcosuchus",
+    "diet": "Carnivore",
+    "social": "Pack",
+    "biome": "Desert",
+    "poppin_favorite": "Crunchy",
+    "wild_skill": "Stomper",
+    "farm_skill": "Waterer",
+    "size": "Large",
+    "ridable": true,
+    "pen_m2": 50.0,
+    "friendcall": "2L|1M|3S|2S|4L",
+    "description": "Sarcosuchus is a playful and cheeky creature that thrives with friends in warm environments near water. With their sturdy build, this crocodyliform can help smash through any obstacle making them the perfect steed to navigate sweeping landscapes.",
+    "wiki_link": "https://paleo-pines.fandom.com/wiki/Sarcosuchus",
+    "paleo_gg_link": "https://www.paleo.gg/games/paleo-pines/dinosaurs/sarco",
+    "speed_trot": 14.0,
+    "speed_sprint": null
+  },
+  {
     "slug": "scelidosaurus",
     "common_name": "Scelidosaurus",
     "diet": "Herbivore",
@@ -568,6 +568,25 @@
     "paleo_gg_link": "https://www.paleo.gg/games/paleo-pines/dinosaurs/sceli",
     "speed_trot": null,
     "speed_sprint": null
+  },
+  {
+    "slug": "spinosaurus",
+    "common_name": "Spinosaurus",
+    "diet": "Carnivore",
+    "social": "Loner",
+    "biome": "Valley",
+    "poppin_favorite": "Juicy",
+    "wild_skill": "Diver",
+    "farm_skill": "Waterer",
+    "size": "Large",
+    "ridable": true,
+    "pen_m2": 50.0,
+    "friendcall": "1M|2S|4L|3S|1L",
+    "description": "Magnificent, semi-aquatic theropods often found frolicking near Veridian Valley's rivers. Don't be scared by the toothy smile... these gentle giants are sweethearts who love exploring, swimming and watering crops.",
+    "wiki_link": "https://paleo-pines.fandom.com/wiki/Spinosaurus",
+    "paleo_gg_link": "https://www.paleo.gg/games/paleo-pines/dinosaurs/spino",
+    "speed_trot": 12.0,
+    "speed_sprint": 32.0
   },
   {
     "slug": "stegosaurus",

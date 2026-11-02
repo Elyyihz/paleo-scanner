@@ -18,7 +18,7 @@ SEED_FILE_PATH = Path(__file__).resolve().parent / "dinosaurs_seed.json"
 
 
 def seed_database_if_empty(session: Session, seed_file: Optional[Path] = None) -> int:
-    """Populate the database with the 39 dinosaur species if records are missing.
+    """Populate the database with the dinosaur species if records are missing.
 
     Args:
         session: Active SQLAlchemy Session.
@@ -28,7 +28,7 @@ def seed_database_if_empty(session: Session, seed_file: Optional[Path] = None) -
         Number of dinosaur species inserted or present in the database.
     """
     existing_count = session.query(DinosaurModel).count()
-    if existing_count >= 39:
+    if existing_count >= 40:
         logger.info(
             "Relational database already contains %d species; skipping seed.",
             existing_count,

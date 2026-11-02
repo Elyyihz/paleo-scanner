@@ -21,13 +21,13 @@ import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.componen
             <div class="flex items-center gap-2 mb-1">
               <span class="text-xs uppercase font-mono font-semibold tracking-wider text-[#c8873a]">[BIO-ARQUIVO]</span>
               <span class="text-[#222d3a]">·</span>
-              <span class="text-xs font-mono text-[#94a3b8]">39 REGISTROS CATALOGADOS</span>
+              <span class="text-xs font-mono text-[#94a3b8]">{{ state.totalSpeciesCount() }} REGISTROS CATALOGADOS</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-bold text-[#ebe6dc] tracking-tight">
               Catálogo de Espécies
             </h2>
             <p class="text-xs sm:text-sm text-[#94a3b8] mt-1">
-              Explore os 39 espécimes de Paleo Pines e correlacione seus traços com registros fósseis e reconstituições paleontológicas.
+              Explore os {{ state.totalSpeciesCount() }} espécimes de Paleo Pines e correlacione seus traços com registros fósseis e reconstituições paleontológicas.
             </p>
           </div>
 

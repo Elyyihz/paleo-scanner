@@ -25,7 +25,7 @@ def test_list_dinosaurs_endpoint(client):
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
-    assert len(data) == 39
+    assert len(data) == 40
 
 
 def test_get_dinosaur_by_slug_endpoint(client):
@@ -56,12 +56,19 @@ def test_get_dinosaur_newly_curated_species(client):
     assert data_dim["fossil_profile"]["scientific_name"] == "Dimetrodon grandis"
     assert data_dim["fossil_profile"]["geological_period"] == "Permian"
 
-    # Test Lucky companion
-    res_lucky = client.get("/api/v1/dinosaurs/lucky")
-    assert res_lucky.status_code == 200
-    data_lucky = res_lucky.json()
-    assert data_lucky["fossil_profile"] is not None
-    assert "Parasaurolophus" in data_lucky["fossil_profile"]["scientific_name"]
+    # Test Spinosaurus
+    res_spino = client.get("/api/v1/dinosaurs/spinosaurus")
+    assert res_spino.status_code == 200
+    data_spino = res_spino.json()
+    assert data_spino["fossil_profile"] is not None
+    assert "Spinosaurus aegyptiacus" in data_spino["fossil_profile"]["scientific_name"]
+
+    # Test Sarcosuchus
+    res_sarco = client.get("/api/v1/dinosaurs/sarcosuchus")
+    assert res_sarco.status_code == 200
+    data_sarco = res_sarco.json()
+    assert data_sarco["fossil_profile"] is not None
+    assert "Sarcosuchus imperator" in data_sarco["fossil_profile"]["scientific_name"]
 
 
 def test_get_dinosaur_not_found(client):
