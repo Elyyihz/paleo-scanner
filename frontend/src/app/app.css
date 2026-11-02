@@ -1,38 +1,42 @@
-/* Paleo-Scanner Technological Bio-Lab & Scanner Styling */
+/* Paleo-Scanner Scientific Paleobiology Laboratory Workstation Styling */
 
 :root {
-  --bg-primary: #05131e;
-  --surface-primary: #0a2030;
-  --surface-secondary: #0f2c42;
-  --surface-border: #174463;
-  --surface-border-bright: #226491;
-  --scan-accent: #06b6d4;
-  --scan-soft: #38bdf8;
-  --scan-glow: rgba(6, 182, 212, 0.45);
-  --nature-green: #10b981;
-  --amber-fossil: #f59e0b;
-  --bone-ivory: #f8fafc;
-  --slate-muted: #94a3b8;
+  --bg-primary: #0c1015;
+  --surface-primary: #121820;
+  --surface-secondary: #16202a;
+  --surface-border: #222d3a;
+  --surface-border-bright: #334457;
+
+  /* Scientific Diversity Palette */
+  --amber-fossil: #c8873a;
+  --amber-fossil-muted: #805020;
+  --green-biome: #2e7d4b;
+  --green-biome-muted: #174227;
+  --terracotta-paleoart: #9c5836;
+  --gold-cretaceous: #b89230;
+  --slate-telemetry: #38bdf8;
+  --steel-muted: #64748b;
+  --bone-ivory: #ebe6dc;
 }
 
 body {
   background-color: var(--bg-primary);
   background-image:
-    linear-gradient(rgba(23, 68, 99, 0.25) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 68, 99, 0.25) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(rgba(34, 45, 58, 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 45, 58, 0.45) 1px, transparent 1px);
+  background-size: 28px 28px;
   background-position: -1px -1px;
+  color: var(--bone-ivory);
 }
 
-/* Tactical HUD Corner Brackets */
+/* Subtle Technical Notches */
 .corner {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 2px solid var(--scan-accent);
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--surface-border-bright);
   pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 5;
 }
 
 .corner.tl {
@@ -63,17 +67,17 @@ body {
   border-top: 0;
 }
 
-/* Visor Laser Scanline */
+/* Scientific Precision Scanline (Subtle Laboratory Laser) */
 .scanline {
   position: absolute;
   left: 0;
   right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--scan-soft), var(--scan-accent), transparent);
-  box-shadow: 0 0 20px 6px var(--scan-glow);
-  animation: sweep 1.8s ease-in-out infinite alternate;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.7), transparent);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+  animation: sweep 2.4s ease-in-out infinite alternate;
   pointer-events: none;
-  z-index: 20;
+  z-index: 10;
 }
 
 @keyframes sweep {
@@ -81,7 +85,7 @@ body {
     top: 0;
   }
   to {
-    top: calc(100% - 3px);
+    top: calc(100% - 2px);
   }
 }
 
@@ -94,38 +98,26 @@ body {
 
 /* Specimen Technical Viewport Background */
 .specimen-viewport {
-  background-color: #040e16;
+  background-color: #080c10;
   background-image:
-    radial-gradient(circle, rgba(6, 182, 212, 0.15) 1px, transparent 1px),
-    linear-gradient(rgba(23, 68, 99, 0.2) 1px, transparent 1px);
+    radial-gradient(circle, rgba(100, 116, 139, 0.18) 1px, transparent 1px),
+    linear-gradient(rgba(34, 45, 58, 0.3) 1px, transparent 1px);
   background-size: 16px 16px, 32px 32px;
-}
-
-/* Circular Fidelity Gauge */
-.ring-bg {
-  stroke: #0f2c42;
-}
-
-.ring-fg {
-  stroke: var(--scan-accent);
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Correlation Node in Matrix */
 .conn-node {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #091d2c;
-  border: 2px solid var(--scan-accent);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: #121820;
+  border: 1px solid #334457;
   display: grid;
   place-items: center;
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
   transition: all 0.2s ease;
 }
 
 .conn-node:hover {
-  transform: scale(1.1);
-  border-color: #38bdf8;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+  border-color: #c8873a;
+  background: #18222d;
 }

@@ -54,11 +54,11 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
       />
 
       <!-- 4. SIDE-BY-SIDE MATRIX WITH CENTRAL CORRELATION NODES -->
-      <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#143750] pb-4">
+      <div class="rounded-lg border border-[#222d3a] bg-[#121820] p-5 sm:p-6 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#1c2633] pb-4">
           <div>
-            <span class="text-xs uppercase font-mono tracking-wider text-[#06b6d4] font-bold">[COMPARATIVE MATRIX]</span>
-            <h3 class="text-xl sm:text-2xl font-black text-[#f8fafc]">
+            <span class="text-xs uppercase font-mono tracking-wider text-[#c8873a] font-bold">[MATRIZ COMPARATIVA]</span>
+            <h3 class="text-xl sm:text-2xl font-black text-[#ebe6dc]">
               Mecânicas de Jogo vs Fatos Paleontológicos
             </h3>
           </div>
@@ -70,28 +70,28 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
           </div>
 
           <!-- Mobile Tab Toggles -->
-          <div class="flex md:hidden p-1 rounded-xl bg-[#071927] border border-[#174463] text-xs font-mono font-bold" role="tablist">
+          <div class="flex md:hidden p-0.5 rounded-md bg-[#0c1015] border border-[#222d3a] text-xs font-mono font-bold" role="tablist">
             <button
               type="button"
               (click)="mobileTab.set('both')"
-              class="px-3 py-1 rounded-lg transition-all"
-              [class]="mobileTab() === 'both' ? 'bg-[#0891b2] text-white' : 'text-[#94a3b8]'"
+              class="px-3 py-1 rounded transition-all"
+              [class]="mobileTab() === 'both' ? 'bg-[#1e293b] text-white' : 'text-[#94a3b8]'"
             >
               Ambos
             </button>
             <button
               type="button"
               (click)="mobileTab.set('game')"
-              class="px-3 py-1 rounded-lg transition-all"
-              [class]="mobileTab() === 'game' ? 'bg-[#059669] text-white' : 'text-[#94a3b8]'"
+              class="px-3 py-1 rounded transition-all"
+              [class]="mobileTab() === 'game' ? 'bg-[#143322] text-[#4ade80]' : 'text-[#94a3b8]'"
             >
               Jogo
             </button>
             <button
               type="button"
               (click)="mobileTab.set('real')"
-              class="px-3 py-1 rounded-lg transition-all"
-              [class]="mobileTab() === 'real' ? 'bg-[#0284c7] text-white' : 'text-[#94a3b8]'"
+              class="px-3 py-1 rounded transition-all"
+              [class]="mobileTab() === 'real' ? 'bg-[#332010] text-[#fcd34d]' : 'text-[#94a3b8]'"
             >
               Fóssil
             </button>
@@ -102,57 +102,57 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
         <div class="grid grid-cols-1 md:grid-cols-[1fr_54px_1fr] gap-4 sm:gap-6 items-stretch">
           <!-- LEFT: GAME ATTRIBUTES -->
           @if (mobileTab() === 'both' || mobileTab() === 'game') {
-            <div class="rounded-2xl border border-[#1b4332] bg-[#071927] p-5 flex flex-col justify-between space-y-4 shadow-md">
-              <div class="flex items-center justify-between pb-3 border-b border-[#133e31]">
+            <div class="rounded border border-[#1b3a26] bg-[#0e1612] p-5 flex flex-col justify-between space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-[#1b3a26]">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-lg bg-[#062c20] border border-[#0d6b4a] flex items-center justify-center text-[#34d399]">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <div class="w-7 h-7 rounded bg-[#143322] border border-[#1e5033] flex items-center justify-center text-[#4ade80]">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                     </svg>
                   </div>
-                  <h4 class="font-bold text-sm sm:text-base text-[#34d399]">No Jogo (Paleo Pines)</h4>
+                  <h4 class="font-bold text-sm sm:text-base text-[#4ade80]">No Jogo (Paleo Pines)</h4>
                 </div>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border" [class]="biomeBadgeClass()">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold border" [class]="biomeBadgeClass()">
                   {{ dino().game_profile.biome }}
                 </span>
               </div>
 
               <!-- Comparison Rows Game -->
-              <div class="space-y-3.5 text-xs font-mono">
+              <div class="space-y-3 text-xs font-mono">
                 <!-- Row 1: Biome / Environment -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#133e31]">
-                  <span class="text-[#6ee7b7] block text-[11px] font-semibold">BIOMA / HÁBITAT:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">{{ dino().game_profile.biome }}</span>
+                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
+                  <span class="text-[#86efac] block text-[11px] font-semibold">BIOMA / HÁBITAT:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">{{ dino().game_profile.biome }}</span>
                 </div>
 
                 <!-- Row 2: Diet -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#133e31]">
-                  <span class="text-[#6ee7b7] block text-[11px] font-semibold">DIETA & POPPIN FAVORITO:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
+                  <span class="text-[#86efac] block text-[11px] font-semibold">DIETA & POPPIN FAVORITO:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     {{ dino().game_profile.diet }} (Sabor {{ dino().game_profile.poppin_favorite }})
                   </span>
                 </div>
 
                 <!-- Row 3: Social -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#133e31]">
-                  <span class="text-[#6ee7b7] block text-[11px] font-semibold">SOCIABILIDADE:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
+                  <span class="text-[#86efac] block text-[11px] font-semibold">SOCIABILIDADE:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     {{ dino().game_profile.social === 'Pack' ? 'Bando (Pack)' : dino().game_profile.social === 'Herd' ? 'Manada (Herd)' : 'Solitário (Loner)' }}
                   </span>
                 </div>
 
                 <!-- Row 4: Skills -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#133e31]">
-                  <span class="text-[#6ee7b7] block text-[11px] font-semibold">HABILIDADES NO RANCHO:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
+                  <span class="text-[#86efac] block text-[11px] font-semibold">HABILIDADES NO RANCHO:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     {{ dino().game_profile.farm_skill }} · {{ dino().game_profile.wild_skill }}
                   </span>
                 </div>
 
                 <!-- Row 5: Size & Riding -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#133e31]">
-                  <span class="text-[#6ee7b7] block text-[11px] font-semibold">PORTE & SELA:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
+                  <span class="text-[#86efac] block text-[11px] font-semibold">PORTE & SELA:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     Porte {{ dino().game_profile.size_category }} · {{ dino().game_profile.is_rideable ? 'Montável' : 'Não montável' }}
                   </span>
                 </div>
@@ -161,29 +161,29 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
           }
 
           <!-- MIDDLE: CORRELATION CONNECTION NODES -->
-          <div class="hidden md:flex flex-col items-center justify-around py-16" aria-hidden="true">
-            <div class="conn-node text-[#06b6d4]" title="Correspondência de Hábitat">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <div class="hidden md:flex flex-col items-center justify-around py-12" aria-hidden="true">
+            <div class="conn-node text-[#c8873a]" title="Correspondência de Hábitat">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
               </svg>
             </div>
-            <div class="conn-node text-[#06b6d4]" title="Correspondência de Dieta">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <div class="conn-node text-[#c8873a]" title="Correspondência de Dieta">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
               </svg>
             </div>
-            <div class="conn-node text-[#06b6d4]" title="Correlação Evolutiva">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <div class="conn-node text-[#c8873a]" title="Correlação Evolutiva">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
               </svg>
             </div>
-            <div class="conn-node text-[#06b6d4]" title="Adaptações Biológicas">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <div class="conn-node text-[#c8873a]" title="Adaptações Biológicas">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
               </svg>
             </div>
-            <div class="conn-node text-[#06b6d4]" title="Proporção Anatômica">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <div class="conn-node text-[#c8873a]" title="Proporção Anatômica">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M5 12h14M13 6l6 6-6 6"/>
               </svg>
             </div>
@@ -191,60 +191,60 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
 
           <!-- RIGHT: REAL FOSSIL EVIDENCE -->
           @if (mobileTab() === 'both' || mobileTab() === 'real') {
-            <div class="rounded-2xl border border-[#174463] bg-[#071927] p-5 flex flex-col justify-between space-y-4 shadow-md">
-              <div class="flex items-center justify-between pb-3 border-b border-[#143750]">
+            <div class="rounded border border-[#3a2c1b] bg-[#16120e] p-5 flex flex-col justify-between space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-[#3a2c1b]">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-lg bg-[#0b2b40] border border-[#174463] flex items-center justify-center text-[#38bdf8]">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <div class="w-7 h-7 rounded bg-[#332010] border border-[#6b3d16] flex items-center justify-center text-[#fcd34d]">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
                       <path d="M2.5 12a9.5 9.5 0 0 1 7-9.2"/>
                     </svg>
                   </div>
-                  <h4 class="font-bold text-sm sm:text-base text-[#38bdf8]">Lado Real (Paleontologia)</h4>
+                  <h4 class="font-bold text-sm sm:text-base text-[#fcd34d]">Lado Real (Paleontologia)</h4>
                 </div>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-[#0c2e42] text-[#38bdf8] border border-[#0369a1]">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-[#332010] text-[#fcd34d] border border-[#6b3d16]">
                   {{ dino().fossil_profile?.geological_period || 'Registro Fóssil' }}
                 </span>
               </div>
 
               <!-- Comparison Rows Real -->
-              <div class="space-y-3.5 text-xs font-mono">
+              <div class="space-y-3 text-xs font-mono">
                 <!-- Row 1: Real Formations & Locations -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#143750]">
-                  <span class="text-[#38bdf8] block text-[11px] font-semibold">FORMAÇÕES & LOCAIS FÓSSEIS:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
+                  <span class="text-[#fde68a] block text-[11px] font-semibold">FORMAÇÕES & LOCAIS FÓSSEIS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     {{ dino().fossil_profile?.fossil_locations?.join(', ') || 'Morrison, Hell Creek, Tendaguru' }}
                   </span>
                 </div>
 
                 <!-- Row 2: Real Diet -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#143750]">
-                  <span class="text-[#38bdf8] block text-[11px] font-semibold">DIETA FÓSSIL COMPROVADA:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
+                  <span class="text-[#fde68a] block text-[11px] font-semibold">DIETA FÓSSIL COMPROVADA:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     {{ dino().fossil_profile?.real_diet }} (Dentição e coprólitos)
                   </span>
                 </div>
 
                 <!-- Row 3: Taxonomy & Epoch -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#143750]">
-                  <span class="text-[#38bdf8] block text-[11px] font-semibold">CLADO & DATAÇÃO REAL:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
+                  <span class="text-[#fde68a] block text-[11px] font-semibold">CLADO & DATAÇÃO REAL:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     Família {{ dino().fossil_profile?.taxonomy_family }} · {{ dino().fossil_profile?.approximate_mya }}
                   </span>
                 </div>
 
                 <!-- Row 4: Anatomical Distinctive Features -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#143750]">
-                  <span class="text-[#38bdf8] block text-[11px] font-semibold">ADAPTAÇÕES DISTINTIVAS:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm line-clamp-2">
+                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
+                  <span class="text-[#fde68a] block text-[11px] font-semibold">ADAPTAÇÕES DISTINTIVAS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm line-clamp-2">
                     {{ dino().fossil_profile?.distinctive_features }}
                   </span>
                 </div>
 
                 <!-- Row 5: Real Dimensions -->
-                <div class="p-3 rounded-xl bg-[#05131e] border border-[#143750]">
-                  <span class="text-[#38bdf8] block text-[11px] font-semibold">DIMENSÕES CORPÓREAS:</span>
-                  <span class="font-bold text-[#f8fafc] text-sm">
+                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
+                  <span class="text-[#fde68a] block text-[11px] font-semibold">DIMENSÕES CORPÓREAS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-sm">
                     ~{{ dino().fossil_profile?.length_meters }} m de comprimento · ~{{ dino().fossil_profile?.mass_kg?.toLocaleString() }} kg
                   </span>
                 </div>
@@ -257,20 +257,20 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
       <!-- 5. CRITICAL INSIGHTS TELEMETRY (When comparison report is available) -->
       @if (report(); as rep) {
         @if (rep.key_insights.length > 0) {
-          <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl space-y-3">
-            <h4 class="text-xs uppercase font-mono font-black text-[#06b6d4] tracking-wider flex items-center gap-2">
-              <svg class="w-4 h-4 text-[#38bdf8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <div class="rounded-lg border border-[#222d3a] bg-[#121820] p-5 sm:p-6 shadow-sm space-y-3">
+            <h4 class="text-xs uppercase font-mono font-bold text-[#c8873a] tracking-wider flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#c8873a]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="12" y1="16" x2="12" y2="12"/>
                 <line x1="12" y1="8" x2="12.01" y2="8"/>
               </svg>
-              <span>[NOTES // PALEONTOLOGICAL ANALYSIS]</span>
+              <span>[ANÁLISE & NOTAS PALEONTOLÓGICAS]</span>
             </h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
               @for (insight of rep.key_insights; track insight) {
-                <div class="p-3.5 rounded-2xl bg-[#071927] border border-[#143750] flex items-start gap-2.5 text-xs font-mono text-[#94a3b8]">
-                  <span class="text-[#06b6d4] font-bold text-base leading-none">▸</span>
-                  <span class="leading-relaxed text-[#cbd5e1]">{{ insight }}</span>
+                <div class="p-3 rounded bg-[#0c1015] border border-[#222d3a] flex items-start gap-2.5 text-xs font-mono text-[#94a3b8]">
+                  <span class="text-[#c8873a] font-bold text-base leading-none">▸</span>
+                  <span class="leading-relaxed text-[#d6d0c4]">{{ insight }}</span>
                 </div>
               }
             </div>

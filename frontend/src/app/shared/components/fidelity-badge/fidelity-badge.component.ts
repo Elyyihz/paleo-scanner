@@ -1,20 +1,20 @@
 import { Component, computed, input } from '@angular/core';
 
 /**
- * Visual field stamp indicating paleontological accuracy level with high-tech HUD cues.
+ * Visual field stamp indicating paleontological accuracy level with sober laboratory HUD cues.
  */
 @Component({
   selector: 'app-fidelity-badge',
   standalone: true,
   template: `
     <div
-      class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wide border shadow-sm"
+      class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-mono font-medium tracking-wide border shadow-xs"
       [class]="badgeClasses()"
     >
-      <span class="w-2 h-2 rounded-full" [class]="dotClass()"></span>
+      <span class="w-1.5 h-1.5 rounded-full" [class]="dotClass()"></span>
       <span>{{ percentage() }}%</span>
       @if (showText()) {
-        <span class="hidden sm:inline font-semibold opacity-95">· {{ label() }}</span>
+        <span class="hidden sm:inline opacity-90">· {{ label() }}</span>
       }
     </div>
   `
@@ -26,19 +26,19 @@ export class FidelityBadgeComponent {
   public readonly badgeClasses = computed(() => {
     const val = this.percentage();
     if (val >= 80) {
-      return 'bg-[#064e3b] text-[#34d399] border-[#059669] shadow-[#064e3b]/30';
+      return 'bg-[#0f241a] text-[#4ade80] border-[#1b4d31]';
     }
     if (val >= 50) {
-      return 'bg-[#0c4a6e] text-[#38bdf8] border-[#0284c7] shadow-[#0c4a6e]/30';
+      return 'bg-[#241a0e] text-[#fcd34d] border-[#6b4716]';
     }
-    return 'bg-[#4c0519] text-[#fb7185] border-[#be123c] shadow-[#4c0519]/30';
+    return 'bg-[#261012] text-[#f87171] border-[#5c1c24]';
   });
 
   public readonly dotClass = computed(() => {
     const val = this.percentage();
-    if (val >= 80) return 'bg-[#10b981] animate-pulse';
-    if (val >= 50) return 'bg-[#06b6d4]';
-    return 'bg-[#f43f5e]';
+    if (val >= 80) return 'bg-[#4ade80]';
+    if (val >= 50) return 'bg-[#fcd34d]';
+    return 'bg-[#f87171]';
   });
 
   public readonly label = computed(() => {

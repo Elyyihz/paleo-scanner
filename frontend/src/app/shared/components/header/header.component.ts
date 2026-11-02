@@ -2,14 +2,14 @@ import { Component, inject } from '@angular/core';
 import { ScannerStateService } from '../../../core/services/scanner-state.service';
 
 /**
- * Top application navigation bar with high-tech bio-lab telemetry
+ * Top application navigation bar with sober bio-lab telemetry
  * and balanced 3-column alignment.
  */
 @Component({
   selector: 'app-header',
   standalone: true,
   template: `
-    <header class="sticky top-0 z-40 w-full border-b border-[#174463] bg-[#071927]/95 backdrop-blur-md shadow-lg shadow-cyan-950/20">
+    <header class="sticky top-0 z-40 w-full border-b border-[#222d3a] bg-[#0e141b]/95 backdrop-blur-md">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
         <!-- Left: Brand identity with Tech HUD tag -->
@@ -17,29 +17,29 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
           <img
             src="/logo.png"
             alt="Paleo Pines"
-            class="h-9 w-auto object-contain shrink-0 drop-shadow-md hover:scale-105 transition-transform"
+            class="h-9 w-auto object-contain shrink-0 drop-shadow-sm hover:opacity-95 transition-opacity"
           />
           <div class="flex items-baseline gap-2">
-            <h1 class="text-base sm:text-lg font-black tracking-tight text-[#f8fafc]">
-              PALEO<span class="text-[#06b6d4]">-SCANNER</span>
+            <h1 class="text-base sm:text-lg font-black tracking-tight text-[#ebe6dc]">
+              PALEO<span class="text-[#c8873a]">-SCANNER</span>
             </h1>
-            <span class="hidden xl:inline text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded bg-[#0b2436] text-[#38bdf8] border border-[#174463]">
-              BIO-LAB V2.4
+            <span class="hidden xl:inline text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded bg-[#16202a] text-[#c8873a] border border-[#2c3b4c]">
+              PESQUISA PALEOBIOLÓGICA
             </span>
           </div>
         </div>
 
         <!-- Center: Navigation Tabs (Tech Viewport Switcher) -->
-        <nav class="flex items-center gap-1.5 bg-[#091f2f] p-1 rounded-xl border border-[#174463] shadow-inner shrink-0">
+        <nav class="flex items-center gap-1.5 bg-[#121820] p-1 rounded-md border border-[#222d3a] shrink-0">
           <button
             type="button"
             (click)="state.setTab('scanner')"
-            class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
+            class="flex items-center gap-2 px-3.5 py-1.5 rounded text-xs font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'scanner'
-              ? 'bg-[#0891b2] text-white shadow-md shadow-cyan-950/60 border border-cyan-400/40'
-              : 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42]'"
+              ? 'bg-[#1e293b] text-white border border-[#3b82f6]/40 shadow-xs'
+              : 'text-[#94a3b8] hover:text-[#ebe6dc] hover:bg-[#16202a]'"
           >
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <svg class="w-3.5 h-3.5 text-[#38bdf8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/>
               <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
             </svg>
@@ -49,19 +49,19 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
           <button
             type="button"
             (click)="state.setTab('catalog')"
-            class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
+            class="flex items-center gap-2 px-3.5 py-1.5 rounded text-xs font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'catalog'
-              ? 'bg-[#059669] text-white shadow-md shadow-emerald-950/60 border border-emerald-400/40'
-              : 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42]'"
+              ? 'bg-[#1e293b] text-white border border-[#2e7d4b]/50 shadow-xs'
+              : 'text-[#94a3b8] hover:text-[#ebe6dc] hover:bg-[#16202a]'"
           >
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <svg class="w-3.5 h-3.5 text-[#4ade80]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
               <path d="M6 6h10"/>
               <path d="M6 10h10"/>
             </svg>
             <span>Catálogo</span>
             @if (state.totalSpeciesCount() > 0) {
-              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-[#05131e] text-[#34d399] font-mono font-bold">
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-[#0c1015] text-[#c8873a] font-mono font-bold">
                 {{ state.totalSpeciesCount() }}
               </span>
             }
@@ -73,25 +73,25 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
           @if (state.isBackendOnline() === true) {
             <div
               (click)="state.verifyBackendHealth()"
-              class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#062c20] text-[#34d399] border border-[#0d6b4a] shadow-xs cursor-pointer hover:brightness-110 transition-all"
+              class="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold bg-[#0f241a] text-[#4ade80] border border-[#1b5e39] cursor-pointer hover:brightness-110 transition-all"
               title="API FastAPI e Banco de Dados Relacional Online (Clique para re-verificar)"
             >
-              <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
-              <span class="font-mono text-[11px]">API ONLINE</span>
+              <span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+              <span class="font-mono text-[11px]">SISTEMA ONLINE</span>
             </div>
           } @else if (state.isBackendOnline() === false) {
             <button
               type="button"
               (click)="state.verifyBackendHealth()"
-              class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#3b1115] text-[#fca5a5] border border-[#8b2229] hover:bg-[#52161c] transition-colors cursor-pointer"
+              class="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold bg-[#291215] text-[#f87171] border border-[#7f1d1d] hover:bg-[#38161a] transition-colors cursor-pointer"
               title="Clique para reconectar ao backend"
             >
               <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
               <span class="font-mono text-[11px]">OFFLINE · RECONECTAR</span>
             </button>
           } @else {
-            <div class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-[#0b2436] text-[#94a3b8] border border-[#174463]">
-              <span class="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping"></span>
+            <div class="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-mono bg-[#16202a] text-[#94a3b8] border border-[#222d3a]">
+              <span class="w-2 h-2 rounded-full bg-[#38bdf8] animate-ping"></span>
               <span>INICIANDO...</span>
             </div>
           }
@@ -101,7 +101,7 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
             href="https://github.com/Elyyihz/paleo-scanner"
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden sm:flex items-center gap-1.5 p-2 rounded-xl text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42] border border-transparent hover:border-[#174463] transition-all"
+            class="hidden sm:flex items-center gap-1.5 p-2 rounded-md text-[#94a3b8] hover:text-[#ebe6dc] hover:bg-[#16202a] border border-transparent hover:border-[#222d3a] transition-all"
             title="Ver código-fonte no GitHub"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">

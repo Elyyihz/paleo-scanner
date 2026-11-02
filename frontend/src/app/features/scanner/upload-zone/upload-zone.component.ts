@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 
 /**
  * Interactive viewfinder upload zone for Paleo Pines screenshots
- * featuring tactical HUD corners, laser scanline animation, rotating analytical messages,
+ * featuring sober laboratory styling, subtle scanline animation, rotating analytical messages,
  * global clipboard paste (Ctrl+V) and instant demo scan presets.
  */
 @Component({
@@ -20,12 +20,12 @@ import { HttpClient } from '@angular/common/http';
   template: `
     <div class="space-y-4">
       @if (!state.selectedFile()) {
-        <!-- Tactical Scanner Visor / Drop Zone -->
+        <!-- Laboratory Drop Zone / Viewfinder -->
         <div
-          class="relative rounded-3xl border-2 border-dashed transition-all duration-300 p-8 sm:p-12 text-center cursor-pointer group bg-[#071927]/90 hover:bg-[#0a2234]"
+          class="relative rounded-lg border-2 border-dashed transition-all duration-200 p-8 sm:p-10 text-center cursor-pointer group bg-[#121820] hover:bg-[#16202a]"
           [class]="isDragging()
-            ? 'border-[#06b6d4] bg-[#0c2e42] shadow-2xl shadow-cyan-950/80 scale-[1.01]'
-            : 'border-[#174463] hover:border-[#06b6d4]/80'"
+            ? 'border-[#c8873a] bg-[#1a232e] shadow-xl'
+            : 'border-[#222d3a] hover:border-[#c8873a]/70'"
           (dragover)="onDragOver($event)"
           (dragleave)="onDragLeave($event)"
           (drop)="onDrop($event)"
@@ -36,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
           (keydown.enter)="fileInput.click()"
           (keydown.space)="fileInput.click()"
         >
-          <!-- 4 Tactical Visor Corners -->
+          <!-- 4 Specimen Corners -->
           <i class="corner tl"></i>
           <i class="corner tr"></i>
           <i class="corner bl"></i>
@@ -51,32 +51,32 @@ import { HttpClient } from '@angular/common/http';
           />
 
           <!-- Scanner Lens Icon -->
-          <div class="mx-auto w-16 h-16 rounded-2xl bg-[#091f2f] border border-[#174463] flex items-center justify-center text-[#06b6d4] group-hover:scale-105 group-hover:text-[#38bdf8] group-hover:border-[#06b6d4] transition-all duration-300 shadow-md">
-            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <div class="mx-auto w-14 h-14 rounded bg-[#0c1015] border border-[#222d3a] flex items-center justify-center text-[#c8873a] group-hover:border-[#c8873a] transition-colors shadow-sm">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/>
               <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
             </svg>
           </div>
 
-          <h3 class="mt-4 text-lg sm:text-xl font-black text-[#f8fafc] group-hover:text-[#38bdf8] transition-colors">
-            Solte aqui a captura do seu dinossauro
+          <h3 class="mt-4 text-lg font-bold text-[#ebe6dc] group-hover:text-[#c8873a] transition-colors">
+            Solte aqui a captura do seu espécime
           </h3>
 
-          <p class="text-xs sm:text-sm text-[#94a3b8] mt-1.5 max-w-md mx-auto">
-            Arraste um print, selecione um arquivo ou <strong class="text-[#06b6d4] font-mono">cole direto com Ctrl+V</strong> (PNG, JPG, WEBP até 10MB)
+          <p class="text-xs text-[#94a3b8] mt-1.5 max-w-md mx-auto">
+            Arraste um print, selecione um arquivo ou <strong class="text-[#c8873a] font-mono">cole direto com Ctrl+V</strong> (PNG, JPG, WEBP até 10MB)
           </p>
 
           <!-- Quick Test Presets & Instant Demo -->
-          <div class="mt-6 pt-5 border-t border-[#143750] flex flex-wrap items-center justify-center gap-2" (click)="$event.stopPropagation()">
+          <div class="mt-5 pt-4 border-t border-[#222d3a] flex flex-wrap items-center justify-center gap-2" (click)="$event.stopPropagation()">
             <button
               type="button"
               (click)="runInstantDemo()"
-              class="flex items-center gap-2 px-4 py-2 text-xs font-mono font-black rounded-xl bg-gradient-to-r from-[#0891b2] to-[#06b6d4] text-white hover:brightness-110 transition-all cursor-pointer shadow-md shadow-cyan-950/40 hover:scale-[1.02]"
+              class="flex items-center gap-2 px-3.5 py-1.5 text-xs font-mono font-bold rounded bg-[#c8873a] text-[#0c1015] hover:bg-[#dba159] transition-all cursor-pointer shadow-md shadow-amber-950/30"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polygon points="5 3 19 12 5 21 5 3"/>
               </svg>
-              <span>Escanear Exemplo (Demo)</span>
+              <span>Escanear Amostra (Demo)</span>
             </button>
 
             <span class="text-xs font-mono text-[#64748b] px-1 font-medium hidden sm:inline">ou teste por espécie:</span>
@@ -86,7 +86,7 @@ import { HttpClient } from '@angular/common/http';
               <button
                 type="button"
                 (click)="loadSamplePreset('parasaurolophus')"
-                class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-xl bg-[#0a2030] hover:bg-[#133952] border border-[#174463] text-[#f8fafc] transition-all cursor-pointer"
+                class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
                 Parasaurolophus
               </button>
@@ -95,7 +95,7 @@ import { HttpClient } from '@angular/common/http';
               <button
                 type="button"
                 (click)="loadSamplePreset('stegosaurus')"
-                class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-xl bg-[#0a2030] hover:bg-[#133952] border border-[#174463] text-[#f8fafc] transition-all cursor-pointer"
+                class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
                 Stegosaurus
               </button>
@@ -104,7 +104,7 @@ import { HttpClient } from '@angular/common/http';
               <button
                 type="button"
                 (click)="loadSamplePreset('triceratops')"
-                class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-xl bg-[#0a2030] hover:bg-[#133952] border border-[#174463] text-[#f8fafc] transition-all cursor-pointer"
+                class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
                 Triceratops
               </button>
@@ -113,7 +113,7 @@ import { HttpClient } from '@angular/common/http';
               <button
                 type="button"
                 (click)="loadSamplePreset('tyrannosaurus-rex')"
-                class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-xl bg-[#0a2030] hover:bg-[#133952] border border-[#174463] text-[#f8fafc] transition-all cursor-pointer"
+                class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
                 T-Rex
               </button>
@@ -122,7 +122,7 @@ import { HttpClient } from '@angular/common/http';
         </div>
       } @else {
         <!-- Loaded File Preview Visor with Scanning Animation -->
-        <div class="relative rounded-3xl border border-[#174463] bg-[#071927] p-5 sm:p-6 shadow-2xl overflow-hidden">
+        <div class="relative rounded-lg border border-[#222d3a] bg-[#121820] p-5 sm:p-6 shadow-xl overflow-hidden">
           <i class="corner tl"></i>
           <i class="corner tr"></i>
           <i class="corner bl"></i>
@@ -130,12 +130,12 @@ import { HttpClient } from '@angular/common/http';
 
           <div class="flex flex-col sm:flex-row items-center gap-5">
             <!-- Image Frame with Sweep Scanline during processing -->
-            <div class="specimen-viewport relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl border-2 border-[#174463] overflow-hidden shrink-0 flex items-center justify-center p-2">
+            <div class="specimen-viewport relative w-36 h-36 sm:w-44 sm:h-44 rounded border border-[#222d3a] bg-[#080c10] overflow-hidden shrink-0 flex items-center justify-center p-2">
               @if (state.previewUrl(); as url) {
                 <img
                   [src]="url"
-                  alt="Pré-visualização do dinossauro"
-                  class="w-full h-full object-contain rounded-xl"
+                  alt="Pré-visualização do espécime"
+                  class="w-full h-full object-contain rounded"
                 />
               }
 
@@ -148,10 +148,10 @@ import { HttpClient } from '@angular/common/http';
             <!-- Analysis Details & Actions -->
             <div class="flex-1 space-y-3 text-center sm:text-left w-full">
               <div>
-                <span class="text-xs uppercase font-mono font-bold text-[#06b6d4] tracking-wider">
-                  {{ state.isScanning() ? 'VARREDURA EM ANDAMENTO' : 'CAPTURA CARREGADA' }}
+                <span class="text-xs uppercase font-mono font-semibold text-[#c8873a] tracking-wider">
+                  {{ state.isScanning() ? 'VARREDURA EM ANDAMENTO' : 'AMOSTRA CARREGADA' }}
                 </span>
-                <h4 class="text-lg font-black text-[#f8fafc] truncate">
+                <h4 class="text-lg font-bold text-[#ebe6dc] truncate">
                   {{ state.selectedFile()?.name }}
                 </h4>
                 <p class="text-xs font-mono text-[#94a3b8] mt-0.5">
@@ -161,26 +161,26 @@ import { HttpClient } from '@angular/common/http';
 
               <!-- Animated Scan Messages -->
               @if (state.isScanning()) {
-                <div class="p-3 rounded-xl bg-[#0a2030] border border-[#174463] space-y-1.5">
+                <div class="p-3 rounded bg-[#0c1015] border border-[#222d3a] space-y-1.5">
                   <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping"></span>
-                    <span class="text-xs font-mono font-bold text-[#38bdf8]">
+                    <span class="w-2 h-2 rounded-full bg-[#c8873a] animate-ping"></span>
+                    <span class="text-xs font-mono font-medium text-[#c8873a]">
                       {{ currentScanMessage() }}
                     </span>
                   </div>
-                  <div class="h-1.5 w-full bg-[#05131e] rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-[#0891b2] to-[#10b981] animate-pulse w-full"></div>
+                  <div class="h-1.5 w-full bg-[#16202a] rounded overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-[#c8873a] to-[#2e7d4b] animate-pulse w-full"></div>
                   </div>
                 </div>
               }
 
               <!-- Action Buttons -->
-              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 pt-1">
+              <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
                 @if (!state.isScanning()) {
                   <button
                     type="button"
                     (click)="startScan()"
-                    class="flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono font-bold text-sm bg-gradient-to-r from-[#0891b2] to-[#06b6d4] text-white hover:brightness-110 transition-all cursor-pointer shadow-md shadow-cyan-950/40"
+                    class="flex items-center gap-2 px-4 py-2 rounded font-mono font-bold text-xs bg-[#c8873a] text-[#0c1015] hover:bg-[#dba159] transition-all cursor-pointer shadow-md shadow-amber-950/30"
                   >
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <circle cx="12" cy="12" r="3"/>
@@ -192,7 +192,7 @@ import { HttpClient } from '@angular/common/http';
                   <button
                     type="button"
                     (click)="state.clearScan()"
-                    class="px-4 py-2.5 rounded-xl font-mono font-bold text-xs text-[#94a3b8] bg-[#0a2030] hover:bg-[#133952] hover:text-[#f8fafc] border border-[#174463] transition-all cursor-pointer"
+                    class="px-3.5 py-2 rounded font-mono font-medium text-xs text-[#94a3b8] bg-[#0c1015] hover:bg-[#1a232e] hover:text-[#ebe6dc] border border-[#222d3a] transition-colors cursor-pointer"
                   >
                     Trocar Imagem
                   </button>
@@ -205,7 +205,7 @@ import { HttpClient } from '@angular/common/http';
 
       <!-- Scan Error Alert -->
       @if (state.scanError(); as err) {
-        <div class="p-4 rounded-2xl bg-[#3b1115] border border-[#8b2229] text-[#fca5a5] text-xs font-mono flex items-center justify-between shadow-lg">
+        <div class="p-4 rounded border border-[#7f1d1d] bg-[#1a0a0c] text-[#fca5a5] text-xs font-mono flex items-center justify-between shadow-lg">
           <div class="flex items-center gap-2.5">
             <svg class="w-5 h-5 text-[#ef4444] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>

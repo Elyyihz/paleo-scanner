@@ -2,17 +2,17 @@ import { Component, computed, input } from '@angular/core';
 
 /**
  * Circular SVG HUD gauge chart displaying scientific fidelity
- * with high-tech cyan/emerald laser styling and digital monospace readouts.
+ * with sober laboratory amber/moss styling and digital monospace readouts.
  */
 @Component({
   selector: 'app-fidelity-gauge',
   standalone: true,
   host: { class: 'block w-full h-full' },
   template: `
-    <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl flex flex-col items-center text-center space-y-4 h-full justify-between">
+    <div class="rounded-lg border border-[#222d3a] bg-[#121820] p-5 sm:p-6 shadow-lg flex flex-col items-center text-center space-y-4 h-full justify-between">
       <div>
-        <span class="text-xs uppercase font-mono tracking-wider text-[#06b6d4] font-bold">[METRIC // TELEMETRY]</span>
-        <h3 class="text-lg sm:text-xl font-black text-[#f8fafc]">Fidelidade com o Fóssil</h3>
+        <span class="text-xs uppercase font-mono tracking-wider text-[#c8873a] font-semibold">[MÉTRICA // TELEMETRIA]</span>
+        <h3 class="text-lg font-bold text-[#ebe6dc]">Fidelidade com o Fóssil</h3>
       </div>
 
       <!-- Circular SVG Ring HUD Gauge -->
@@ -24,7 +24,7 @@ import { Component, computed, input } from '@angular/core';
             cy="60"
             r="50"
             fill="none"
-            stroke="#0d293d"
+            stroke="#16202a"
             stroke-width="10"
           />
           <!-- Foreground animated progress ring -->
@@ -44,17 +44,17 @@ import { Component, computed, input } from '@angular/core';
 
         <!-- Centered Digital Telemetry -->
         <div class="absolute inset-0 flex flex-col items-center justify-center">
-          <span class="text-3xl font-mono font-black text-[#f8fafc] tracking-tight">
+          <span class="text-3xl font-mono font-bold text-[#ebe6dc] tracking-tight">
             {{ percentage().toFixed(0) }}%
           </span>
-          <span class="text-[10px] uppercase font-mono font-bold text-[#38bdf8] tracking-wider">
+          <span class="text-[10px] uppercase font-mono font-semibold text-[#c8873a] tracking-wider">
             {{ verdictSummary() }}
           </span>
         </div>
       </div>
 
       <!-- Verdict Tag -->
-      <div class="px-3.5 py-1 rounded-full text-xs font-mono font-bold border" [class]="verdictBadgeClass()">
+      <div class="px-3 py-1 rounded text-xs font-mono font-medium border" [class]="verdictBadgeClass()">
         {{ verdict() }}
       </div>
 
@@ -62,10 +62,10 @@ import { Component, computed, input } from '@angular/core';
       <div class="flex flex-wrap gap-1.5 justify-center text-[11px] pt-1">
         @for (chip of traitChips(); track chip.text) {
           <span
-            class="px-2.5 py-1 rounded-full border font-mono transition-all"
+            class="px-2.5 py-0.5 rounded border font-mono transition-all"
             [class]="chip.type === 'match'
-              ? 'bg-[#062c20] text-[#34d399] border-[#0d6b4a]'
-              : 'bg-[#1e293b] text-[#94a3b8] border-[#334155]'"
+              ? 'bg-[#0f241a] text-[#4ade80] border-[#1b4d31]'
+              : 'bg-[#16202a] text-[#94a3b8] border-[#222d3a]'"
           >
             {{ chip.text }}
           </span>
@@ -87,9 +87,9 @@ export class FidelityGaugeComponent {
 
   public readonly gaugeColor = computed(() => {
     const val = this.percentage();
-    if (val >= 80) return '#10b981';
-    if (val >= 60) return '#06b6d4';
-    return '#f59e0b';
+    if (val >= 80) return '#2e7d4b';
+    if (val >= 60) return '#c8873a';
+    return '#b45309';
   });
 
   public readonly verdictSummary = computed(() => {
@@ -101,9 +101,9 @@ export class FidelityGaugeComponent {
 
   public readonly verdictBadgeClass = computed(() => {
     const val = this.percentage();
-    if (val >= 80) return 'bg-[#062c20] text-[#34d399] border-[#0d6b4a] shadow-xs';
-    if (val >= 60) return 'bg-[#0c2e42] text-[#38bdf8] border-[#0369a1] shadow-xs';
-    return 'bg-[#3b200c] text-[#fbbf24] border-[#78350f] shadow-xs';
+    if (val >= 80) return 'bg-[#0f241a] text-[#4ade80] border-[#1b4d31] shadow-xs';
+    if (val >= 60) return 'bg-[#241a0e] text-[#fcd34d] border-[#6b4716] shadow-xs';
+    return 'bg-[#261012] text-[#f87171] border-[#5c1c24] shadow-xs';
   });
 
   public readonly traitChips = computed(() => {

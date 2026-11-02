@@ -7,12 +7,12 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   standalone: true,
   template: `
-    <footer class="mt-20 border-t border-[#174463] bg-[#071927] py-8 text-xs text-[#94a3b8]">
+    <footer class="mt-16 border-t border-[#222d3a] bg-[#0e141b] py-8 text-xs text-[#94a3b8]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
           <img src="/logo.png" alt="Paleo Pines" class="h-8 w-auto object-contain opacity-85" />
           <div>
-            <span class="font-bold text-[#f8fafc]">Paleo-Scanner</span>
+            <span class="font-bold text-[#ebe6dc]">Paleo-Scanner</span>
             <span class="text-[#94a3b8]"> — Do Rancho de Paleo Pines aos Museus de Paleontologia.</span>
           </div>
         </div>

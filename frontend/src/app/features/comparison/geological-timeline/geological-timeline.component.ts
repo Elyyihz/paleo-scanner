@@ -3,59 +3,59 @@ import { RealFossilProfile } from '../../../core/models/dinosaur.model';
 
 /**
  * High-tech interactive geological timeline visualizing the species' chronological position
- * across the Permian, Triassic, Jurassic, and Cretaceous periods.
+ * across the Permian, Triassic, Jurassic, and Cretaceous periods using sober stratigraphic tones.
  */
 @Component({
   selector: 'app-geological-timeline',
   standalone: true,
   host: { class: 'block w-full h-full' },
   template: `
-    <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl space-y-4 h-full flex flex-col justify-between">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#143750] pb-3">
+    <div class="rounded-lg border border-[#222d3a] bg-[#121820] p-5 sm:p-6 shadow-lg space-y-4 h-full flex flex-col justify-between">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#222d3a] pb-3">
         <div>
-          <span class="text-xs uppercase font-mono tracking-wider text-[#06b6d4] font-bold">[GEO-CHRONOLOGY]</span>
-          <h3 class="text-lg sm:text-xl font-black text-[#f8fafc]">Linha do Tempo Geológica</h3>
+          <span class="text-xs uppercase font-mono tracking-wider text-[#c8873a] font-semibold">[GEO-CRONOLOGIA]</span>
+          <h3 class="text-lg font-bold text-[#ebe6dc]">Linha do Tempo Geológica</h3>
         </div>
-        <span class="text-xs font-mono text-[#38bdf8] bg-[#071927] px-3 py-1 rounded-full border border-[#174463] self-start sm:self-auto font-bold">
+        <span class="text-xs font-mono text-[#c8873a] bg-[#0c1015] px-2.5 py-1 rounded border border-[#222d3a] self-start sm:self-auto font-medium">
           {{ fossil()?.geological_period || 'Período Fóssil' }} · {{ fossil()?.approximate_mya || '~70 Ma' }}
         </span>
       </div>
 
       <!-- Segmented Geological Bar with Laser HUD Marker -->
       <div class="relative pt-6 pb-2">
-        <!-- Floating Species Marker Needle with Glow -->
+        <!-- Floating Species Marker Needle -->
         <div
           class="absolute top-0 -translate-x-1/2 flex flex-col items-center transition-all duration-700 pointer-events-none z-20"
           [style.left.%]="markerPercent()"
         >
-          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#06b6d4] text-[#05131e] shadow-lg shadow-cyan-500/40 whitespace-nowrap">
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#c8873a] text-[#0c1015] shadow-md shadow-amber-950/40 whitespace-nowrap">
             {{ displayMa() }}
           </span>
-          <svg width="14" height="10" viewBox="0 0 14 10" class="text-[#06b6d4]" fill="currentColor">
+          <svg width="12" height="8" viewBox="0 0 14 10" class="text-[#c8873a]" fill="currentColor">
             <path d="M7 10L0 0h14z" />
           </svg>
         </div>
 
-        <!-- The Chronological Bar -->
-        <div class="flex h-10 rounded-xl overflow-hidden text-[11px] font-mono font-bold text-white border border-[#174463] shadow-inner">
+        <!-- The Chronological Bar with Authentic Stratigraphic Tones -->
+        <div class="flex h-9 rounded overflow-hidden text-[11px] font-mono font-bold text-white border border-[#222d3a] shadow-inner">
           <!-- Permian -->
-          <div class="bg-[#0369a1] flex items-center justify-center transition-all hover:brightness-110" style="flex: 47" title="Permiano: 299 a 252 Ma">
-            <span class="truncate px-1">Permiano</span>
+          <div class="bg-[#9c4d2d] flex items-center justify-center transition-all hover:brightness-110" style="flex: 47" title="Permiano: 299 a 252 Ma">
+            <span class="truncate px-1 text-[#ebe6dc]">Permiano</span>
           </div>
 
           <!-- Triassic -->
-          <div class="bg-[#0f766e] flex items-center justify-center transition-all hover:brightness-110" style="flex: 51" title="Triássico: 252 a 201 Ma">
-            <span class="truncate px-1">Triássico</span>
+          <div class="bg-[#824479] flex items-center justify-center transition-all hover:brightness-110" style="flex: 51" title="Triássico: 252 a 201 Ma">
+            <span class="truncate px-1 text-[#ebe6dc]">Triássico</span>
           </div>
 
           <!-- Jurassic -->
-          <div class="bg-[#059669] flex items-center justify-center transition-all hover:brightness-110" style="flex: 56" title="Jurássico: 201 a 145 Ma">
-            <span class="truncate px-1 text-white">Jurássico</span>
+          <div class="bg-[#245e3f] flex items-center justify-center transition-all hover:brightness-110" style="flex: 56" title="Jurássico: 201 a 145 Ma">
+            <span class="truncate px-1 text-[#ebe6dc]">Jurássico</span>
           </div>
 
           <!-- Cretaceous -->
-          <div class="bg-[#0891b2] flex items-center justify-center transition-all hover:brightness-110" style="flex: 79" title="Cretáceo: 145 a 66 Ma">
-            <span class="truncate px-1 text-[#05131e] font-black">Cretáceo</span>
+          <div class="bg-[#a67924] flex items-center justify-center transition-all hover:brightness-110" style="flex: 79" title="Cretáceo: 145 a 66 Ma">
+            <span class="truncate px-1 text-[#0c1015] font-black">Cretáceo</span>
           </div>
         </div>
 
@@ -65,13 +65,13 @@ import { RealFossilProfile } from '../../../core/models/dinosaur.model';
           <span>252 Ma</span>
           <span>201 Ma</span>
           <span>145 Ma</span>
-          <span class="text-[#f87171] font-bold">66 Ma (Extinção K-Pg)</span>
+          <span class="text-[#e06c75] font-bold">66 Ma (Extinção K-Pg)</span>
         </div>
       </div>
 
       <!-- Explanatory Telemetry description -->
-      <div class="p-3.5 rounded-xl bg-[#071927] border border-[#143750] text-xs font-mono text-[#94a3b8] leading-relaxed">
-        <span class="text-[#38bdf8] font-bold">[INFO]</span> {{ explanationText() }}
+      <div class="p-3 rounded border border-[#222d3a] bg-[#0c1015] text-xs font-mono text-[#94a3b8] leading-relaxed">
+        <span class="text-[#c8873a] font-bold">[INFO]</span> {{ explanationText() }}
       </div>
     </div>
   `
