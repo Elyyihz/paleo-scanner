@@ -218,7 +218,15 @@ class JSONDinosaurRepository(IDinosaurRepositoryGateway):
             self._cache[slug] = dinosaur
 
     def find_by_slug(self, slug: str) -> Optional[Dinosaur]:
-        return self._cache.get(slug.lower().strip())
+        s = slug.lower().strip()
+        if s in self._cache:
+            return self._cache[s]
+        alt_s = s.replace("-", "_") if "-" in s else s.replace("_", "-")
+        if alt_s in self._cache:
+            return self._cache[alt_s]
+        if s in ["tyrannosaurus", "t_rex", "t-rex"]:
+            return self._cache.get("tyrannosaurus_rex") or self._cache.get("tyrannosaurus")
+        return None
 
     def list_all(
         self,

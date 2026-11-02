@@ -53,6 +53,7 @@ ml/data/raw/
 ml/data/processed/
 ml/models/checkpoints/
 ml/models/*.keras
+!ml/models/dino_mobilenet_v3.keras
 ml/models/*.onnx
 
 # Environment variables & secrets

@@ -7,8 +7,20 @@ from app.core.domain.entities.prediction_result import PredictionResult
 from app.core.domain.gateways.vision_classifier_gateway import IVisionClassifierGateway
 from app.infrastructure.ml.mock_vision_classifier import MockVisionClassifierGateway
 
-DEFAULT_MODEL_PATH = Path(__file__).resolve().parent.parent.parent.parent / "ml" / "models" / "dino_mobilenet_v3.keras"
-DEFAULT_INDICES_PATH = Path(__file__).resolve().parent.parent.parent.parent / "ml" / "models" / "class_indices.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+BACKEND_ROOT = Path(__file__).resolve().parents[3]
+
+DEFAULT_MODEL_PATH = (
+    (PROJECT_ROOT / "ml" / "models" / "dino_mobilenet_v3.keras")
+    if (PROJECT_ROOT / "ml" / "models" / "dino_mobilenet_v3.keras").exists()
+    else (BACKEND_ROOT / "ml" / "models" / "dino_mobilenet_v3.keras")
+)
+
+DEFAULT_INDICES_PATH = (
+    (PROJECT_ROOT / "ml" / "models" / "class_indices.json")
+    if (PROJECT_ROOT / "ml" / "models" / "class_indices.json").exists()
+    else (BACKEND_ROOT / "ml" / "models" / "class_indices.json")
+)
 
 
 class KerasVisionClassifierGateway(IVisionClassifierGateway):
@@ -52,7 +64,11 @@ class KerasVisionClassifierGateway(IVisionClassifierGateway):
         from PIL import Image
         import numpy as np
 
-        image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+        try:
+            image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+        except Exception:
+            return self._fallback_mock.classify_image(image_bytes)
+
         image = image.resize((224, 224))
         arr = np.array(image, dtype=np.float32)
         arr = np.expand_dims(arr, axis=0)

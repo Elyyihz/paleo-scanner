@@ -15,6 +15,7 @@ import numpy as np
 
 # Ensure tf_keras is used per project specification
 os.environ["TF_USE_LEGACY_KERAS"] = "1"
+import tensorflow as tf
 import tf_keras as keras
 from tf_keras import layers
 from sklearn.utils.class_weight import compute_class_weight
@@ -136,13 +137,8 @@ def main():
     print("-> Pesos balanceados calculados para mitigar desbalanceamento de classes.")
 
     # Optimize pipeline I/O
-    AUTOTUNE = keras.backend.tensorflow_backend.tf.data.AUTOTUNE if hasattr(keras.backend, "tensorflow_backend") else -1
-    try:
-        import tensorflow as tf
-        train_ds = train_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
-        val_ds = val_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
-    except Exception:
-        pass
+    train_ds = train_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
+    val_ds = val_ds.prefetch(buffer_size=tf.data.AUTOTUNE)
 
     # Build and summarize model
     model = build_model(num_classes=num_classes, learning_rate=args.lr)
