@@ -9,10 +9,11 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
 @Component({
   selector: 'app-scan-results',
   standalone: true,
+  host: { class: 'block w-full' },
   imports: [SplitViewComparisonComponent],
   template: `
     @if (state.scanResult(); as res) {
-      <div class="space-y-8 animate-fadeIn">
+      <div class="flex flex-col gap-8 animate-fadeIn">
         <!-- Detection Summary Card with HUD Corners -->
         <div class="rounded-2xl border border-[#174463] bg-[#0a2030]/90 p-6 sm:p-8 shadow-2xl relative overflow-hidden">
           <i class="corner tl"></i>

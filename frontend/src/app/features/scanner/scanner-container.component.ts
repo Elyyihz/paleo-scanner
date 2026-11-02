@@ -9,9 +9,10 @@ import { ScanResultsComponent } from './scan-results/scan-results.component';
 @Component({
   selector: 'app-scanner-container',
   standalone: true,
+  host: { class: 'block w-full' },
   imports: [UploadZoneComponent, ScanResultsComponent],
   template: `
-    <div class="space-y-6">
+    <div class="flex flex-col gap-6">
       <!-- Concise Top Header (Immediately visible without scrolling) -->
       @if (!state.hasScanResult()) {
         <div class="text-center max-w-2xl mx-auto space-y-2">

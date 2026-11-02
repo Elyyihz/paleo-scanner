@@ -10,9 +10,10 @@ import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.componen
 @Component({
   selector: 'app-catalog-container',
   standalone: true,
+  host: { class: 'block w-full' },
   imports: [DinosaurCardComponent, DinosaurModalComponent],
   template: `
-    <div class="space-y-8">
+    <div class="flex flex-col gap-8">
       <!-- Title & Filters Bar -->
       <div class="space-y-5">
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">

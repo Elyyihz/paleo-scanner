@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-upload-zone',
   standalone: true,
+  host: { class: 'block w-full' },
   template: `
     <div class="space-y-4">
       @if (!state.selectedFile()) {

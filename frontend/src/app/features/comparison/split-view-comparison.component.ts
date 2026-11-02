@@ -15,6 +15,7 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
 @Component({
   selector: 'app-split-view-comparison',
   standalone: true,
+  host: { class: 'block w-full' },
   imports: [
     VisualTriptychComponent,
     GeologicalTimelineComponent,
@@ -23,7 +24,7 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
     FidelityBadgeComponent,
   ],
   template: `
-    <div class="space-y-8 animate-fadeIn">
+    <div class="flex flex-col gap-8 animate-fadeIn">
       <!-- 1. STANDARDIZED VISUAL TRIPTYCH (Game vs Real Fossil vs Life Paleoart) -->
       <app-visual-triptych [dino]="dino()" />
 

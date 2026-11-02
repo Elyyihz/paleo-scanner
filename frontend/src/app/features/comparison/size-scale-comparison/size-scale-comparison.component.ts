@@ -14,6 +14,7 @@ interface ScaleReference {
 @Component({
   selector: 'app-size-scale-comparison',
   standalone: true,
+  host: { class: 'block w-full' },
   template: `
     <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#143750] pb-4">

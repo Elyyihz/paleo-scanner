@@ -7,8 +7,9 @@ import { Component, computed, input } from '@angular/core';
 @Component({
   selector: 'app-fidelity-gauge',
   standalone: true,
+  host: { class: 'block w-full h-full' },
   template: `
-    <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl flex flex-col items-center text-center space-y-4">
+    <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl flex flex-col items-center text-center space-y-4 h-full justify-between">
       <div>
         <span class="text-xs uppercase font-mono tracking-wider text-[#06b6d4] font-bold">[METRIC // TELEMETRY]</span>
         <h3 class="text-lg sm:text-xl font-black text-[#f8fafc]">Fidelidade com o Fóssil</h3>

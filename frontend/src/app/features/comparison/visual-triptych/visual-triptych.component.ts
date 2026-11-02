@@ -19,6 +19,7 @@ interface ZoomedSpecimen {
 @Component({
   selector: 'app-visual-triptych',
   standalone: true,
+  host: { class: 'block w-full' },
   template: `
     <div class="rounded-3xl border border-[#174463] bg-[#0a2030] p-5 sm:p-7 shadow-xl space-y-6">
       <!-- Section Header with Viewport Switcher -->

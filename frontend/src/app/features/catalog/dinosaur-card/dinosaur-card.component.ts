@@ -9,10 +9,11 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
 @Component({
   selector: 'app-dinosaur-card',
   standalone: true,
+  host: { class: 'block h-full' },
   template: `
     <div
       (click)="state.openDinosaurModal(dino())"
-      class="rounded-2xl border border-[#174463] bg-[#0a2030]/90 hover:bg-[#0f2c42] hover:border-[#06b6d4] transition-all duration-300 p-5 flex flex-col justify-between cursor-pointer group shadow-lg hover:shadow-cyan-950/40 hover:-translate-y-1"
+      class="rounded-2xl border border-[#174463] bg-[#0a2030]/90 hover:bg-[#0f2c42] hover:border-[#06b6d4] transition-all duration-300 p-5 flex flex-col justify-between cursor-pointer group shadow-lg hover:shadow-cyan-950/40 hover:-translate-y-1 h-full"
     >
       <div>
         <!-- Portrait & Header -->
