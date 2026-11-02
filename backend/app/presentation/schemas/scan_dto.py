@@ -27,6 +27,8 @@ class RealFossilProfileDTO(BaseModel):
     real_diet: str
     fossil_locations: List[str]
     distinctive_features: str
+    fossil_image_url: Optional[str] = None
+    paleoart_image_url: Optional[str] = None
 
 
 class ComparisonReportDTO(BaseModel):

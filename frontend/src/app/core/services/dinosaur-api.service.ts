@@ -71,6 +71,16 @@ export class DinosaurApiService {
    * @returns Normalized URL string pointing to the backend static file server.
    */
   public getPortraitUrl(relativeUrl: string): string {
+    return this.getStaticImageUrl(relativeUrl);
+  }
+
+  /**
+   * Normalizes static image assets (portraits, fossils, paleoart).
+   *
+   * @param relativeUrl - Relative asset path (e.g. '/static/fossils/parasaurolophus.jpg').
+   * @returns Normalized URL.
+   */
+  public getStaticImageUrl(relativeUrl: string): string {
     if (!relativeUrl) {
       return '';
     }

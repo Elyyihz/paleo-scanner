@@ -150,6 +150,13 @@ export class ScannerStateService {
   }
 
   /**
+   * Alias for selectFile.
+   */
+  public setFile(file: File): void {
+    this.selectFile(file);
+  }
+
+  /**
    * Clears the current scanning selection and resets the scan outcome.
    */
   public clearScan(): void {
@@ -215,5 +222,84 @@ export class ScannerStateService {
    */
   public getPortraitUrl(path: string): string {
     return this.apiService.getPortraitUrl(path);
+  }
+
+  /**
+   * Helper to resolve real fossil specimen photograph URL.
+   *
+   * @param dinoOrSlug - Dinosaur entity or slug identifier.
+   * @returns Full fossil image URL.
+   */
+  public getFossilUrl(dinoOrSlug: Dinosaur | string): string {
+    const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
+    return this.apiService.getStaticImageUrl(`/static/fossils/${slug}.jpg`);
+  }
+
+  /**
+   * Helper to resolve paleoart life reconstruction illustration URL.
+   *
+   * @param dinoOrSlug - Dinosaur entity or slug identifier.
+   * @returns Full paleoart illustration URL.
+   */
+  public getPaleoartUrl(dinoOrSlug: Dinosaur | string): string {
+    const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
+    return this.apiService.getStaticImageUrl(`/static/paleoart/${slug}.jpg`);
+  }
+
+  /**
+   * Instantly loads a sample dinosaur demonstration scan from the curated catalog.
+   *
+   * @param slug - Dinosaur slug to demonstrate.
+   */
+  public loadDemoDinosaur(slug: string): void {
+    const normalized = slug.toLowerCase().replace('-', '_');
+    const dino =
+      this.dinosaurs().find(
+        d =>
+          d.slug === normalized ||
+          d.slug === slug ||
+          d.slug.replace('_', '-') === slug
+      ) || this.dinosaurs()[0];
+
+    if (!dino) {
+      return;
+    }
+
+    const fossil = dino.fossil_profile;
+    const dietMatch =
+      Boolean(fossil && dino.game_profile.diet.toLowerCase() === fossil.real_diet.toLowerCase());
+    const fidelity = fossil ? 86.5 : 70.0;
+
+    const insights = [
+      `Dieta no rancho: ${dino.game_profile.diet} com guloseima favorita Poppin ${dino.game_profile.poppin_favorite}.`,
+      fossil
+        ? `Dieta real: ${fossil.real_diet} durante o período geológico ${fossil.geological_period} (~${fossil.approximate_mya}).`
+        : 'Registro fóssil em curadoria científica.',
+      fossil
+        ? `Evidência anatômica fóssil: ${fossil.distinctive_features}`
+        : 'Anatomia comparada preservada.',
+    ];
+
+    this.scanResult.set({
+      prediction: {
+        predicted_slug: dino.slug,
+        confidence: 0.974,
+        top_candidates: [
+          { species_slug: dino.slug, probability: 0.974 },
+          { species_slug: 'parasaurolophus', probability: 0.018 },
+          { species_slug: 'corythosaurus', probability: 0.008 },
+        ],
+      },
+      dinosaur: dino,
+      comparison_report: {
+        fidelity_percentage: fidelity,
+        verdict: fidelity >= 80 ? 'Alta Fidelidade Científica' : 'Boa Precisão com Adaptações Lúdicas',
+        diet_match: dietMatch,
+        size_comparison_summary: fossil
+          ? `No jogo: porte ${dino.game_profile.size_category}. Fóssil: ~${fossil.length_meters}m de comprimento e ${fossil.mass_kg.toLocaleString()} kg.`
+          : `Porte in-game: ${dino.game_profile.size_category}.`,
+        key_insights: insights,
+      },
+    });
   }
 }

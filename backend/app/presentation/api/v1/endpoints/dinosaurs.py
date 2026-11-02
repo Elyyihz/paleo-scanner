@@ -56,6 +56,8 @@ def to_dto(dino: Dinosaur) -> DinosaurDTO:
             real_diet=dino.fossil_profile.real_diet.value,
             fossil_locations=dino.fossil_profile.fossil_locations,
             distinctive_features=dino.fossil_profile.distinctive_features,
+            fossil_image_url=f"/static/fossils/{dino.slug}.jpg",
+            paleoart_image_url=f"/static/paleoart/{dino.slug}.jpg",
         )
 
     return DinosaurDTO(

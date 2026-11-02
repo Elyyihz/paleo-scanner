@@ -27,6 +27,8 @@ export interface RealFossilProfile {
   real_diet: string;
   fossil_locations: string[];
   distinctive_features: string;
+  fossil_image_url?: string;
+  paleoart_image_url?: string;
 }
 
 /**
