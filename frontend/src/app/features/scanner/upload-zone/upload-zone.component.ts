@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
 
 /**
  * Interactive drag-and-drop file upload zone for dinosaur screenshots
- * styled with warm earthy ranch & naturalist workbench aesthetics.
+ * styled with warm earthy ranch aesthetics and clean vector SVG icons.
  */
 @Component({
   selector: 'app-upload-zone',
@@ -15,10 +15,10 @@ import { environment } from '../../../../environments/environment';
       @if (!state.selectedFile()) {
         <!-- Drag & Drop Zone -->
         <div
-          class="relative rounded-3xl border-2 border-dashed transition-all duration-300 p-8 sm:p-12 text-center cursor-pointer group"
+          class="relative rounded-3xl border-2 border-dashed transition-all duration-300 p-6 sm:p-8 text-center cursor-pointer group"
           [class]="isDragging()
-            ? 'border-[#f4a261] bg-[#2e2116] shadow-2xl shadow-amber-950/60 scale-[1.01]'
-            : 'border-[#543d2c] hover:border-[#f4a261]/80 bg-[#221811]/70 hover:bg-[#281d14]'"
+            ? 'border-[#f4a261] bg-[#2e2116] shadow-xl shadow-amber-950/60 scale-[1.01]'
+            : 'border-[#543d2c] hover:border-[#f4a261]/80 bg-[#221811]/80 hover:bg-[#281d14]'"
           (dragover)="onDragOver($event)"
           (dragleave)="onDragLeave($event)"
           (drop)="onDrop($event)"
@@ -32,57 +32,76 @@ import { environment } from '../../../../environments/environment';
             (change)="onFileSelected($event)"
           />
 
-          <!-- Naturalist Explorer Badge Icon -->
-          <div class="mx-auto w-16 h-16 rounded-2xl bg-[#322317] border border-[#5a402a] flex items-center justify-center text-[#f4a261] group-hover:scale-110 group-hover:text-[#ffbe76] group-hover:border-[#e09f3e] transition-all duration-300 shadow-md">
-            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.3-4.3"/>
-              <path d="M11 7v8"/>
-              <path d="M7 11h8"/>
+          <!-- Vector Explorer Lens Icon (No Emojis) -->
+          <div class="mx-auto w-14 h-14 rounded-2xl bg-[#322317] border border-[#5a402a] flex items-center justify-center text-[#f4a261] group-hover:scale-105 group-hover:text-[#ffbe76] group-hover:border-[#e09f3e] transition-all duration-300 shadow-sm">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 8V6a2 2 0 0 1 2-2h2"/>
+              <path d="M4 16v2a2 2 0 0 0 2 2h2"/>
+              <path d="M16 4h2a2 2 0 0 1 2 2v2"/>
+              <path d="M16 20h2a2 2 0 0 0 2-2v-2"/>
+              <circle cx="12" cy="12" r="3"/>
             </svg>
           </div>
 
-          <h3 class="mt-4 text-lg sm:text-xl font-black text-[#fceddb] group-hover:text-[#f4a261] transition-colors">
-            Arraste sua captura de tela do Paleo Pines aqui
+          <h3 class="mt-3.5 text-base sm:text-lg font-black text-[#fceddb] group-hover:text-[#f4a261] transition-colors">
+            Arraste uma captura de tela do Paleo Pines aqui
           </h3>
-          <p class="text-xs sm:text-sm text-[#b8a490] mt-1 max-w-md mx-auto">
-            Ou clique para escolher do seu computador (PNG, JPG, WEBP até 10MB)
+          <p class="text-xs text-[#b8a490] mt-1 max-w-sm mx-auto">
+            Ou clique para carregar um arquivo (PNG, JPG, WEBP até 10MB)
           </p>
 
-          <!-- Quick Test Presets -->
-          <div class="mt-6 pt-5 border-t border-[#443122] flex flex-col sm:flex-row items-center justify-center gap-2.5" (click)="$event.stopPropagation()">
-            <span class="text-xs text-[#a38e7c] font-medium">Sem print no momento? Teste com um dinossauro:</span>
+          <!-- Quick Test Presets with SVG Icons -->
+          <div class="mt-5 pt-4 border-t border-[#443122] flex flex-col sm:flex-row items-center justify-center gap-2" (click)="$event.stopPropagation()">
+            <span class="text-xs text-[#a38e7c] font-medium">Testar com amostra:</span>
             <div class="flex items-center gap-2">
+              <!-- T-Rex Button -->
               <button
                 type="button"
                 (click)="loadSamplePreset('tyrannosaurus-rex')"
-                class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-sm"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-xs"
               >
-                🦖 T-Rex
+                <svg class="w-3.5 h-3.5 text-[#f87171]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
+                  <path d="M2.5 12a9.5 9.5 0 0 1 7-9.2"/>
+                  <path d="M2 18l4-4"/>
+                </svg>
+                <span>T-Rex</span>
               </button>
+
+              <!-- Triceratops Button -->
               <button
                 type="button"
                 (click)="loadSamplePreset('triceratops')"
-                class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-sm"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-xs"
               >
-                🦏 Triceratops
+                <svg class="w-3.5 h-3.5 text-[#f4a261]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/>
+                  <path d="m5 2 5 5"/>
+                </svg>
+                <span>Triceratops</span>
               </button>
+
+              <!-- Stegosaurus Button -->
               <button
                 type="button"
                 (click)="loadSamplePreset('stegosaurus')"
-                class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-sm"
+                class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-[#342417] hover:bg-[#4a3321] hover:text-[#fceddb] border border-[#5e412b] text-[#dfd0be] transition-all cursor-pointer shadow-xs"
               >
-                🦕 Stegosaurus
+                <svg class="w-3.5 h-3.5 text-[#74c69d]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span>Stegosaurus</span>
               </button>
             </div>
           </div>
         </div>
       } @else {
         <!-- Loaded File Preview Card -->
-        <div class="rounded-3xl border border-[#573f2c] bg-[#221811] p-5 sm:p-7 shadow-xl">
+        <div class="rounded-3xl border border-[#573f2c] bg-[#221811] p-5 sm:p-6 shadow-xl">
           <div class="flex flex-col sm:flex-row items-center gap-6">
             <!-- Image Preview in wooden frame -->
-            <div class="relative w-44 h-44 rounded-2xl overflow-hidden border-3 border-[#8c5836] bg-[#17100b] shrink-0 shadow-lg glow-wood">
+            <div class="relative w-40 h-40 rounded-2xl overflow-hidden border-2 border-[#8c5836] bg-[#17100b] shrink-0 shadow-lg glow-wood">
               <img
                 [src]="state.previewUrl()"
                 alt="Preview do dinossauro selecionado"
@@ -90,18 +109,17 @@ import { environment } from '../../../../environments/environment';
               />
               
               @if (state.isScanning()) {
-                <!-- Subtle warm scanning sweep -->
                 <div class="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#f4a261] to-transparent shadow-[0_0_15px_#f4a261] animate-bounce"></div>
               }
             </div>
 
             <!-- Meta details and Actions -->
-            <div class="flex-1 w-full text-center sm:text-left space-y-3.5">
+            <div class="flex-1 w-full text-center sm:text-left space-y-3">
               <div>
                 <span class="text-xs uppercase tracking-wider text-[#f4a261] font-bold">
-                  Imagem Carregada para Análise
+                  Imagem Carregada
                 </span>
-                <h4 class="text-xl font-bold text-[#fceddb] truncate max-w-md">
+                <h4 class="text-lg font-bold text-[#fceddb] truncate max-w-md">
                   {{ state.selectedFile()?.name }}
                 </h4>
                 <p class="text-xs text-[#a89582]">
@@ -115,7 +133,7 @@ import { environment } from '../../../../environments/environment';
                   type="button"
                   (click)="state.executeScan()"
                   [disabled]="state.isScanning()"
-                  class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 rounded-2xl font-bold text-sm text-amber-50 bg-gradient-to-r from-[#d97706] via-[#b45309] to-[#92400e] hover:brightness-110 transition-all duration-200 shadow-lg shadow-amber-950/70 border border-amber-400/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-2xl font-bold text-xs sm:text-sm text-amber-50 bg-gradient-to-r from-[#d97706] via-[#b45309] to-[#92400e] hover:brightness-110 transition-all duration-200 shadow-md shadow-amber-950/70 border border-amber-400/30 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   @if (state.isScanning()) {
                     <svg class="w-4 h-4 animate-spin text-amber-100" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -136,7 +154,7 @@ import { environment } from '../../../../environments/environment';
                   type="button"
                   (click)="state.clearScan()"
                   [disabled]="state.isScanning()"
-                  class="px-4 py-3 rounded-2xl text-xs font-bold text-[#c9b7a5] hover:text-[#fceddb] bg-[#322317] hover:bg-[#3f2c1d] border border-[#573f2c] transition-all cursor-pointer disabled:opacity-50"
+                  class="px-4 py-2.5 rounded-2xl text-xs font-bold text-[#c9b7a5] hover:text-[#fceddb] bg-[#322317] hover:bg-[#3f2c1d] border border-[#573f2c] transition-all cursor-pointer disabled:opacity-50"
                 >
                   Trocar Imagem
                 </button>
@@ -148,8 +166,8 @@ import { environment } from '../../../../environments/environment';
 
       <!-- Error Toast Notification -->
       @if (state.scanError(); as errorMsg) {
-        <div class="p-4 rounded-2xl bg-[#3f1917] border border-[#822a21] text-[#fca5a5] text-xs flex items-center gap-3 shadow-lg">
-          <svg class="w-5 h-5 text-[#ef4444] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="p-3.5 rounded-2xl bg-[#3f1917] border border-[#822a21] text-[#fca5a5] text-xs flex items-center gap-3 shadow-lg">
+          <svg class="w-4 h-4 text-[#ef4444] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10"/>
             <line x1="12" y1="8" x2="12" y2="12"/>
             <line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -197,11 +215,6 @@ export class UploadZoneComponent {
     }
   }
 
-  /**
-   * Helper that downloads a sample portrait and creates a File instance to test.
-   *
-   * @param slug - Dinosaur slug identifier.
-   */
   public loadSamplePreset(slug: string): void {
     const sampleUrl = `${environment.staticBaseUrl}/static/portraits/${slug}.png`;
     this.http.get(sampleUrl, { responseType: 'blob' }).subscribe({

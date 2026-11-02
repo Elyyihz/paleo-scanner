@@ -4,7 +4,7 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
 
 /**
  * Modal dialog presenting comprehensive comparison details for a selected dinosaur
- * in warm earthy Paleo Pines style.
+ * in warm earthy Paleo Pines style with vector icons.
  */
 @Component({
   selector: 'app-dinosaur-modal',
@@ -40,15 +40,21 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
 
             <!-- Modal Header with Portrait -->
             <div class="flex items-center gap-5 pb-6 border-b border-[#3e2c1e]">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#17100a] border-2 border-[#8c5836] p-1 shrink-0 overflow-hidden shadow-lg glow-wood">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#17100a] border-2 border-[#8c5836] p-1 shrink-0 overflow-hidden shadow-lg glow-wood flex items-center justify-center">
                 @if (dino.portrait_url) {
                   <img
                     [src]="state.getPortraitUrl(dino.portrait_url)"
                     [alt]="dino.common_name"
                     class="w-full h-full object-cover rounded-xl"
+                    (error)="onImageError($event, dino.slug)"
                   />
                 } @else {
-                  <div class="w-full h-full flex items-center justify-center text-2xl">🦖</div>
+                  <svg class="w-8 h-8 text-[#573e29]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
+                    <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+                    <path d="M2.5 12a9.5 9.5 0 0 1 7-9.2"/>
+                    <path d="M2 18l4-4"/>
+                  </svg>
                 }
               </div>
 
@@ -83,5 +89,12 @@ export class DinosaurModalComponent {
   @HostListener('document:keydown.escape')
   public handleEscape(): void {
     this.state.closeDinosaurModal();
+  }
+
+  public onImageError(event: Event, slug: string): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes(`/static/portraits/${slug}.png`)) {
+      img.src = `/static/portraits/${slug}.png`;
+    }
   }
 }

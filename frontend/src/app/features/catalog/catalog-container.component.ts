@@ -4,7 +4,8 @@ import { DinosaurCardComponent } from './dinosaur-card/dinosaur-card.component';
 import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.component';
 
 /**
- * Filterable and searchable species catalog styled in warm earthy Paleo Pines ranch aesthetics.
+ * Filterable and searchable species catalog styled in warm earthy Paleo Pines ranch aesthetics
+ * with clean vector icons.
  */
 @Component({
   selector: 'app-catalog-container',
@@ -195,10 +196,13 @@ import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.componen
             }
           </div>
         } @else {
-          <!-- Empty Results -->
+          <!-- Empty Results with Vector Search Lens Icon (No Emojis) -->
           <div class="py-20 text-center rounded-3xl border border-dashed border-[#4d3827] bg-[#201710] p-8">
-            <div class="w-16 h-16 rounded-2xl bg-[#2e2117] flex items-center justify-center text-3xl mx-auto mb-3">
-              🔍
+            <div class="w-16 h-16 rounded-2xl bg-[#2e2117] border border-[#523927] flex items-center justify-center text-[#f4a261] mx-auto mb-3 shadow-inner">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.3-4.3"/>
+              </svg>
             </div>
             <h3 class="text-lg font-bold text-[#fceddb]">Nenhum dinossauro encontrado</h3>
             <p class="text-xs text-[#a89582] mt-1 max-w-sm mx-auto">

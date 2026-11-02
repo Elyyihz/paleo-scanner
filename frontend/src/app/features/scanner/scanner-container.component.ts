@@ -4,42 +4,36 @@ import { UploadZoneComponent } from './upload-zone/upload-zone.component';
 import { ScanResultsComponent } from './scan-results/scan-results.component';
 
 /**
- * Main container for the visual scanning flow styled in warm Paleo Pines atmosphere.
+ * Main container for the visual scanning flow with high-priority upload zone placed immediately above the fold.
  */
 @Component({
   selector: 'app-scanner-container',
   standalone: true,
   imports: [UploadZoneComponent, ScanResultsComponent],
   template: `
-    <div class="space-y-10">
-      <!-- Hero Intro Header with Paleo Pines Logo -->
-      <div class="text-center max-w-3xl mx-auto space-y-4">
-        <!-- Logo Display -->
-        <div class="flex justify-center mb-1">
-          <img
-            src="/logo.png"
-            alt="Paleo Pines"
-            class="h-24 sm:h-32 w-auto object-contain drop-shadow-lg"
-          />
-        </div>
-
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2e2116] border border-[#5a402a] text-[#f4a261] text-xs font-bold shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-[#52b788] animate-pulse"></span>
-          Inteligência Artificial Treinada em 38 Espécies do Jogo
-        </div>
-
-        <h2 class="text-3xl sm:text-5xl font-black text-[#fceddb] tracking-tight leading-tight">
-          Descubra o Fóssil Real por Trás do Seu Dinossauro
-        </h2>
-
-        <p class="text-sm sm:text-base text-[#b8a490] leading-relaxed max-w-2xl mx-auto">
-          Envie uma imagem do seu dinossauro de <strong class="text-[#f4a261]">Paleo Pines</strong> para descobrir a espécie exata e comparar como ele vivia na pré-história real: peso fóssil, época geológica, dieta e anatomia.
-        </p>
-      </div>
-
-      <!-- Main Action Area: Upload vs. Results -->
+    <div class="space-y-6">
+      <!-- Concise Top Header (Immediately visible without scrolling) -->
       @if (!state.hasScanResult()) {
-        <div class="max-w-3xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#2a1d14] border border-[#543b27] text-[#f4a261] text-xs font-bold shadow-xs">
+            <svg class="w-3.5 h-3.5 text-[#52b788]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
+              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+            </svg>
+            <span>Classificador de Visão Computacional (38 Espécies)</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-black text-[#fceddb] tracking-tight">
+            Descubra o Fóssil Real do Seu Dinossauro
+          </h2>
+
+          <p class="text-xs sm:text-sm text-[#b8a490] max-w-lg mx-auto">
+            Envie uma captura de tela de <strong class="text-[#f4a261]">Paleo Pines</strong> para identificar a espécie e comparar traços do jogo com a paleontologia real.
+          </p>
+        </div>
+
+        <!-- Drag & Drop Zone placed right at the top -->
+        <div class="max-w-2xl mx-auto">
           <app-upload-zone />
         </div>
       } @else {
