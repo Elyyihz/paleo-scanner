@@ -99,11 +99,11 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
         </div>
 
         <!-- 3-Column Comparison (Game | Connection Nodes | Real Fossil) -->
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_54px_1fr] gap-4 sm:gap-6 items-stretch">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_54px_1fr] gap-4 sm:gap-6 items-start">
           <!-- LEFT: GAME ATTRIBUTES -->
           @if (mobileTab() === 'both' || mobileTab() === 'game') {
-            <div class="rounded border border-[#1b3a26] bg-[#0e1612] p-5 flex flex-col justify-between space-y-4">
-              <div class="flex items-center justify-between pb-3 border-b border-[#1b3a26]">
+            <div class="rounded border border-[#1b3a26] bg-[#0e1612] p-4 sm:p-5 flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-[#1b3a26] mb-3">
                 <div class="flex items-center gap-2.5">
                   <div class="w-7 h-7 rounded bg-[#143322] border border-[#1e5033] flex items-center justify-center text-[#4ade80]">
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -118,41 +118,41 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
               </div>
 
               <!-- Comparison Rows Game -->
-              <div class="space-y-3 text-xs font-mono">
+              <div class="flex flex-col gap-2.5 text-xs font-mono">
                 <!-- Row 1: Biome / Environment -->
-                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
-                  <span class="text-[#86efac] block text-[11px] font-semibold">BIOMA / HÁBITAT:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">{{ dino().game_profile.biome }}</span>
+                <div class="p-2.5 sm:p-3 rounded bg-[#0a0f0d] border border-[#1b3a26] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#86efac] block text-[10px] sm:text-[11px] font-semibold">BIOMA / HÁBITAT:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">{{ dino().game_profile.biome }}</span>
                 </div>
 
                 <!-- Row 2: Diet -->
-                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
-                  <span class="text-[#86efac] block text-[11px] font-semibold">DIETA & POPPIN FAVORITO:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0a0f0d] border border-[#1b3a26] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#86efac] block text-[10px] sm:text-[11px] font-semibold">DIETA & POPPIN FAVORITO:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     {{ dino().game_profile.diet }} (Sabor {{ dino().game_profile.poppin_favorite }})
                   </span>
                 </div>
 
                 <!-- Row 3: Social -->
-                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
-                  <span class="text-[#86efac] block text-[11px] font-semibold">SOCIABILIDADE:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0a0f0d] border border-[#1b3a26] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#86efac] block text-[10px] sm:text-[11px] font-semibold">SOCIABILIDADE:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     {{ dino().game_profile.social === 'Pack' ? 'Bando (Pack)' : dino().game_profile.social === 'Herd' ? 'Manada (Herd)' : 'Solitário (Loner)' }}
                   </span>
                 </div>
 
                 <!-- Row 4: Skills -->
-                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
-                  <span class="text-[#86efac] block text-[11px] font-semibold">HABILIDADES NO RANCHO:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0a0f0d] border border-[#1b3a26] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#86efac] block text-[10px] sm:text-[11px] font-semibold">HABILIDADES NO RANCHO:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     {{ dino().game_profile.farm_skill }} · {{ dino().game_profile.wild_skill }}
                   </span>
                 </div>
 
                 <!-- Row 5: Size & Riding -->
-                <div class="p-3 rounded bg-[#0a0f0d] border border-[#1b3a26]">
-                  <span class="text-[#86efac] block text-[11px] font-semibold">PORTE & SELA:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0a0f0d] border border-[#1b3a26] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#86efac] block text-[10px] sm:text-[11px] font-semibold">PORTE & SELA:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     Porte {{ dino().game_profile.size_category }} · {{ dino().game_profile.is_rideable ? 'Montável' : 'Não montável' }}
                   </span>
                 </div>
@@ -161,38 +161,52 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
           }
 
           <!-- MIDDLE: CORRELATION CONNECTION NODES -->
-          <div class="hidden md:flex flex-col items-center justify-around py-12" aria-hidden="true">
-            <div class="conn-node text-[#c8873a]" title="Correspondência de Hábitat">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
-            </div>
-            <div class="conn-node text-[#c8873a]" title="Correspondência de Dieta">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
-            </div>
-            <div class="conn-node text-[#c8873a]" title="Correlação Evolutiva">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
-            </div>
-            <div class="conn-node text-[#c8873a]" title="Adaptações Biológicas">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
-            </div>
-            <div class="conn-node text-[#c8873a]" title="Proporção Anatômica">
-              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M13 6l6 6-6 6"/>
-              </svg>
+          <div class="hidden md:flex flex-col pt-4 sm:pt-5" aria-hidden="true">
+            <!-- Header spacer to align arrows with attribute rows -->
+            <div class="h-[41px] pb-3 border-b border-transparent mb-3"></div>
+            <div class="flex flex-col gap-2.5">
+              <div class="h-[66px] sm:h-[70px] flex items-center justify-center">
+                <div class="conn-node text-[#c8873a]" title="Correspondência de Hábitat">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="h-[66px] sm:h-[70px] flex items-center justify-center">
+                <div class="conn-node text-[#c8873a]" title="Correspondência de Dieta">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="h-[66px] sm:h-[70px] flex items-center justify-center">
+                <div class="conn-node text-[#c8873a]" title="Correlação Evolutiva">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="h-[66px] sm:h-[70px] flex items-center justify-center">
+                <div class="conn-node text-[#c8873a]" title="Adaptações Biológicas">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="h-[66px] sm:h-[70px] flex items-center justify-center">
+                <div class="conn-node text-[#c8873a]" title="Proporção Anatômica">
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- RIGHT: REAL FOSSIL EVIDENCE -->
           @if (mobileTab() === 'both' || mobileTab() === 'real') {
-            <div class="rounded border border-[#3a2c1b] bg-[#16120e] p-5 flex flex-col justify-between space-y-4">
-              <div class="flex items-center justify-between pb-3 border-b border-[#3a2c1b]">
+            <div class="rounded border border-[#3a2c1b] bg-[#16120e] p-4 sm:p-5 flex flex-col">
+              <div class="flex items-center justify-between pb-3 border-b border-[#3a2c1b] mb-3">
                 <div class="flex items-center gap-2.5">
                   <div class="w-7 h-7 rounded bg-[#332010] border border-[#6b3d16] flex items-center justify-center text-[#fcd34d]">
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -208,43 +222,43 @@ import { ScannerStateService } from '../../core/services/scanner-state.service';
               </div>
 
               <!-- Comparison Rows Real -->
-              <div class="space-y-3 text-xs font-mono">
+              <div class="flex flex-col gap-2.5 text-xs font-mono">
                 <!-- Row 1: Real Formations & Locations -->
-                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
-                  <span class="text-[#fde68a] block text-[11px] font-semibold">FORMAÇÕES & LOCAIS FÓSSEIS:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0f0c09] border border-[#3a2c1b] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#fde68a] block text-[10px] sm:text-[11px] font-semibold">FORMAÇÕES & LOCAIS FÓSSEIS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm line-clamp-2">
                     {{ dino().fossil_profile?.fossil_locations?.join(', ') || 'Morrison, Hell Creek, Tendaguru' }}
                   </span>
                 </div>
 
                 <!-- Row 2: Real Diet -->
-                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
-                  <span class="text-[#fde68a] block text-[11px] font-semibold">DIETA FÓSSIL COMPROVADA:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0f0c09] border border-[#3a2c1b] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#fde68a] block text-[10px] sm:text-[11px] font-semibold">DIETA FÓSSIL COMPROVADA:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     {{ dino().fossil_profile?.real_diet }} (Dentição e coprólitos)
                   </span>
                 </div>
 
                 <!-- Row 3: Taxonomy & Epoch -->
-                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
-                  <span class="text-[#fde68a] block text-[11px] font-semibold">CLADO & DATAÇÃO REAL:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0f0c09] border border-[#3a2c1b] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#fde68a] block text-[10px] sm:text-[11px] font-semibold">CLADO & DATAÇÃO REAL:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     Família {{ dino().fossil_profile?.taxonomy_family }} · {{ dino().fossil_profile?.approximate_mya }}
                   </span>
                 </div>
 
                 <!-- Row 4: Anatomical Distinctive Features -->
-                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
-                  <span class="text-[#fde68a] block text-[11px] font-semibold">ADAPTAÇÕES DISTINTIVAS:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm line-clamp-2">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0f0c09] border border-[#3a2c1b] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#fde68a] block text-[10px] sm:text-[11px] font-semibold">ADAPTAÇÕES DISTINTIVAS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm line-clamp-2">
                     {{ dino().fossil_profile?.distinctive_features }}
                   </span>
                 </div>
 
                 <!-- Row 5: Real Dimensions -->
-                <div class="p-3 rounded bg-[#0f0c09] border border-[#3a2c1b]">
-                  <span class="text-[#fde68a] block text-[11px] font-semibold">DIMENSÕES CORPÓREAS:</span>
-                  <span class="font-bold text-[#ebe6dc] text-sm">
+                <div class="p-2.5 sm:p-3 rounded bg-[#0f0c09] border border-[#3a2c1b] min-h-[66px] sm:min-h-[70px] flex flex-col justify-center">
+                  <span class="text-[#fde68a] block text-[10px] sm:text-[11px] font-semibold">DIMENSÕES CORPÓREAS:</span>
+                  <span class="font-bold text-[#ebe6dc] text-xs sm:text-sm">
                     ~{{ dino().fossil_profile?.length_meters }} m de comprimento · ~{{ dino().fossil_profile?.mass_kg?.toLocaleString() }} kg
                   </span>
                 </div>
