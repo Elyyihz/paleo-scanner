@@ -1,22 +1,48 @@
-version: '3.8'
-
+# ==============================================================================
+# Paleo-Scanner Multi-Container Orchestration (Backend FastAPI + Frontend Angular)
+# ==============================================================================
 services:
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: paleo-scanner-backend
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/app:/app/app
-      - ./backend/app/infrastructure/database/dinosaurs_seed.json:/app/app/infrastructure/database/dinosaurs_seed.json:ro
+      - ./backend/app/infrastructure/database:/app/app/infrastructure/database
       - ./ml/models:/app/ml/models:ro
     environment:
       - PYTHONUNBUFFERED=1
+      - TF_USE_LEGACY_KERAS=1
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
       interval: 10s
       timeout: 5s
       retries: 3
+    networks:
+      - paleo-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: paleo-scanner-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:4200/"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - paleo-network
+
+networks:
+  paleo-network:
+    driver: bridge

@@ -1,0 +1,16 @@
+.git
+.github
+.idea
+.vscode
+node_modules
+.angular
+frontend/dist
+backend/**/__pycache__
+backend/**/.pytest_cache
+ml/data/raw
+ml/data/processed
+ml/models/*.keras
+!ml/models/dino_mobilenet_v3.keras
+!ml/models/dino_mobilenet_v3_best.keras
+*.log
+.DS_Store
