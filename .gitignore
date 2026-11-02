@@ -42,16 +42,18 @@ node_modules/
 .angular/
 dist/
 
-# Machine Learning & Large Artifacts
+# Machine Learning Large Artifacts & Heavy Datasets
 *.h5
 *.keras
 *.onnx
 *.tflite
 *.pt
 *.pth
-data/raw/
-data/processed/
-models/checkpoints/
+ml/data/raw/
+ml/data/processed/
+ml/models/checkpoints/
+ml/models/*.keras
+ml/models/*.onnx
 
 # Environment variables & secrets
 .env

@@ -1,0 +1,276 @@
+{
+  "total_species": 38,
+  "total_images": 726,
+  "train_images": 599,
+  "val_images": 127,
+  "classes": [
+    "allosaurus",
+    "ankylosaurus",
+    "archaeopteryx",
+    "baryonyx",
+    "carnotaurus",
+    "centrosaurus",
+    "ceratosaurus",
+    "coelophysis",
+    "compsognathus",
+    "corythosaurus",
+    "deinocheirus",
+    "deinonychus",
+    "desmatosuchus",
+    "dilophosaurus",
+    "dimetrodon",
+    "euoplocephalus",
+    "gallimimus",
+    "kentrosaurus",
+    "megalosaurus",
+    "microraptor",
+    "ouranosaurus",
+    "oviraptor",
+    "pachycephalosaurus",
+    "parasaurolophus",
+    "pinacosaurus",
+    "postosuchus",
+    "protoceratops",
+    "psittacosaurus",
+    "scelidosaurus",
+    "stegosaurus",
+    "styracosaurus",
+    "therizinosaurus",
+    "triceratops",
+    "troodon",
+    "tyrannosaurus",
+    "utahraptor",
+    "velociraptor",
+    "wuerhosaurus"
+  ],
+  "species_breakdown": {
+    "allosaurus": {
+      "common_name": "Allosaurus",
+      "total_samples": 23,
+      "train_samples": 19,
+      "val_samples": 4
+    },
+    "ankylosaurus": {
+      "common_name": "Ankylosaurus",
+      "total_samples": 25,
+      "train_samples": 20,
+      "val_samples": 5
+    },
+    "archaeopteryx": {
+      "common_name": "Archaeopteryx",
+      "total_samples": 34,
+      "train_samples": 28,
+      "val_samples": 6
+    },
+    "baryonyx": {
+      "common_name": "Baryonyx",
+      "total_samples": 23,
+      "train_samples": 19,
+      "val_samples": 4
+    },
+    "carnotaurus": {
+      "common_name": "Carnotaurus",
+      "total_samples": 23,
+      "train_samples": 19,
+      "val_samples": 4
+    },
+    "centrosaurus": {
+      "common_name": "Centrosaurus",
+      "total_samples": 13,
+      "train_samples": 11,
+      "val_samples": 2
+    },
+    "ceratosaurus": {
+      "common_name": "Ceratosaurus",
+      "total_samples": 13,
+      "train_samples": 11,
+      "val_samples": 2
+    },
+    "coelophysis": {
+      "common_name": "Coelophysis",
+      "total_samples": 13,
+      "train_samples": 11,
+      "val_samples": 2
+    },
+    "compsognathus": {
+      "common_name": "Compsognathus",
+      "total_samples": 21,
+      "train_samples": 17,
+      "val_samples": 4
+    },
+    "corythosaurus": {
+      "common_name": "Corythosaurus",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "deinocheirus": {
+      "common_name": "Deinocheirus",
+      "total_samples": 23,
+      "train_samples": 19,
+      "val_samples": 4
+    },
+    "deinonychus": {
+      "common_name": "Deinonychus",
+      "total_samples": 14,
+      "train_samples": 12,
+      "val_samples": 2
+    },
+    "desmatosuchus": {
+      "common_name": "Desmatosuchus",
+      "total_samples": 36,
+      "train_samples": 29,
+      "val_samples": 7
+    },
+    "dilophosaurus": {
+      "common_name": "Dilophosaurus",
+      "total_samples": 19,
+      "train_samples": 16,
+      "val_samples": 3
+    },
+    "dimetrodon": {
+      "common_name": "Dimetrodon",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "euoplocephalus": {
+      "common_name": "Euoplocephalus",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "gallimimus": {
+      "common_name": "Gallimimus",
+      "total_samples": 24,
+      "train_samples": 20,
+      "val_samples": 4
+    },
+    "kentrosaurus": {
+      "common_name": "Kentrosaurus",
+      "total_samples": 21,
+      "train_samples": 17,
+      "val_samples": 4
+    },
+    "megalosaurus": {
+      "common_name": "Megalosaurus",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "microraptor": {
+      "common_name": "Microraptor",
+      "total_samples": 10,
+      "train_samples": 8,
+      "val_samples": 2
+    },
+    "ouranosaurus": {
+      "common_name": "Ouranosaurus",
+      "total_samples": 14,
+      "train_samples": 12,
+      "val_samples": 2
+    },
+    "oviraptor": {
+      "common_name": "Oviraptor",
+      "total_samples": 14,
+      "train_samples": 12,
+      "val_samples": 2
+    },
+    "pachycephalosaurus": {
+      "common_name": "Pachycephalosaurus",
+      "total_samples": 21,
+      "train_samples": 17,
+      "val_samples": 4
+    },
+    "parasaurolophus": {
+      "common_name": "Parasaurolophus",
+      "total_samples": 25,
+      "train_samples": 20,
+      "val_samples": 5
+    },
+    "pinacosaurus": {
+      "common_name": "Pinacosaurus",
+      "total_samples": 9,
+      "train_samples": 8,
+      "val_samples": 1
+    },
+    "postosuchus": {
+      "common_name": "Postosuchus",
+      "total_samples": 13,
+      "train_samples": 11,
+      "val_samples": 2
+    },
+    "protoceratops": {
+      "common_name": "Protoceratops",
+      "total_samples": 13,
+      "train_samples": 11,
+      "val_samples": 2
+    },
+    "psittacosaurus": {
+      "common_name": "Psittacosaurus",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "scelidosaurus": {
+      "common_name": "Scelidosaurus",
+      "total_samples": 11,
+      "train_samples": 9,
+      "val_samples": 2
+    },
+    "stegosaurus": {
+      "common_name": "Stegosaurus",
+      "total_samples": 12,
+      "train_samples": 10,
+      "val_samples": 2
+    },
+    "styracosaurus": {
+      "common_name": "Styracosaurus",
+      "total_samples": 28,
+      "train_samples": 23,
+      "val_samples": 5
+    },
+    "therizinosaurus": {
+      "common_name": "Therizinosaurus",
+      "total_samples": 24,
+      "train_samples": 20,
+      "val_samples": 4
+    },
+    "triceratops": {
+      "common_name": "Triceratops",
+      "total_samples": 27,
+      "train_samples": 22,
+      "val_samples": 5
+    },
+    "troodon": {
+      "common_name": "Troodon",
+      "total_samples": 30,
+      "train_samples": 24,
+      "val_samples": 6
+    },
+    "tyrannosaurus": {
+      "common_name": "Tyrannosaurus",
+      "total_samples": 22,
+      "train_samples": 18,
+      "val_samples": 4
+    },
+    "utahraptor": {
+      "common_name": "Utahraptor",
+      "total_samples": 21,
+      "train_samples": 17,
+      "val_samples": 4
+    },
+    "velociraptor": {
+      "common_name": "Velociraptor",
+      "total_samples": 23,
+      "train_samples": 19,
+      "val_samples": 4
+    },
+    "wuerhosaurus": {
+      "common_name": "Wuerhosaurus",
+      "total_samples": 24,
+      "train_samples": 20,
+      "val_samples": 4
+    }
+  }
+}
