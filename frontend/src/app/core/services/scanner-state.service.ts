@@ -232,7 +232,7 @@ export class ScannerStateService {
    */
   public getFossilUrl(dinoOrSlug: Dinosaur | string): string {
     const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
-    return this.apiService.getStaticImageUrl(`/static/fossils/${slug}.jpg`);
+    return this.apiService.getStaticImageUrl(`/static/fossils/${slug}.jpg?v=20261102`);
   }
 
   /**
@@ -243,7 +243,7 @@ export class ScannerStateService {
    */
   public getPaleoartUrl(dinoOrSlug: Dinosaur | string): string {
     const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
-    return this.apiService.getStaticImageUrl(`/static/paleoart/${slug}.jpg`);
+    return this.apiService.getStaticImageUrl(`/static/paleoart/${slug}.jpg?v=20261102`);
   }
 
   /**
