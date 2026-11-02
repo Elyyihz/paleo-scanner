@@ -90,10 +90,17 @@ Para inferência veloz tanto em CPU de servidor quanto em containers leves, util
 
 ---
 
-## 📊 Critérios de Avaliação & Exportação
+## 📊 Resultados e Métricas em Produção (Modelo v2.0)
 
-* **Métrica Principal**: Acurácia Top-1 no conjunto de teste > 85%.
-* **Métrica Secundária**: Macro F1-score > 0.80 para assegurar que espécies menores (ex: *Psittacosaurus*) não sejam ofuscadas por gigantes.
-* **Formato de Exportação**:
-  * `model_dino_classifier.keras` (formato nativo Keras v3)
-  * `model_dino_classifier.onnx` (otimizado para inferência rápida com ONNX Runtime no backend FastAPI).
+O classificador em produção foi treinado com **842 imagens** distribuídas uniformemente pelas **40 espécies biológicas** de *Paleo Pines*:
+
+* **Classes Ativas**: 40 espécies (incluindo *Spinosaurus* e *Sarcosuchus*).
+* **Acurácia Top-1 (Validação)**: **77.85%**
+* **Acurácia Top-3 (Validação)**: **90.60%**
+* **Loss de Validação**: 0.8500 (Categorical Crossentropy balanceada)
+* **Tempo de Inferência Médio**: ~35 ms em CPU.
+* **Artefatos Gerados**:
+  * `ml/models/dino_mobilenet_v3.keras`
+  * `ml/models/dino_mobilenet_v3_best.keras`
+  * `ml/models/class_indices.json`
+* 📊 **Relatório Interativo Completo**: Consulte o dashboard visual em [`docs/model_report.html`](file:///Users/elyyihz/repositories/personal/paleo-scanner/docs/model_report.html).

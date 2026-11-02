@@ -226,3 +226,35 @@ O índice pondera 4 dimensões científicas contrastadas com o gameplay lúdico:
   * **Localização**: Formação Yixian (China) e Mongólia.
   * **Bico e Cerdas**: Bico semelhante ao de papagaio para quebrar nozes e sementes duras; fileira de cerdas tegumentares filamentosas na cauda preservadas em espécimes de Liaoning.
   * **Score de Fidelidade**: **89%** *(O jogo captura o porte minúsculo, o bico quebra-nozes e a dieta à base de sementes)*.
+
+---
+
+### 11. Spinosaurus (*Spinosaurus aegyptiacus*)
+* **🎮 Paleo Pines**:
+  * **Bioma**: Veridian Valley (áreas ribeirinhas).
+  * **Poppin Favorito**: Suculento / Juicy (*apium*).
+  * **Porte**: Grande (Montável).
+  * **Habilidade**: Regador (*Waterer*) e Mergulhador (*Diver*).
+* **🔬 Paleontologia Real**:
+  * **Família**: Spinosauridae.
+  * **Período**: Cretáceo Superior (~99 a 93.5 milhões de anos).
+  * **Tamanho**: ~14 metros de comprimento | **Massa**: ~7.400 kg.
+  * **Localização**: Bahariya Formation (Egito) e Kem Kem Group (Marrocos).
+  * **Adaptações Fósseis**: Maior terópode predador conhecido; imensa vela dorsal neural de até 1,65 m, focinho cônico piscívoro com neuro-orifícios sensoriais e cauda de remo para propulsão em rios cretáceos.
+  * **Score de Fidelidade**: **96%** *(Alta precisão: o jogo reconhece seu comportamento anfíbio/aquático e sua associação direta a rios e lagos)*.
+
+---
+
+### 12. Sarcosuchus (*Sarcosuchus imperator*)
+* **🎮 Paleo Pines**:
+  * **Bioma**: Ariacotta Dunes (Deserto).
+  * **Poppin Favorito**: Crocante / Crunchy.
+  * **Porte**: Grande (Montável).
+  * **Habilidade**: Esmagador de obstáculos (*Stomper*) e Regador (*Waterer*).
+* **🔬 Paleontologia Real**:
+  * **Família**: Pholidosauridae (crocodilomorfo gigante extinto).
+  * **Período**: Cretáceo Inferior (~112 milhões de anos).
+  * **Tamanho**: ~9,5 metros de comprimento | **Massa**: ~3.500 kg.
+  * **Localização**: Elrhaz Formation (Ténéré, Níger).
+  * **Adaptações Fósseis**: Crânio alongado de 1,6 m com protuberância nasal bulbosa no focinho; mandíbulas maciças com dentes cônicos robustos para presas gigantes e couraça protetora de osteodermas espessas.
+  * **Score de Fidelidade**: **93%** *(Fidelidade excelente: o jogo traduz sua robustez massiva, sociabilidade em bando e comportamento associado à água no deserto)*.

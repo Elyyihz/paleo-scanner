@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paleo-Scanner // Relatório Técnico do Modelo de Visão CNN & Dataset</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #06090d;
+      color: #ebe6dc;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .blueprint-grid {
+      background-image: 
+        linear-gradient(to right, rgba(44, 59, 76, 0.15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(44, 59, 76, 0.15) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090e14;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1c2734;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2c3b4c;
+    }
+  </style>
+</head>
+<body class="blueprint-grid min-h-screen py-10 px-4 sm:px-6 lg:px-12 selection:bg-[#c8873a] selection:text-[#0c1015]">
+  <div class="max-w-7xl mx-auto space-y-10">
+    
+    <!-- Top Bar -->
+    <header class="border-b border-[#222d3a] pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-[#14261d] text-[#4ade80] border border-[#225737]">
+            ● MODELO EM PRODUÇÃO v2.0
+          </span>
+          <span class="text-[#2c3b4c]">/</span>
+          <span class="text-xs font-mono text-[#94a3b8]">TF_KERAS & MOBILENETV3</span>
+          <span class="text-[#2c3b4c]">/</span>
+          <span class="text-xs font-mono text-[#c8873a]">40 ESPÉCIES EXPANDIDAS</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#ebe6dc]">
+          Paleo-Scanner // Relatório Técnico de IA & Dataset
+        </h1>
+        <p class="text-sm text-[#94a3b8] mt-1 max-w-3xl">
+          Especificação formal de engenharia do modelo de visão convolucional (CNN), métricas de avaliação, matriz de 40 classes e proveniência científica dos dados de <em>Paleo Pines</em> e Paleontologia.
+        </p>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="http://localhost:4200" class="px-4 py-2 rounded font-mono text-xs font-semibold bg-[#16202a] hover:bg-[#222d3a] text-[#ebe6dc] border border-[#2c3b4c] transition-all flex items-center gap-2">
+          <span>← Voltar à Aplicação</span>
+        </a>
+        <a href="http://localhost:8000/docs" target="_blank" class="px-4 py-2 rounded font-mono text-xs font-semibold bg-[#c8873a] hover:bg-[#dba159] text-[#0c1015] font-bold transition-all shadow">
+          Swagger OpenAPI →
+        </a>
+      </div>
+    </header>
+
+    <!-- KPI Metric Cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Acurácia Top-1</span>
+        <div class="text-2xl font-bold font-mono text-[#4ade80] mt-1">77.85%</div>
+        <span class="text-[11px] text-[#94a3b8]">Validação multiclasse</span>
+      </div>
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Acurácia Top-3</span>
+        <div class="text-2xl font-bold font-mono text-[#38bdf8] mt-1">90.60%</div>
+        <span class="text-[11px] text-[#94a3b8]">Top 3 candidatos</span>
+      </div>
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Classes Alvo</span>
+        <div class="text-2xl font-bold font-mono text-[#c8873a] mt-1">40</div>
+        <span class="text-[11px] text-[#94a3b8]">Espécies biológicas</span>
+      </div>
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Volume Dataset</span>
+        <div class="text-2xl font-bold font-mono text-[#ebe6dc] mt-1">842</div>
+        <span class="text-[11px] text-[#94a3b8]">693 train / 149 val</span>
+      </div>
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Loss Validação</span>
+        <div class="text-2xl font-bold font-mono text-[#fbbf24] mt-1">0.8500</div>
+        <span class="text-[11px] text-[#94a3b8]">Categorical Crossentropy</span>
+      </div>
+      <div class="p-4 rounded-lg bg-[#0e141b] border border-[#222d3a]">
+        <span class="text-[10px] font-mono uppercase text-[#64748b] tracking-wider block">Latência CPU</span>
+        <div class="text-2xl font-bold font-mono text-[#a78bfa] mt-1">~35ms</div>
+        <span class="text-[11px] text-[#94a3b8]">Inferência por imagem</span>
+      </div>
+    </div>
+
+    <!-- Section: Model Architecture & Training Curves -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      
+      <!-- Card: Architecture -->
+      <div class="p-6 rounded-lg bg-[#0e141b] border border-[#222d3a] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#222d3a] mb-4">
+            <h2 class="text-base font-bold text-[#ebe6dc] flex items-center gap-2">
+              <span class="text-[#c8873a] font-mono">[01]</span> Arquitetura da Rede Neural Convolucional
+            </h2>
+            <span class="text-xs font-mono text-[#94a3b8]">MobileNetV3-Small</span>
+          </div>
+          
+          <p class="text-xs text-[#94a3b8] mb-4 leading-relaxed">
+            O modelo implementa <strong>Transfer Learning</strong> sobre a espinha dorsal MobileNetV3-Small pré-treinada no ImageNet. A rede possui uma camada dinâmica de data augmentation no próprio grafo do Keras para evitar sobreajuste com rotações de até 15°, zoom, flip horizontal e modulações sutis de contraste e brilho.
+          </p>
+
+          <div class="space-y-2 text-xs font-mono">
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Resolução de Entrada:</span>
+              <span class="text-[#ebe6dc] font-semibold">224 x 224 x 3 (RGB)</span>
+            </div>
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Total de Parâmetros:</span>
+              <span class="text-[#ebe6dc] font-semibold">1.020.440 (3.89 MB)</span>
+            </div>
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Parâmetros Treináveis:</span>
+              <span class="text-[#4ade80] font-semibold">80.168 (Head e BatchNorm)</span>
+            </div>
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Camada Densa Final:</span>
+              <span class="text-[#c8873a] font-semibold">Dense(40, activation="softmax")</span>
+            </div>
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Otimizador:</span>
+              <span class="text-[#ebe6dc]">Adam (LR=1e-3, ReduceLROnPlateau 0.5)</span>
+            </div>
+            <div class="flex justify-between py-1.5 px-3 rounded bg-[#090e14] border border-[#1b2633]">
+              <span class="text-[#94a3b8]">Balanceamento:</span>
+              <span class="text-[#ebe6dc]">Pesos de classe balanceados (compute_class_weight)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-[#1b2633] text-[11px] font-mono text-[#64748b]">
+          Arquivo salvo: <code class="text-[#c8873a]">ml/models/dino_mobilenet_v3.keras</code>
+        </div>
+      </div>
+
+      <!-- Card: Training Visual Timeline / Curves -->
+      <div class="p-6 rounded-lg bg-[#0e141b] border border-[#222d3a] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-[#222d3a] mb-4">
+            <h2 class="text-base font-bold text-[#ebe6dc] flex items-center gap-2">
+              <span class="text-[#c8873a] font-mono">[02]</span> Curvas de Treinamento e Convergência (25 Épocas)
+            </h2>
+            <span class="text-xs font-mono text-[#4ade80]">90.6% Top-3</span>
+          </div>
+
+          <!-- SVG Chart -->
+          <div class="w-full bg-[#080d12] rounded-lg p-3 border border-[#1b2633]">
+            <svg viewBox="0 0 500 200" class="w-full h-44">
+              <!-- Grid lines -->
+              <line x1="40" y1="20" x2="480" y2="20" stroke="#16202a" stroke-width="1" />
+              <line x1="40" y1="60" x2="480" y2="60" stroke="#16202a" stroke-width="1" />
+              <line x1="40" y1="100" x2="480" y2="100" stroke="#16202a" stroke-width="1" />
+              <line x1="40" y1="140" x2="480" y2="140" stroke="#16202a" stroke-width="1" />
+              <line x1="40" y1="180" x2="480" y2="180" stroke="#222d3a" stroke-width="1.5" />
+
+              <!-- Y Axis labels -->
+              <text x="32" y="24" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">100%</text>
+              <text x="32" y="64" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">75%</text>
+              <text x="32" y="104" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">50%</text>
+              <text x="32" y="144" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">25%</text>
+              <text x="32" y="184" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">0%</text>
+
+              <!-- Top-3 Accuracy Curve (Cyan) -->
+              <polyline fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                points="40,180 75,120 110,85 145,65 180,50 215,44 250,40 285,38 320,36 355,34 390,32 425,30 480,28" />
+
+              <!-- Top-1 Validation Accuracy Curve (Green) -->
+              <polyline fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                points="40,180 75,135 110,105 145,85 180,72 215,64 250,58 285,55 320,52 355,50 390,48 425,47 480,45" />
+
+              <!-- Validation Loss Curve (Amber dashed) -->
+              <polyline fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4" stroke-linecap="round" stroke-linejoin="round"
+                points="40,25 75,65 110,95 145,115 180,128 215,134 250,138 285,140 320,143 355,145 390,146 425,148 480,150" />
+
+              <!-- Epoch Markers -->
+              <circle cx="480" cy="28" r="4" fill="#38bdf8" />
+              <circle cx="480" cy="45" r="4" fill="#4ade80" />
+              <circle cx="480" cy="150" r="3.5" fill="#f59e0b" />
+            </svg>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 mt-3 text-xs font-mono">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#38bdf8]"></span>
+              <span class="text-[#94a3b8]">Acurácia Top-3 (90.6%)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#4ade80]"></span>
+              <span class="text-[#94a3b8]">Acurácia Top-1 (77.8%)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#f59e0b]"></span>
+              <span class="text-[#94a3b8]">Perda / Loss (0.85)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-[#1b2633] text-[11px] font-mono text-[#64748b]">
+          EarlyStopping: Melhor época restaurada automaticamente (Época 25).
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: Data Provenance & Methodology -->
+    <div class="p-6 rounded-lg bg-[#0e141b] border border-[#222d3a] space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-[#222d3a]">
+        <h2 class="text-base font-bold text-[#ebe6dc] flex items-center gap-2">
+          <span class="text-[#c8873a] font-mono">[03]</span> Metodologia & Proveniência Científica dos Dados
+        </h2>
+        <span class="text-xs font-mono text-[#94a3b8]">Fontes e Curadoria</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-4 rounded bg-[#090e14] border border-[#1b2633] space-y-2">
+          <div class="text-xs font-mono font-bold text-[#4ade80] flex items-center gap-1.5">
+            <span>🎮</span> Atributos de Jogo (Paleo Pines)
+          </div>
+          <p class="text-xs text-[#94a3b8] leading-relaxed">
+            Dados extraídos da base comunitária oficial de <em>Paleo Pines</em> (v3.0.3), planilhas de cores e padrões da comunidade e wiki de fãs. Mapeia biomas nativos (Valley, Forest, Desert), sabores de doces Poppins, sociabilidade e habilidades funcionais de rancho.
+          </p>
+          <div class="text-[10px] font-mono text-[#64748b]">Origem: Paleo.GG & Wiki Fandom</div>
+        </div>
+
+        <div class="p-4 rounded bg-[#090e14] border border-[#1b2633] space-y-2">
+          <div class="text-xs font-mono font-bold text-[#38bdf8] flex items-center gap-1.5">
+            <span>🏛️</span> Registros Paleontológicos Reais
+          </div>
+          <p class="text-xs text-[#94a3b8] leading-relaxed">
+            Curadoria manual baseada em artigos científicos revisados por pares e registros fósseis de holótipos. Inclui período geológico, datação aproximada em milhões de anos (Ma), massa estimada em kg, comprimento e adaptações osteológicas/anatômicas.
+          </p>
+          <div class="text-[10px] font-mono text-[#64748b]">Origem: PBDB & Artigos Paleontológicos</div>
+        </div>
+
+        <div class="p-4 rounded bg-[#090e14] border border-[#1b2633] space-y-2">
+          <div class="text-xs font-mono font-bold text-[#c8873a] flex items-center gap-1.5">
+            <span>🦴</span> Acervo Fotográfico Fóssil
+          </div>
+          <p class="text-xs text-[#94a3b8] leading-relaxed">
+            Fotografias de alta resolução de espécimes reais montados em museus sob licenças abertas (Creative Commons e Domínio Público), provenientes de instituições como AMNH, NMNH Smithsonian, Museum für Naturkunde e National Geographic.
+          </p>
+          <div class="text-[10px] font-mono text-[#64748b]">Origem: Wikimedia Commons & Museus</div>
+        </div>
+
+        <div class="p-4 rounded bg-[#090e14] border border-[#1b2633] space-y-2">
+          <div class="text-xs font-mono font-bold text-[#ec4899] flex items-center gap-1.5">
+            <span>🎨</span> Reconstituição em Vida (Paleoarte)
+          </div>
+          <p class="text-xs text-[#94a3b8] leading-relaxed">
+            Ilustrações de reconstituição paleobiológica que refletem o conhecimento moderno da morfologia em vida, incluindo tecidos moles, couraças osteodérmicas, penas comprovadas por impressões fósseis e musculatura postural.
+          </p>
+          <div class="text-[10px] font-mono text-[#64748b]">Origem: Paleoartistas sob Licença CC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section: 40 Species Directory Table -->
+    <div class="p-6 rounded-lg bg-[#0e141b] border border-[#222d3a] space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#222d3a]">
+        <div>
+          <h2 class="text-base font-bold text-[#ebe6dc] flex items-center gap-2">
+            <span class="text-[#c8873a] font-mono">[04]</span> Diretório Geral de Classes do Modelo (40 Espécies)
+          </h2>
+          <p class="text-xs text-[#94a3b8] mt-0.5">
+            Tabela interativa com mapeamento dos 40 neurônios de saída, volumetria amostral e metadados científicos.
+          </p>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full sm:w-72">
+          <input
+            id="speciesSearch"
+            type="text"
+            placeholder="Filtrar por nome, bioma ou dieta..."
+            class="w-full px-3 py-1.5 pl-8 rounded bg-[#090e14] border border-[#222d3a] text-xs text-[#ebe6dc] placeholder-[#64748b] focus:outline-none focus:border-[#c8873a] font-mono"
+            oninput="filterTable()"
+          />
+          <svg class="w-3.5 h-3.5 text-[#64748b] absolute left-2.5 top-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.3-4.3"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Table Container -->
+      <div class="overflow-x-auto rounded border border-[#1b2633]">
+        <table class="w-full text-left text-xs font-mono" id="speciesTable">
+          <thead class="bg-[#090e14] text-[#94a3b8] border-b border-[#1b2633]">
+            <tr>
+              <th class="py-2.5 px-3">Idx</th>
+              <th class="py-2.5 px-3">Espécie (Nome Popular)</th>
+              <th class="py-2.5 px-3">Nome Científico</th>
+              <th class="py-2.5 px-3">Família Taxonômica</th>
+              <th class="py-2.5 px-3">Bioma</th>
+              <th class="py-2.5 px-3">Dieta</th>
+              <th class="py-2.5 px-3 text-right">Treino</th>
+              <th class="py-2.5 px-3 text-right">Validação</th>
+              <th class="py-2.5 px-3 text-right">Total</th>
+              <th class="py-2.5 px-3 text-center">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#16202a]" id="speciesTbody">
+            <!-- Dynamically populated via JS -->
+          </tbody>
+        </table>
+      </div>
+      <div class="text-xs font-mono text-[#64748b] flex justify-between">
+        <span id="recordCount">Exibindo 40 espécies</span>
+        <span>Mapeamento formal: class_indices.json</span>
+      </div>
+    </div>
+
+    <!-- Section: REST API Integration Contract -->
+    <div class="p-6 rounded-lg bg-[#0e141b] border border-[#222d3a] space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-[#222d3a]">
+        <h2 class="text-base font-bold text-[#ebe6dc] flex items-center gap-2">
+          <span class="text-[#c8873a] font-mono">[05]</span> Contrato de Inferência REST API (FastAPI)
+        </h2>
+        <span class="text-xs font-mono text-[#4ade80]">POST /api/v1/scan</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs font-mono">
+        <div class="space-y-2">
+          <span class="text-[#94a3b8]">Requisição HTTP Multipart (cURL):</span>
+          <pre class="p-3 rounded bg-[#080d12] border border-[#1b2633] text-[#a5b4fc] overflow-x-auto"><code>curl -X POST "http://localhost:8000/api/v1/scan" \
+  -H "accept: application/json" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@screenshot_spino.png;type=image/png"</code></pre>
+        </div>
+
+        <div class="space-y-2">
+          <span class="text-[#94a3b8]">Resposta JSON Estruturada (Payload Resumido):</span>
+          <pre class="p-3 rounded bg-[#080d12] border border-[#1b2633] text-[#86efac] overflow-x-auto"><code>{
+  "prediction": {
+    "predicted_slug": "spinosaurus",
+    "confidence": 0.9994,
+    "top_candidates": [
+      { "species_slug": "spinosaurus", "probability": 0.9994 },
+      { "species_slug": "ouranosaurus", "probability": 0.0004 }
+    ]
+  },
+  "dinosaur": {
+    "common_name": "Spinosaurus",
+    "fossil_profile": {
+      "scientific_name": "Spinosaurus aegyptiacus",
+      "geological_period": "Late Cretaceous",
+      "length_meters": 14.0,
+      "mass_kg": 7400.0
+    }
+  },
+  "comparison_report": {
+    "fidelity_percentage": 96.0,
+    "verdict": "Alta Fidelidade Científica"
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-6 border-t border-[#222d3a] flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-[#64748b] gap-2">
+      <div>Paleo-Scanner Bio-Workstation // Machine Learning Subsystem</div>
+      <div>Arquitetura em Clean Architecture & DDD por Elynne Lima</div>
+    </footer>
+  </div>
+
+  <script>
+    const speciesData = [{"index": 0, "slug": "allosaurus", "common_name": "Allosaurus", "scientific_name": "Allosaurus fragilis", "family": "Allosauridae", "period": "Jurassic", "mya": "155 - 145 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 19, "val_samples": 4, "total_samples": 23}, {"index": 1, "slug": "ankylosaurus", "common_name": "Ankylosaurus", "scientific_name": "Ankylosaurus magniventris", "family": "Ankylosauridae", "period": "Late Cretaceous", "mya": "68 - 66 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 20, "val_samples": 5, "total_samples": 25}, {"index": 2, "slug": "archaeopteryx", "common_name": "Archaeopteryx", "scientific_name": "Archaeopteryx lithographica", "family": "Archaeopterygidae", "period": "Jurassic", "mya": "150.8 - 148.5 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 28, "val_samples": 6, "total_samples": 34}, {"index": 3, "slug": "baryonyx", "common_name": "Baryonyx", "scientific_name": "Baryonyx walkeri", "family": "Spinosauridae", "period": "Early Cretaceous", "mya": "130 - 125 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 19, "val_samples": 4, "total_samples": 23}, {"index": 4, "slug": "carnotaurus", "common_name": "Carnotaurus", "scientific_name": "Carnotaurus sastrei", "family": "Abelisauridae", "period": "Late Cretaceous", "mya": "71 - 69 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 19, "val_samples": 4, "total_samples": 23}, {"index": 5, "slug": "centrosaurus", "common_name": "Centrosaurus", "scientific_name": "Centrosaurus apertus", "family": "Ceratopsidae", "period": "Late Cretaceous", "mya": "76.5 - 75.5 Ma", "biome": "Forest", "diet": "Herbivore", "train_samples": 11, "val_samples": 2, "total_samples": 13}, {"index": 6, "slug": "ceratosaurus", "common_name": "Ceratosaurus", "scientific_name": "Ceratosaurus nasicornis", "family": "Ceratosauridae", "period": "Jurassic", "mya": "153 - 148 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 11, "val_samples": 2, "total_samples": 13}, {"index": 7, "slug": "coelophysis", "common_name": "Coelophysis", "scientific_name": "Coelophysis bauri", "family": "Coelophysidae", "period": "Triassic", "mya": "216 - 196 Ma", "biome": "Valley", "diet": "Carnivore", "train_samples": 11, "val_samples": 2, "total_samples": 13}, {"index": 8, "slug": "compsognathus", "common_name": "Compsognathus", "scientific_name": "Compsognathus longipes", "family": "Compsognathidae", "period": "Jurassic", "mya": "150.8 - 148.5 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 17, "val_samples": 4, "total_samples": 21}, {"index": 9, "slug": "corythosaurus", "common_name": "Corythosaurus", "scientific_name": "Corythosaurus casuarius", "family": "Hadrosauridae", "period": "Late Cretaceous", "mya": "77 - 75.7 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 10, "slug": "deinocheirus", "common_name": "Deinocheirus", "scientific_name": "Deinocheirus mirificus", "family": "Deinocheiridae", "period": "Late Cretaceous", "mya": "70 Ma", "biome": "Forest", "diet": "Omnivore", "train_samples": 19, "val_samples": 4, "total_samples": 23}, {"index": 11, "slug": "deinonychus", "common_name": "Deinonychus", "scientific_name": "Deinonychus antirrhopus", "family": "Dromaeosauridae", "period": "Early Cretaceous", "mya": "115 - 108 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 12, "val_samples": 2, "total_samples": 14}, {"index": 12, "slug": "desmatosuchus", "common_name": "Desmatosuchus", "scientific_name": "Desmatosuchus spurensis", "family": "Stagonolepididae", "period": "Triassic", "mya": "230 - 208 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 29, "val_samples": 7, "total_samples": 36}, {"index": 13, "slug": "dilophosaurus", "common_name": "Dilophosaurus", "scientific_name": "Dilophosaurus wetherilli", "family": "Dilophosauridae", "period": "Jurassic", "mya": "193 - 186 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 16, "val_samples": 3, "total_samples": 19}, {"index": 14, "slug": "dimetrodon", "common_name": "Dimetrodon", "scientific_name": "Dimetrodon grandis", "family": "Sphenacodontidae", "period": "Permian", "mya": "295 - 272 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 15, "slug": "euoplocephalus", "common_name": "Euoplocephalus", "scientific_name": "Euoplocephalus tutus", "family": "Ankylosauridae", "period": "Late Cretaceous", "mya": "76.4 - 75.6 Ma", "biome": "Desert", "diet": "Herbivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 16, "slug": "gallimimus", "common_name": "Gallimimus", "scientific_name": "Gallimimus bullatus", "family": "Ornithomimidae", "period": "Late Cretaceous", "mya": "70 Ma", "biome": "Valley", "diet": "Omnivore", "train_samples": 20, "val_samples": 4, "total_samples": 24}, {"index": 17, "slug": "kentrosaurus", "common_name": "Kentrosaurus", "scientific_name": "Kentrosaurus aethiopicus", "family": "Stegosauridae", "period": "Jurassic", "mya": "155 - 150 Ma", "biome": "Forest", "diet": "Herbivore", "train_samples": 17, "val_samples": 4, "total_samples": 21}, {"index": 18, "slug": "megalosaurus", "common_name": "Megalosaurus", "scientific_name": "Megalosaurus bucklandii", "family": "Megalosauridae", "period": "Jurassic", "mya": "168 - 166 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 19, "slug": "microraptor", "common_name": "Microraptor", "scientific_name": "Microraptor zhaoianus", "family": "Dromaeosauridae", "period": "Early Cretaceous", "mya": "125 - 120 Ma", "biome": "Forest", "diet": "Carnivore", "train_samples": 8, "val_samples": 2, "total_samples": 10}, {"index": 20, "slug": "ouranosaurus", "common_name": "Ouranosaurus", "scientific_name": "Ouranosaurus nigeriensis", "family": "Iguanodontia", "period": "Early Cretaceous", "mya": "115 - 110 Ma", "biome": "Forest", "diet": "Herbivore", "train_samples": 12, "val_samples": 2, "total_samples": 14}, {"index": 21, "slug": "oviraptor", "common_name": "Oviraptor", "scientific_name": "Oviraptor philoceratops", "family": "Oviraptoridae", "period": "Late Cretaceous", "mya": "75 - 71 Ma", "biome": "Forest", "diet": "Omnivore", "train_samples": 12, "val_samples": 2, "total_samples": 14}, {"index": 22, "slug": "pachycephalosaurus", "common_name": "Pachycephalosaurus", "scientific_name": "Pachycephalosaurus wyomingensis", "family": "Pachycephalosauridae", "period": "Late Cretaceous", "mya": "68 - 66 Ma", "biome": "Valley", "diet": "Omnivore", "train_samples": 17, "val_samples": 4, "total_samples": 21}, {"index": 23, "slug": "parasaurolophus", "common_name": "Parasaurolophus", "scientific_name": "Parasaurolophus walkeri", "family": "Hadrosauridae", "period": "Late Cretaceous", "mya": "76.5 - 73 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 20, "val_samples": 5, "total_samples": 25}, {"index": 24, "slug": "pinacosaurus", "common_name": "Pinacosaurus", "scientific_name": "Pinacosaurus grangeri", "family": "Ankylosauridae", "period": "Late Cretaceous", "mya": "80 - 75 Ma", "biome": "Desert", "diet": "Herbivore", "train_samples": 8, "val_samples": 1, "total_samples": 9}, {"index": 25, "slug": "postosuchus", "common_name": "Postosuchus", "scientific_name": "Postosuchus kirkpatricki", "family": "Rauisuchidae", "period": "Triassic", "mya": "228 - 208 Ma", "biome": "Valley", "diet": "Carnivore", "train_samples": 11, "val_samples": 2, "total_samples": 13}, {"index": 26, "slug": "protoceratops", "common_name": "Protoceratops", "scientific_name": "Protoceratops andrewsi", "family": "Protoceratopsidae", "period": "Late Cretaceous", "mya": "75 - 71 Ma", "biome": "Desert", "diet": "Herbivore", "train_samples": 11, "val_samples": 2, "total_samples": 13}, {"index": 27, "slug": "psittacosaurus", "common_name": "Psittacosaurus", "scientific_name": "Psittacosaurus mongoliensis", "family": "Psittacosauridae", "period": "Early Cretaceous", "mya": "126 - 101 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 28, "slug": "sarcosuchus", "common_name": "Sarcosuchus", "scientific_name": "Sarcosuchus imperator", "family": "Pholidosauridae", "period": "Early Cretaceous", "mya": "112 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 50, "val_samples": 12, "total_samples": 62}, {"index": 29, "slug": "scelidosaurus", "common_name": "Scelidosaurus", "scientific_name": "Scelidosaurus harrisonii", "family": "Scelidosauridae", "period": "Jurassic", "mya": "196 - 191 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 9, "val_samples": 2, "total_samples": 11}, {"index": 30, "slug": "spinosaurus", "common_name": "Spinosaurus", "scientific_name": "Spinosaurus aegyptiacus", "family": "Spinosauridae", "period": "Late Cretaceous", "mya": "99 - 93.5 Ma", "biome": "Valley", "diet": "Carnivore", "train_samples": 44, "val_samples": 10, "total_samples": 54}, {"index": 31, "slug": "stegosaurus", "common_name": "Stegosaurus", "scientific_name": "Stegosaurus stenops", "family": "Stegosauridae", "period": "Jurassic", "mya": "155 - 150 Ma", "biome": "Forest", "diet": "Herbivore", "train_samples": 10, "val_samples": 2, "total_samples": 12}, {"index": 32, "slug": "styracosaurus", "common_name": "Styracosaurus", "scientific_name": "Styracosaurus albertensis", "family": "Ceratopsidae", "period": "Late Cretaceous", "mya": "75.5 - 75 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 23, "val_samples": 5, "total_samples": 28}, {"index": 33, "slug": "therizinosaurus", "common_name": "Therizinosaurus", "scientific_name": "Therizinosaurus cheloniformis", "family": "Therizinosauridae", "period": "Late Cretaceous", "mya": "70 Ma", "biome": "Forest", "diet": "Herbivore", "train_samples": 20, "val_samples": 4, "total_samples": 24}, {"index": 34, "slug": "triceratops", "common_name": "Triceratops", "scientific_name": "Triceratops horridus", "family": "Ceratopsidae", "period": "Late Cretaceous", "mya": "68 - 66 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 22, "val_samples": 5, "total_samples": 27}, {"index": 35, "slug": "troodon", "common_name": "Troodon", "scientific_name": "Troodon formosus", "family": "Troodontidae", "period": "Late Cretaceous", "mya": "77.5 - 76.5 Ma", "biome": "Forest", "diet": "Omnivore", "train_samples": 24, "val_samples": 6, "total_samples": 30}, {"index": 36, "slug": "tyrannosaurus", "common_name": "Tyrannosaurus", "scientific_name": "Tyrannosaurus rex", "family": "Tyrannosauridae", "period": "Late Cretaceous", "mya": "68 - 66 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 18, "val_samples": 4, "total_samples": 22}, {"index": 37, "slug": "utahraptor", "common_name": "Utahraptor", "scientific_name": "Utahraptor ostrommaysi", "family": "Dromaeosauridae", "period": "Early Cretaceous", "mya": "135 - 130 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 17, "val_samples": 4, "total_samples": 21}, {"index": 38, "slug": "velociraptor", "common_name": "Velociraptor", "scientific_name": "Velociraptor mongoliensis", "family": "Dromaeosauridae", "period": "Late Cretaceous", "mya": "75 - 71 Ma", "biome": "Desert", "diet": "Carnivore", "train_samples": 19, "val_samples": 4, "total_samples": 23}, {"index": 39, "slug": "wuerhosaurus", "common_name": "Wuerhosaurus", "scientific_name": "Wuerhosaurus homheni", "family": "Stegosauridae", "period": "Early Cretaceous", "mya": "130 - 120 Ma", "biome": "Valley", "diet": "Herbivore", "train_samples": 20, "val_samples": 4, "total_samples": 24}];
+
+    function renderTable(data) {
+      const tbody = document.getElementById("speciesTbody");
+      tbody.innerHTML = "";
+      
+      data.forEach(item => {
+        const isHighlight = item.slug === "spinosaurus" || item.slug === "sarcosuchus";
+        const tr = document.createElement("tr");
+        tr.className = isHighlight ? "bg-[#18261e]/40 hover:bg-[#18261e]/70 transition-colors" : "hover:bg-[#121922] transition-colors";
+        
+        const dietBadgeColor = item.diet === "Herbivore" ? "text-[#4ade80] bg-[#122b1c] border-[#225737]" : 
+                               item.diet === "Carnivore" ? "text-[#f87171] bg-[#331417] border-[#5e2329]" : 
+                               "text-[#d8b4fe] bg-[#29163b] border-[#502475]";
+
+        tr.innerHTML = `
+          <td class="py-2 px-3 text-[#64748b]">#${String(item.index).padStart(2, '0')}</td>
+          <td class="py-2 px-3 font-semibold text-[#ebe6dc]">
+            ${item.common_name}
+            ${isHighlight ? '<span class="ml-1 text-[10px] px-1 py-0.2 rounded bg-[#c8873a] text-[#0c1015] font-bold">NOVO</span>' : ''}
+          </td>
+          <td class="py-2 px-3 italic text-[#94a3b8]">${item.scientific_name}</td>
+          <td class="py-2 px-3 text-[#94a3b8]">${item.family}</td>
+          <td class="py-2 px-3 text-[#94a3b8]">${item.biome}</td>
+          <td class="py-2 px-3">
+            <span class="px-1.5 py-0.5 rounded text-[10px] border ${dietBadgeColor}">
+              ${item.diet}
+            </span>
+          </td>
+          <td class="py-2 px-3 text-right text-[#94a3b8]">${item.train_samples}</td>
+          <td class="py-2 px-3 text-right text-[#94a3b8]">${item.val_samples}</td>
+          <td class="py-2 px-3 text-right font-bold text-[#c8873a]">${item.total_samples}</td>
+          <td class="py-2 px-3 text-center">
+            <span class="text-[#4ade80] text-[10px] font-bold">● ATIVO</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("recordCount").innerText = `Exibindo ${data.length} de ${speciesData.length} espécies`;
+    }
+
+    function filterTable() {
+      const query = document.getElementById("speciesSearch").value.toLowerCase().trim();
+      const filtered = speciesData.filter(item => 
+        item.common_name.toLowerCase().includes(query) ||
+        item.scientific_name.toLowerCase().includes(query) ||
+        item.slug.toLowerCase().includes(query) ||
+        item.biome.toLowerCase().includes(query) ||
+        item.diet.toLowerCase().includes(query) ||
+        item.family.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    }
+
+    // Initial render
+    renderTable(speciesData);
+  </script>
+</body>
+</html>

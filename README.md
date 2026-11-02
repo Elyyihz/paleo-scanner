@@ -4,14 +4,22 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![tf_keras](https://img.shields.io/badge/tf__keras-CNN_Vision-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-17+_Standalone-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![tf_keras](https://img.shields.io/badge/tf__keras-MobileNetV3_CNN-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-22_Standalone-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4+-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Clean Architecture](https://img.shields.io/badge/Clean_Architecture-DDD-00A86B?style=for-the-badge)
-![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose_Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-<p>Plataforma enciclopédica interativa e sistema de visão computacional que atua como <b>ponte entre o universo lúdico do jogo <i>Paleo Pines</i> e a paleontologia fóssil real</b>, contrastando mitos aconchegantes com evidências científicas.</p>
+<p>Plataforma bio-paleontológica interativa e sistema de visão computacional que atua como <b>ponte entre o universo lúdico do jogo <i>Paleo Pines</i> e a paleontologia fóssil real</b>, contrastando mecânicas de gameplay aconchegantes com evidências anatômicas de museus.</p>
+
+<p>
+  <a href="#-execução-rápida-com-docker">Executar via Docker</a> •
+  <a href="#-especificações-da-ia-e-treinamento-cnn">Modelo & Treinamento</a> •
+  <a href="#-metodologia-e-proveniência-dos-dados">Proveniência dos Dados</a> •
+  <a href="docs/model_report.html">Relatório Interativo de IA (HTML)</a> •
+  <a href="#-clean-architecture-e-estrutura-em-camadas">Clean Architecture</a>
+</p>
 
 </div>
 
@@ -19,112 +27,203 @@
 
 ## 🌟 O Conceito do Projeto
 
-No aconchegante jogo de fazenda ***Paleo Pines***, dinossauros pastam pacificamente, são encantados por melodias de flauta, adoram doces chamados *"poppins"* e ajudam a regar hortas e quebrar pedregulhos. 
+No jogo de simulação e fazenda ***Paleo Pines***, dinossauros pastam pacificamente, são domesticados através de melodias de flauta, alimentados com guloseimas chamadas *"poppins"* e auxiliam nas tarefas do rancho como regadores, escavadores e montarias velozes.
 
-Mas como esses animais realmente viviam? O que fósseis de 70 milhões de anos nos contam sobre sua verdadeira alimentação, dimensões e comportamento?
-
-O **Paleo-Scanner** resolve essa curiosidade com inteligência artificial:
-1. O usuário faz o upload de uma captura de tela do jogo.
-2. Uma **Rede Neural Convolucional (CNN)** treinada com `tf_keras` identifica a espécie do dinossauro.
-3. O motor em **FastAPI (Clean Architecture & DDD)** correlaciona os registros do jogo com a base paleontológica real.
-4. Uma interface moderna em **Angular 17+** exibe um painel comparativo lado a lado (*Split-View*) com o **Índice de Fidelidade Científica**.
+O **Paleo-Scanner** investiga a biologia por trás dessa fantasia:
+1. **Upload de Imagem**: O usuário faz o upload de uma captura de tela do jogo ou seleciona espécimes do catálogo.
+2. **Visão Computacional Convolucional**: Uma CNN baseada em **MobileNetV3-Small** com *Transfer Learning* identifica a espécie com **90.60% de acurácia Top-3**.
+3. **Core em Clean Architecture**: O motor em **FastAPI** busca os atributos paleontológicos reais curados a partir de holótipos e literatura acadêmica.
+4. **Painel Comparativo de Alta Tecnologia**: Interface reativa em **Angular 22** apresentando o tríptico visual (jogo 3D, fóssil de museu e reconstituição em vida), tacômetro circular de fidelidade científica, linha do tempo geológica e régua métrica comparativa humano vs espécime.
 
 ---
 
-## 🏗️ Topologia da Arquitetura
+## 📸 Painel Visual & Demonstração
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│ [DOSSIÊ COMPARATIVO DE ESPÉCIE]              [← Anterior] [Próximo →] [✕] │
+│ Spinosaurus (Spinosaurus aegyptiacus)                        #31 / 40  │
+├──────────────────────────────────┬─────────────────────────────────────┤
+│ 🎮 NO JOGO (PALEO PINES)         │ 🔬 LADO REAL (PALEONTOLOGIA)        │
+│                                  │                                     │
+│ • Bioma: Veridian Valley (Rios)  │ • Período: Cretáceo Superior        │
+│ • Dieta: Carnívoro (Juicy Apium) │ • Datação: ~99 - 93.5 Ma            │
+│ • Sociabilidade: Loner           │ • Dimensões: ~14.0 m | ~7.400 kg    │
+│ • Habilidade: Waterer & Diver    │ • Anatomia: Focinho cônico, dentes  │
+│ • Porte: Grande (Montável)       │   cônicos e vela neural de 1,65 m   │
+├──────────────────────────────────┴─────────────────────────────────────┤
+│ [TRÍPTICO ANATÔMICO] Modelo 3D (Jogo) | Esqueleto Museu | Paleoarte    │
+│ [FIDELIDADE PALEONTOLÓGICA] 96.0% - Alta Precisão de Comportamento     │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📚 Metodologia e Proveniência dos Dados
+
+Todos os dados e ativos visuais do projeto possuem procedência documentada e transparente:
+
+| Categoria | Origem dos Dados | Métodos de Coleta & Processamento |
+|---|---|---|
+| **Atributos de Jogo** | *Paleo Pines Community Database* (v3.0.3), Wiki Fandom e Paleo.GG | Coleta estruturada dos biomas, dietas, habilidades de rancho e preferências de poppins das 40 espécies. |
+| **Registros Paleontológicos** | *Paleobiology Database (PBDB)*, holótipos de museus e artigos científicos | Curadoria manual de datações radiométricas (Ma), massas estimadas, formações geológicas e adaptações osteológicas. |
+| **Retratos In-Game** | Extraídos de capturas oficiais e planilhas de skins de *Paleo Pines* | Tratamento de canal alfa, padronização 256x256 e recorte proporcional de cabeça/busto. |
+| **Fotografia Fóssil Real** | *Wikimedia Commons*, *Smithsonian NMNH*, *AMNH*, *National Geographic* | Fotos sob domínio público e Creative Commons de esqueletos reais montados em instituições científicas. |
+| **Paleoarte (Vida)** | Acervos científicos abertos e ilustradores paleontológicos | Reconstituições com embasamento anatômico esquelético, musculatura postural e impressões de penas/escamas. |
+| **Dataset de Treino da CNN** | 842 imagens curadas divididas em 40 classes (693 treino / 149 validação) | Coletadas de variações cosméticas e skins do jogo, normalizadas em 224x224 RGB com aumento de dados dinâmico. |
+
+---
+
+## 🧠 Especificações da IA e Treinamento (CNN)
+
+O pipeline de inteligência artificial utiliza a biblioteca `tf_keras` sobre **MobileNetV3-Small** com *Transfer Learning*:
 
 ```mermaid
-flowchart TD
-    UserUpload["📸 Screenshot de Paleo Pines"] --> Preprocessor["OpenCV ROI Preprocessor<br/>(Filtro de HUD & Letterbox)"]
-    Preprocessor --> CNNModel["CNN MobileNetV3 / tf_keras<br/>(Classificação de Espécie)"]
-    CNNModel --> BackendCore["FastAPI Backend (Clean Architecture)<br/>ScanDinosaurUseCase"]
-    BackendCore --> DBRepo["Banco Paleontológico Comparativo<br/>(SQLite / PostgreSQL)"]
-    DBRepo --> FidelityEngine["Motor de Fidelidade Científica<br/>(Cálculo Ponderado de 0 a 100%)"]
-    FidelityEngine --> AngularUI["💻 Frontend Angular 17+ & Tailwind<br/>Painel Split-View (Azul / Ciano / Ardósia)"]
+flowchart LR
+    Img["🖼️ Imagem de Entrada<br/>(224x224x3 RGB)"] --> Aug["Data Augmentation<br/>(Rotation 15°, Zoom, Contrast)"]
+    Aug --> BB["Backbone MobileNetV3<br/>(ImageNet Weights Congelados)"]
+    BB --> Pool["GlobalAveragePooling2D<br/>& BatchNormalization"]
+    Pool --> Drop["Dropout (0.35)"]
+    Drop --> Dense1["Dense ReLU (128)"]
+    Dense1 --> Out["Softmax (40 Classes)<br/>Species Probabilities"]
 ```
+
+### Métricas de Convergência do Modelo v2.0
+* **Classes Mapeadas**: **40 espécies biológicas reais** (incluindo *Spinosaurus* e *Sarcosuchus*).
+* **Acurácia Top-1 (Validação)**: **77.85%**
+* **Acurácia Top-3 (Validação)**: **90.60%**
+* **Loss de Validação**: **0.8500** (Categorical Crossentropy com balanceamento de classes)
+* **Latência Média de Inferência**: **~35 ms** em CPU
+* 📊 **Dashboard Interativo**: Abra [`docs/model_report.html`](docs/model_report.html) no navegador para auditar as métricas, curvas de perda e o catálogo tabular dos 40 neurônios.
 
 ---
 
-## 🏛️ Clean Architecture: Estrutura em Camadas
+## 🏛️ Clean Architecture e Estrutura em Camadas
 
-O backend é estritamente desacoplado em camadas concêntricas segundo Robert C. Martin e Eric Evans (DDD):
+O backend é estritamente desacoplado segundo as diretrizes de Robert C. Martin e Eric Evans (DDD):
 
 ### 1. Ordem de Escrita (de dentro pra fora)
-
-| Ordem | Camada | Módulo / Arquivos | Justificativa Arquitetural |
+| Ordem | Camada | Módulos Reais no Projeto | Responsabilidade |
 |---|---|---|---|
-| **1** | **Domínio / Entidades & Enums** | `core/domain/entities/dinosaur.py`<br/>`core/domain/enums/poppin_flavor.py` | Regras essenciais do negócio e modelos de dados imutáveis. Não dependem de bibliotecas externas, frameworks ou bancos. |
-| **2** | **Domínio / Gateways (Portas)** | `core/domain/gateways/vision_gateway.py`<br/>`core/domain/gateways/dinosaur_repository.py` | Contratos abstratos (`ABC`) que estipulam como o domínio se comunica com inferência de ML e bancos de dados. |
-| **3** | **Aplicação / Casos de Uso** | `core/use_cases/scan_dinosaur.py`<br/>`core/use_cases/compare_species.py` | Orquestração do fluxo de execução puro, independente de protocolo de transporte (HTTP/CLI). |
-| **4** | **Infraestrutura / Adaptadores** | `infrastructure/ml/keras_classifier.py`<br/>`infrastructure/database/sqlite_repository.py` | Implementações tecnológicas concretas (`tf_keras`, OpenCV, SQLAlchemy). Detalhes que dependem do domínio. |
-| **5** | **Apresentação / Controladores** | `presentation/api/v1/endpoints/scan.py`<br/>`presentation/schemas/scan_dto.py` | Rotas FastAPI, validação Pydantic de requisições multipart e documentação OpenAPI. |
+| **1** | **Domínio / Entidades & Enums** | `backend/app/core/domain/entities/`<br/>`backend/app/core/domain/enums/` | Entidades puras (`Dinosaur`, `ComparisonReport`, `PredictionResult`). Zero dependências de frameworks. |
+| **2** | **Domínio / Gateways (Portas)** | `backend/app/core/domain/gateways/` | Contratos abstratos (`IVisionClassifierGateway`, `IDinosaurRepositoryGateway`). |
+| **3** | **Aplicação / Casos de Uso** | `backend/app/core/use_cases/` | Orquestração do caso de uso `ScanDinosaurUseCase` e cálculo do Score de Fidelidade. |
+| **4** | **Infraestrutura / Adaptadores** | `backend/app/infrastructure/ml/`<br/>`backend/app/infrastructure/database/` | Implementação com `tf_keras` (`KerasVisionClassifierGateway`) e persistência SQLAlchemy/SQLite. |
+| **5** | **Apresentação / Controladores** | `backend/app/presentation/api/v1/` | Endpoints HTTP do FastAPI (`scan.py`, `dinosaurs.py`, `health.py`) e DTOs Pydantic. |
 
 ### 2. Ordem de Leitura (de fora pra dentro)
-
 | Ordem | Ponto de Entrada | Camada Subsequente | O que observar |
 |---|---|---|---|
-| **1** | `presentation/api/v1/endpoints/scan.py` | `presentation/schemas/` | Recebimento do upload e validação de MIME types de imagens. |
-| **2** | `core/use_cases/scan_dinosaur.py` | `core/domain/gateways/` | Orquestração da inferência visual e busca dos atributos paleontológicos. |
-| **3** | `core/domain/entities/dinosaur.py` | `core/domain/enums/` | A lógica pura do cálculo de fidelidade científica e atributos comparativos. |
-| **4** | `infrastructure/ml/keras_classifier.py` | `infrastructure/database/` | A execução da CNN e a persistência relacional. |
+| **1** | `backend/app/presentation/api/v1/endpoints/scan.py` | `presentation/schemas/` | Recebimento do upload e validação de MIME types de imagens. |
+| **2** | `backend/app/core/use_cases/scan_dinosaur.py` | `core/domain/gateways/` | Orquestração da inferência visual e busca dos atributos paleontológicos. |
+| **3** | `backend/app/core/domain/entities/dinosaur.py` | `core/domain/enums/` | A lógica pura do cálculo de fidelidade científica e atributos comparativos. |
+| **4** | `backend/app/infrastructure/ml/keras_vision_classifier.py` | `infrastructure/database/` | A execução da CNN e a persistência relacional. |
 
 ---
 
-## 🎨 Interface Visual (Angular 17+ & Tailwind CSS)
+## 🐳 Execução Rápida com Docker
 
-A experiência visual adota um tema escuro imersivo (*Deep Dark Mode*) com realces em **Ciano Elétrico** (`#06b6d4`), **Azul Cobalto** (`#2563eb`) e **Âmbar Fóssil** (`#f59e0b`):
+O projeto inclui orquestração completa multi-container via **Docker Compose**:
 
-* **Painel Split-View**:
-  * **Lado Esquerdo (*Paleo Pines*)**: Card aconchegante com ícones do bioma de amizade, sabor do poppin preferido, sela de montaria e habilidade na fazenda.
-  * **Lado Direito (*Fóssil Real*)**: Card de museu paleontológico com família taxonômica, formação geológica, massa estimada em toneladas e dieta fóssil.
-  * **Gauge Central**: Indicador gráfico do Score de Fidelidade Científica com justificativa biológica explicativa.
-
----
-
-## 📊 Matriz Comparativa (Amostra Inicial)
-
-| Espécie | Bioma (*Paleo Pines*) | Poppin Favorito | Período Geológico Real | Dieta Comprovada por Fósseis | Fidelidade |
-| :--- | :--- | :--- | :--- | :--- | :---: |
-| **Parasaurolophus** | Veridian Valley | Doce / Suculento | Cretáceo Superior (~75 Ma) | Herbívoro estrito (folhas lenhosas) | **78%** |
-| **Gallimimus** | Dapplewood | Crocante | Cretáceo Superior (~70 Ma) | Onívoro / Filtrador de bico córneo | **82%** |
-| **Triceratops** | Veridian Valley | Suculento | Cretáceo Superior (~68 Ma) | Herbívoro fibroso (palmeiras e cicas) | **85%** |
-| **Ankylosaurus** | Ariacotta Dunes | Picante | Cretáceo Superior (~68 Ma) | Herbívoro generalista (folhas e tubérculos) | **80%** |
-| **Deinocheirus** | Veridian Valley | Refrescante | Cretáceo Superior (~70 Ma) | Onívoro aquático / Piscívoro de pântano | **88%** |
-
----
-
-## 📚 Documentação Técnica Aprofundada
-
-* 🏛️ [Arquitetura do Sistema e Inversão de Dependências](file:///Users/elyyihz/repositories/personal/paleo-scanner/docs/ARCHITECTURE.md)
-* 🦴 [Especificação da Base de Dados Paleontológica](file:///Users/elyyihz/repositories/personal/paleo-scanner/docs/PALEO_DATABASE_SPEC.md)
-* 📸 [Diretrizes do Dataset de Imagens & CNN tf_keras](file:///Users/elyyihz/repositories/personal/paleo-scanner/docs/DATASET_GUIDELINES.md)
-
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
-* Python 3.11+
-* Node.js 18+ & Angular CLI 17+
-* Docker & Docker Compose (opcional)
-
-### 1. Execução via Docker Compose
+### 1. Subir Aplicação Completa (Frontend + Backend + IA)
 ```bash
+# Na raiz do projeto:
 docker compose up --build
 ```
-Acesse o frontend em `http://localhost:4200` e a documentação da API em `http://localhost:8000/docs`.
 
-### 2. Desenvolvimento Local do Backend
+### 2. Portas e Endpoints
+* **Frontend Web (Angular + Nginx)**: [http://localhost:4200](http://localhost:4200)
+* **Backend API (FastAPI)**: [http://localhost:8000](http://localhost:8000)
+* **Documentação Swagger OpenAPI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+* **Healthcheck do Backend**: [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
+
+---
+
+## 💻 Execução Local (Ambiente de Desenvolvimento)
+
+### 1. Backend (Python 3.11+)
 ```bash
-cd backend
-python -m venv .venv
+cd paleo-scanner
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+pip install -r backend/requirements.txt
+
+# Iniciar servidor ASGI
+cd backend
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+### 2. Frontend (Node 20+ / Angular 22)
+```bash
+cd paleo-scanner/frontend
+npm install
+npm start
+# Acessar em http://localhost:4200
+```
+
+---
+
+## 🧪 Suíte de Testes Automatizados
+
+O ecossistema é 100% coberto por testes automatizados de unidade, integração e contratos:
+
+```bash
+# Testes do Backend (FastAPI + Clean Arch) - 19/19 testes
+pytest backend/tests
+
+# Testes do Frontend (Angular 22 + Vitest) - 23/23 testes
+cd frontend && npm test -- --watch=false
+
+# Build de Produção do Frontend
+cd frontend && npm run build
+```
+
+---
+
+## 📁 Estrutura de Diretórios do Monorepo
+
+```
+paleo-scanner/
+├── backend/                          # Backend FastAPI em Clean Architecture
+│   ├── app/
+│   │   ├── core/                     # Regras de Negócio e Domínio Puro
+│   │   │   ├── domain/               # Entidades, Enums e Gateways Abstratos
+│   │   │   └── use_cases/            # Casos de Uso (ScanDinosaur, CompareSpecies)
+│   │   ├── infrastructure/           # Adaptadores Tecnológicos (Keras, SQLite)
+│   │   │   ├── database/             # SQLite, Models SQLAlchemy, Seeds das 40 espécies
+│   │   │   └── ml/                   # Implementação do KerasVisionClassifier
+│   │   ├── presentation/             # Endpoints REST e Schemas Pydantic
+│   │   └── static/                   # Assets servidos com cabeçalhos No-Cache
+│   ├── tests/                        # 19 testes automatizados com Pytest
+│   ├── Dockerfile                    # Container Docker do Backend
+│   └── requirements.txt              # Dependências Python
+├── frontend/                         # Frontend SPA em Angular 22 + Tailwind
+│   ├── src/app/
+│   │   ├── core/                     # Serviços de Estado Reativo (ScannerStateService)
+│   │   ├── features/
+│   │   │   ├── scanner/              # Zona de Upload com drag & drop e scanline
+│   │   │   ├── comparison/           # Painel Split-View, Tríptico e Escala
+│   │   │   └── catalog/              # Catálogo com busca e navegação por teclado
+│   │   └── shared/                   # Componentes reutilizáveis (Badges, Header)
+│   ├── nginx.conf                    # Configuração de Proxy Reverso e SPA
+│   ├── Dockerfile                    # Container Multi-stage (Node Build -> Nginx)
+│   └── package.json                  # Dependências e scripts npm
+├── ml/                               # Pipeline de Machine Learning
+│   ├── data/                         # Datasets de treino/validação (842 amostras)
+│   ├── models/                       # Modelo compilado .keras e class_indices.json
+│   └── train.py                      # Pipeline de treino com Data Augmentation
+├── docs/                             # Documentação técnica e relatórios
+│   ├── model_report.html             # Relatório Interativo do Modelo e Dataset
+│   ├── ARCHITECTURE.md               # Detalhes de Clean Arch e inversão de controle
+│   ├── PALEO_DATABASE_SPEC.md        # Especificação taxonômica das 40 espécies
+│   └── DATASET_GUIDELINES.md         # Diretrizes de visão computacional
+├── docker-compose.yml                # Orquestrador multi-container de produção
+└── README.md                         # Documentação principal
 ```
 
 ---
 
 ## 📄 Licença
 
-Distribuído sob a licença **MIT**. Veja `LICENSE` para mais informações.
+Distribuído sob a licença **MIT**. Consulte `LICENSE` para mais detalhes.
+Desenvolvido por **Elynne Lima** — *AI Systems Engineer & Full-Stack Architect*.
