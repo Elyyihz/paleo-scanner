@@ -50,10 +50,10 @@ describe('ScannerStateService', () => {
     service = TestBed.inject(ScannerStateService);
 
     // Handle constructor requests (health + initial catalog)
-    const healthReq = httpMock.expectOne('http://localhost:8000/api/v1/health');
+    const healthReq = httpMock.expectOne('http://127.0.0.1:8000/api/v1/health');
     healthReq.flush({ status: 'healthy', service: 'paleo-scanner-api', version: '1.0.0' });
 
-    const catalogReq = httpMock.expectOne('http://localhost:8000/api/v1/dinosaurs');
+    const catalogReq = httpMock.expectOne('http://127.0.0.1:8000/api/v1/dinosaurs');
     catalogReq.flush([mockDino]);
   });
 

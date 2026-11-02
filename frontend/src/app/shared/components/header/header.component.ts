@@ -2,54 +2,53 @@ import { Component, inject } from '@angular/core';
 import { ScannerStateService } from '../../../core/services/scanner-state.service';
 
 /**
- * Top application navigation bar with system status and tab switching.
+ * Top application navigation bar styled with Paleo Pines wooden identity and status.
  */
 @Component({
   selector: 'app-header',
   standalone: true,
   template: `
-    <header class="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-[#080d1a]/85 backdrop-blur-md">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <!-- Brand identity -->
-        <div class="flex items-center gap-3 cursor-pointer" (click)="state.setTab('scanner')">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-900/30 border border-cyan-400/30">
-            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
-              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
-              <path d="M2.5 12a9.5 9.5 0 0 1 7-9.2"/>
-              <path d="M2 18l4-4"/>
-              <path d="M6 14l2 2"/>
-            </svg>
+    <header class="sticky top-0 z-40 w-full border-b border-[#3d2d20] bg-[#1a140f]/95 backdrop-blur-md shadow-md">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <!-- Brand identity with Paleo Pines official logo -->
+        <div class="flex items-center gap-3.5 cursor-pointer select-none group" (click)="state.setTab('scanner')">
+          <div class="relative shrink-0">
+            <img
+              src="/logo.png"
+              alt="Paleo Pines Logo"
+              class="h-12 sm:h-14 w-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-200"
+            />
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h1 class="text-lg font-black tracking-tight text-white glow-text-cyan">
-                PALEO<span class="text-cyan-400">-SCANNER</span>
+              <h1 class="text-xl sm:text-2xl font-black tracking-tight text-[#fceddb] drop-shadow-sm">
+                PALEO<span class="text-[#e09f3e]">-SCANNER</span>
               </h1>
-              <span class="px-1.5 py-0.5 text-[10px] font-bold uppercase rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800/60">
-                AI + Fossil
+              <span class="px-2 py-0.5 text-[10px] font-bold uppercase rounded-md bg-[#382618] text-[#f4a261] border border-[#69482d]">
+                Rancho + Fóssil
               </span>
             </div>
-            <p class="text-xs text-slate-400 hidden sm:block">
-              Visão Computacional & Paleontologia Comparada
+            <p class="text-xs text-[#b8a490] hidden sm:block">
+              Caderno de Campo & Paleontologia Comparada
             </p>
           </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <nav class="flex items-center gap-1.5 sm:gap-2 bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+        <!-- Navigation Tabs in rustic wooden style -->
+        <nav class="flex items-center gap-1.5 sm:gap-2 bg-[#251c14] p-1.5 rounded-2xl border border-[#443224] shadow-inner">
           <button
             type="button"
             (click)="state.setTab('scanner')"
-            class="flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200"
+            class="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'scanner'
-              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-950/50'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'"
+              ? 'bg-gradient-to-r from-[#d97706] to-[#b45309] text-amber-50 shadow-md shadow-amber-950/60 border border-amber-400/40'
+              : 'text-[#c2ae9b] hover:text-[#fceddb] hover:bg-[#34261c]'"
           >
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect width="18" height="18" x="3" y="3" rx="2"/>
-              <path d="M3 9h18"/>
-              <path d="M9 21V9"/>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.3-4.3"/>
+              <path d="M11 8v6"/>
+              <path d="M8 11h6"/>
             </svg>
             <span>Digitalizador</span>
           </button>
@@ -57,20 +56,19 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
           <button
             type="button"
             (click)="state.setTab('catalog')"
-            class="flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200"
+            class="flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'catalog'
-              ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-950/50'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800/60'"
+              ? 'bg-gradient-to-r from-[#2d6a4f] to-[#1b4332] text-emerald-50 shadow-md shadow-emerald-950/60 border border-emerald-400/40'
+              : 'text-[#c2ae9b] hover:text-[#fceddb] hover:bg-[#34261c]'"
           >
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/>
-              <path d="m5 2 5 5"/>
-              <path d="m2 5 5 5"/>
-              <circle cx="18" cy="18" r="3"/>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+              <path d="M6 6h10"/>
+              <path d="M6 10h10"/>
             </svg>
             <span>Catálogo</span>
             @if (state.totalSpeciesCount() > 0) {
-              <span class="text-[11px] px-1.5 py-0.2 rounded-full bg-slate-800 text-cyan-300 font-mono">
+              <span class="text-[11px] px-1.5 py-0.2 rounded-full bg-[#18110b] text-[#e09f3e] font-mono font-bold">
                 {{ state.totalSpeciesCount() }}
               </span>
             }
@@ -78,27 +76,37 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
         </nav>
 
         <!-- Connectivity status and GitHub -->
-        <div class="flex items-center gap-3">
-          <!-- Backend health dot -->
-          <div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs">
+        <div class="flex items-center gap-2.5">
+          <!-- Backend health pill with click to retry -->
+          <button
+            type="button"
+            (click)="state.verifyBackendHealth()"
+            class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer shadow-sm"
+            [title]="state.isBackendOnline() === false ? 'Clique para tentar reconectar à API (127.0.0.1:8000)' : 'Status da API'"
+            [class]="state.isBackendOnline() === true
+              ? 'bg-[#183120] text-[#74c69d] border-[#2d6a4f]'
+              : state.isBackendOnline() === false
+                ? 'bg-[#3d1818] text-[#fca5a5] border-[#991b1b] hover:bg-[#4f2020]'
+                : 'bg-[#291f16] text-[#dda15e] border-[#5e432d]'"
+          >
             @if (state.isBackendOnline() === true) {
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span class="text-emerald-400 font-medium hidden md:inline">API Online</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#52b788] animate-pulse"></span>
+              <span class="hidden md:inline">API Online</span>
             } @else if (state.isBackendOnline() === false) {
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-              <span class="text-rose-400 font-medium hidden md:inline">API Offline</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#ef4444]"></span>
+              <span class="hidden md:inline">API Offline ↻</span>
             } @else {
-              <span class="w-2 h-2 rounded-full bg-slate-500 animate-spin"></span>
-              <span class="text-slate-400 font-medium hidden md:inline">Conectando...</span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#e09f3e] animate-spin"></span>
+              <span class="hidden md:inline">Conectando...</span>
             }
-          </div>
+          </button>
 
           <!-- GitHub link -->
           <a
             href="https://github.com/Elyyihz/paleo-scanner"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-slate-400 hover:text-cyan-400 transition-colors rounded-lg hover:bg-slate-900 border border-transparent hover:border-slate-800"
+            class="p-2 text-[#c2ae9b] hover:text-[#f4a261] transition-colors rounded-xl hover:bg-[#2e2117] border border-transparent hover:border-[#4d3826]"
             title="Repositório no GitHub"
           >
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

@@ -3,7 +3,8 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
 import { SplitViewComparisonComponent } from '../../comparison/split-view-comparison.component';
 
 /**
- * Modal dialog presenting comprehensive comparison details for a selected dinosaur.
+ * Modal dialog presenting comprehensive comparison details for a selected dinosaur
+ * in warm earthy Paleo Pines style.
  */
 @Component({
   selector: 'app-dinosaur-modal',
@@ -21,14 +22,14 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
         <!-- Dialog Container -->
         <div class="min-h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
           <div
-            class="relative w-full max-w-5xl rounded-3xl border border-slate-700 bg-[#0b101e] p-6 sm:p-8 shadow-2xl overflow-hidden text-left"
+            class="relative w-full max-w-5xl rounded-3xl border border-[#5a402a] bg-[#1e1610] p-6 sm:p-8 shadow-2xl overflow-hidden text-left"
             (click)="$event.stopPropagation()"
           >
             <!-- Close Button -->
             <button
               type="button"
               (click)="state.closeDinosaurModal()"
-              class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors border border-slate-700 cursor-pointer z-10"
+              class="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#2a1e16] hover:bg-[#38281d] text-[#c2ae9b] hover:text-[#fceddb] flex items-center justify-center transition-colors border border-[#4d3826] cursor-pointer z-10"
               title="Fechar (Esc)"
             >
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -38,8 +39,8 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
             </button>
 
             <!-- Modal Header with Portrait -->
-            <div class="flex items-center gap-5 pb-6 border-b border-slate-800">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-950 border-2 border-cyan-400 p-1 shrink-0 overflow-hidden shadow-lg glow-cyan">
+            <div class="flex items-center gap-5 pb-6 border-b border-[#3e2c1e]">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#17100a] border-2 border-[#8c5836] p-1 shrink-0 overflow-hidden shadow-lg glow-wood">
                 @if (dino.portrait_url) {
                   <img
                     [src]="state.getPortraitUrl(dino.portrait_url)"
@@ -52,14 +53,14 @@ import { SplitViewComparisonComponent } from '../../comparison/split-view-compar
               </div>
 
               <div>
-                <span class="text-xs uppercase font-bold tracking-wider text-cyan-400">
+                <span class="text-xs uppercase font-bold tracking-wider text-[#f4a261]">
                   Dossiê Comparativo de Espécie
                 </span>
-                <h2 class="text-2xl sm:text-3xl font-black text-white">
+                <h2 class="text-2xl sm:text-3xl font-black text-[#fceddb]">
                   {{ dino.common_name }}
                 </h2>
                 @if (dino.fossil_profile?.scientific_name) {
-                  <p class="text-sm text-slate-400 italic">
+                  <p class="text-sm text-[#b8a490] italic">
                     {{ dino.fossil_profile!.scientific_name }}
                   </p>
                 }

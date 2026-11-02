@@ -2,50 +2,48 @@
 
 @layer base {
   body {
-    background-color: #080d1a;
-    color: #f1f5f9;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #16110c;
+    color: #f7f1e5;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  /* Custom sleek scrollbar */
+  /* Cozy rustic scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #0b1120;
+    background: #19130d;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
+    background: #3d2c1e;
     border-radius: 4px;
+    border: 1px solid #573f2c;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: #5c432d;
   }
 }
 
-/* Glow effects and tech aesthetics */
-.glow-cyan {
-  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.35);
+/* Warm earthy glow effects */
+.glow-amber {
+  box-shadow: 0 0 25px -4px rgba(224, 159, 62, 0.3);
 }
 
-.glow-blue {
-  box-shadow: 0 0 25px -5px rgba(37, 99, 235, 0.35);
+.glow-forest {
+  box-shadow: 0 0 25px -4px rgba(82, 183, 136, 0.25);
 }
 
-.glow-text-cyan {
-  text-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+.glow-wood {
+  box-shadow: 0 0 20px -3px rgba(188, 108, 37, 0.25);
 }
 
-.scanline-overlay {
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.25) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
-  );
-  background-size: 100% 3px, 6px 100%;
+.wood-panel {
+  background: linear-gradient(180deg, #2a2018 0%, #201711 100%);
+  border: 1px solid #4a3727;
+}
+
+.parchment-panel {
+  background: linear-gradient(180deg, #261e16 0%, #1d1610 100%);
+  border: 1px solid #3d2f23;
 }

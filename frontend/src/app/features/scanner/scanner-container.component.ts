@@ -4,7 +4,7 @@ import { UploadZoneComponent } from './upload-zone/upload-zone.component';
 import { ScanResultsComponent } from './scan-results/scan-results.component';
 
 /**
- * Main container for the visual scanning flow.
+ * Main container for the visual scanning flow styled in warm Paleo Pines atmosphere.
  */
 @Component({
   selector: 'app-scanner-container',
@@ -12,17 +12,28 @@ import { ScanResultsComponent } from './scan-results/scan-results.component';
   imports: [UploadZoneComponent, ScanResultsComponent],
   template: `
     <div class="space-y-10">
-      <!-- Hero Intro Header -->
-      <div class="text-center max-w-3xl mx-auto space-y-3">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/60 text-cyan-400 text-xs font-semibold">
-          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-          Classificador Neural Treinado em 38 Espécies
+      <!-- Hero Intro Header with Paleo Pines Logo -->
+      <div class="text-center max-w-3xl mx-auto space-y-4">
+        <!-- Logo Display -->
+        <div class="flex justify-center mb-1">
+          <img
+            src="/logo.png"
+            alt="Paleo Pines"
+            class="h-24 sm:h-32 w-auto object-contain drop-shadow-lg"
+          />
         </div>
-        <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#2e2116] border border-[#5a402a] text-[#f4a261] text-xs font-bold shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-[#52b788] animate-pulse"></span>
+          Inteligência Artificial Treinada em 38 Espécies do Jogo
+        </div>
+
+        <h2 class="text-3xl sm:text-5xl font-black text-[#fceddb] tracking-tight leading-tight">
           Descubra o Fóssil Real por Trás do Seu Dinossauro
         </h2>
-        <p class="text-sm sm:text-base text-slate-400 leading-relaxed">
-          Envie uma captura de tela do seu dinossauro de <strong class="text-slate-200">Paleo Pines</strong> para que a rede neural identifique a espécie instantaneamente e gere um raio-X comparativo com a anatomia e o período fóssil real.
+
+        <p class="text-sm sm:text-base text-[#b8a490] leading-relaxed max-w-2xl mx-auto">
+          Envie uma imagem do seu dinossauro de <strong class="text-[#f4a261]">Paleo Pines</strong> para descobrir a espécie exata e comparar como ele vivia na pré-história real: peso fóssil, época geológica, dieta e anatomia.
         </p>
       </div>
 

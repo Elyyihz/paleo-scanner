@@ -10,6 +10,7 @@ import { Dinosaur, ScanResponse } from '../models/dinosaur.model';
 })
 export class ScannerStateService {
   private readonly apiService = inject(DinosaurApiService);
+  private healthIntervalId: number | null = null;
 
   // --- Global App State ---
   public readonly activeTab = signal<'scanner' | 'catalog'>('scanner');
@@ -69,6 +70,21 @@ export class ScannerStateService {
   constructor() {
     this.verifyBackendHealth();
     this.fetchCatalog();
+    this.initHealthPolling();
+  }
+
+  /**
+   * Periodically verifies backend health if it is initially unreachable.
+   */
+  private initHealthPolling(): void {
+    if (typeof window !== 'undefined') {
+      this.healthIntervalId = window.setInterval(() => {
+        // Poll regularly if offline or not yet connected
+        if (this.isBackendOnline() !== true) {
+          this.verifyBackendHealth();
+        }
+      }, 4000);
+    }
   }
 
   /**
@@ -76,7 +92,14 @@ export class ScannerStateService {
    */
   public verifyBackendHealth(): void {
     this.apiService.checkHealth().subscribe({
-      next: () => this.isBackendOnline.set(true),
+      next: () => {
+        const wasOffline = this.isBackendOnline() === false;
+        this.isBackendOnline.set(true);
+        // If it was offline and catalog is empty, auto-fetch catalog now
+        if (wasOffline && this.dinosaurs().length === 0) {
+          this.fetchCatalog();
+        }
+      },
       error: () => this.isBackendOnline.set(false)
     });
   }
@@ -102,7 +125,7 @@ export class ScannerStateService {
         this.dinosaurs.set(data);
         this.isLoadingCatalog.set(false);
       },
-      error: err => {
+      error: () => {
         this.catalogError.set('Falha ao carregar o catálogo de dinossauros do servidor.');
         this.isLoadingCatalog.set(false);
       }
