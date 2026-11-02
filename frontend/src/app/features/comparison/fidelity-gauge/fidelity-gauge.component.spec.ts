@@ -29,7 +29,7 @@ describe('FidelityGaugeComponent', () => {
 
   it('should generate matching trait chips for high fidelity', () => {
     const chips = component.traitChips();
-    expect(chips.some(c => c.text === 'Dieta Comprovada')).toBe(true);
-    expect(chips.some(c => c.text === 'Anatomia Rigorosa')).toBe(true);
+    expect(chips.some(c => c.text === 'DIETA: COMPATÍVEL')).toBe(true);
+    expect(chips.some(c => c.text === 'ANATOMIA: RIGOROSA')).toBe(true);
   });
 });

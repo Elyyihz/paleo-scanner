@@ -2,59 +2,57 @@ import { Component, inject } from '@angular/core';
 import { ScannerStateService } from '../../../core/services/scanner-state.service';
 
 /**
- * Top application navigation bar with balanced 3-column alignment
- * and official Paleo Pines rustic visual identity.
+ * Top application navigation bar with high-tech bio-lab telemetry
+ * and balanced 3-column alignment.
  */
 @Component({
   selector: 'app-header',
   standalone: true,
   template: `
-    <header class="sticky top-0 z-40 w-full border-b border-[#3d2d20] bg-[#1a140f]/95 backdrop-blur-md shadow-md">
+    <header class="sticky top-0 z-40 w-full border-b border-[#174463] bg-[#071927]/95 backdrop-blur-md shadow-lg shadow-cyan-950/20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
-        <!-- Left: Brand identity (Balanced & Level) -->
+        <!-- Left: Brand identity with Tech HUD tag -->
         <div class="flex items-center gap-3 cursor-pointer select-none min-w-[200px]" (click)="state.setTab('scanner')">
           <img
             src="/logo.png"
             alt="Paleo Pines"
-            class="h-9 w-auto object-contain shrink-0 drop-shadow-sm hover:scale-105 transition-transform"
+            class="h-9 w-auto object-contain shrink-0 drop-shadow-md hover:scale-105 transition-transform"
           />
-          <div class="flex items-baseline gap-1.5">
-            <h1 class="text-base sm:text-lg font-black tracking-tight text-[#fceddb]">
-              PALEO<span class="text-[#f4a261]">-SCANNER</span>
+          <div class="flex items-baseline gap-2">
+            <h1 class="text-base sm:text-lg font-black tracking-tight text-[#f8fafc]">
+              PALEO<span class="text-[#06b6d4]">-SCANNER</span>
             </h1>
-            <span class="hidden xl:inline text-[10px] uppercase font-bold px-1.5 py-0.2 rounded bg-[#2e2117] text-[#dda15e] border border-[#523927]">
-              Fóssil
+            <span class="hidden xl:inline text-[10px] uppercase font-mono font-bold px-1.5 py-0.5 rounded bg-[#0b2436] text-[#38bdf8] border border-[#174463]">
+              BIO-LAB V2.4
             </span>
           </div>
         </div>
 
-        <!-- Center: Navigation Tabs (Perfect Horizontal Symmetry) -->
-        <nav class="flex items-center gap-1 bg-[#231a13] p-1 rounded-xl border border-[#443224] shadow-inner shrink-0">
+        <!-- Center: Navigation Tabs (Tech Viewport Switcher) -->
+        <nav class="flex items-center gap-1.5 bg-[#091f2f] p-1 rounded-xl border border-[#174463] shadow-inner shrink-0">
           <button
             type="button"
             (click)="state.setTab('scanner')"
-            class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
+            class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'scanner'
-              ? 'bg-[#d97706] text-amber-50 shadow-sm shadow-amber-950/60 border border-amber-400/30'
-              : 'text-[#c2ae9b] hover:text-[#fceddb] hover:bg-[#34261c]'"
+              ? 'bg-[#0891b2] text-white shadow-md shadow-cyan-950/60 border border-cyan-400/40'
+              : 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42]'"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.3-4.3"/>
-              <path d="M11 8v6"/>
-              <path d="M8 11h6"/>
+              <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/>
+              <path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
             </svg>
-            <span>Digitalizador</span>
+            <span>Scanner</span>
           </button>
 
           <button
             type="button"
             (click)="state.setTab('catalog')"
-            class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
+            class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 cursor-pointer"
             [class]="state.activeTab() === 'catalog'
-              ? 'bg-[#2d6a4f] text-emerald-50 shadow-sm shadow-emerald-950/60 border border-emerald-400/30'
-              : 'text-[#c2ae9b] hover:text-[#fceddb] hover:bg-[#34261c]'"
+              ? 'bg-[#059669] text-white shadow-md shadow-emerald-950/60 border border-emerald-400/40'
+              : 'text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42]'"
           >
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
@@ -63,53 +61,54 @@ import { ScannerStateService } from '../../../core/services/scanner-state.servic
             </svg>
             <span>Catálogo</span>
             @if (state.totalSpeciesCount() > 0) {
-              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-[#18110b] text-[#f4a261] font-mono font-bold">
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-[#05131e] text-[#34d399] font-mono font-bold">
                 {{ state.totalSpeciesCount() }}
               </span>
             }
           </button>
         </nav>
 
-        <!-- Right: Connectivity Status & GitHub (Evenly Balanced) -->
+        <!-- Right: Connectivity Status & Telemetry -->
         <div class="flex items-center justify-end gap-2.5 min-w-[200px]">
-          <!-- Backend health pill with click to retry -->
-          <button
-            type="button"
-            (click)="state.verifyBackendHealth()"
-            class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer shadow-xs"
-            [title]="state.isBackendOnline() === false ? 'Clique para reconectar à API (127.0.0.1:8000)' : 'Status da API'"
-            [class]="state.isBackendOnline() === true
-              ? 'bg-[#183120] text-[#74c69d] border-[#2d6a4f]'
-              : state.isBackendOnline() === false
-                ? 'bg-[#3d1818] text-[#fca5a5] border-[#991b1b] hover:bg-[#4f2020]'
-                : 'bg-[#291f16] text-[#dda15e] border-[#5e432d]'"
-          >
-            @if (state.isBackendOnline() === true) {
-              <span class="w-2 h-2 rounded-full bg-[#52b788] animate-pulse"></span>
-              <span class="hidden sm:inline">API Online</span>
-            } @else if (state.isBackendOnline() === false) {
+          @if (state.isBackendOnline() === true) {
+            <div
+              (click)="state.verifyBackendHealth()"
+              class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#062c20] text-[#34d399] border border-[#0d6b4a] shadow-xs cursor-pointer hover:brightness-110 transition-all"
+              title="API FastAPI e Banco de Dados Relacional Online (Clique para re-verificar)"
+            >
+              <span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+              <span class="font-mono text-[11px]">API ONLINE</span>
+            </div>
+          } @else if (state.isBackendOnline() === false) {
+            <button
+              type="button"
+              (click)="state.verifyBackendHealth()"
+              class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#3b1115] text-[#fca5a5] border border-[#8b2229] hover:bg-[#52161c] transition-colors cursor-pointer"
+              title="Clique para reconectar ao backend"
+            >
               <span class="w-2 h-2 rounded-full bg-[#ef4444]"></span>
-              <span class="hidden sm:inline">API Offline ↻</span>
-            } @else {
-              <span class="w-2 h-2 rounded-full bg-[#f4a261] animate-spin"></span>
-              <span class="hidden sm:inline">Conectando...</span>
-            }
-          </button>
+              <span class="font-mono text-[11px]">OFFLINE · RECONECTAR</span>
+            </button>
+          } @else {
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-[#0b2436] text-[#94a3b8] border border-[#174463]">
+              <span class="w-2 h-2 rounded-full bg-[#06b6d4] animate-ping"></span>
+              <span>INICIANDO...</span>
+            </div>
+          }
 
-          <!-- GitHub link -->
+          <!-- External GitHub Repo Link -->
           <a
             href="https://github.com/Elyyihz/paleo-scanner"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-[#c2ae9b] hover:text-[#f4a261] transition-colors rounded-xl hover:bg-[#2a1e16] border border-transparent hover:border-[#4d3826]"
-            title="Repositório no GitHub"
+            class="hidden sm:flex items-center gap-1.5 p-2 rounded-xl text-[#94a3b8] hover:text-[#f8fafc] hover:bg-[#0f2c42] border border-transparent hover:border-[#174463] transition-all"
+            title="Ver código-fonte no GitHub"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
             </svg>
           </a>
         </div>
-
       </div>
     </header>
   `
