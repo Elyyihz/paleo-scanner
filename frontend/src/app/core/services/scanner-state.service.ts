@@ -62,6 +62,14 @@ export class ScannerStateService {
     });
   });
 
+  public readonly currentDinosaurIndex = computed(() => {
+    const current = this.selectedDinosaur();
+    if (!current) return -1;
+    return this.filteredDinosaurs().findIndex(d => d.slug === current.slug);
+  });
+
+  private readonly sessionAssetVersion = Date.now();
+
   public readonly hasScanResult = computed(() => this.scanResult() !== null);
 
   /**
@@ -215,6 +223,30 @@ export class ScannerStateService {
   }
 
   /**
+   * Selects the next dinosaur in the filtered catalog list.
+   * Cycles circularly back to the first specimen if at the end.
+   */
+  public nextDinosaur(): void {
+    const dinos = this.filteredDinosaurs();
+    if (dinos.length === 0) return;
+    const currentIndex = this.currentDinosaurIndex();
+    const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % dinos.length : 0;
+    this.selectedDinosaur.set(dinos[nextIndex]);
+  }
+
+  /**
+   * Selects the previous dinosaur in the filtered catalog list.
+   * Cycles circularly to the last specimen if at the beginning.
+   */
+  public previousDinosaur(): void {
+    const dinos = this.filteredDinosaurs();
+    if (dinos.length === 0) return;
+    const currentIndex = this.currentDinosaurIndex();
+    const prevIndex = currentIndex > 0 ? currentIndex - 1 : dinos.length - 1;
+    this.selectedDinosaur.set(dinos[prevIndex]);
+  }
+
+  /**
    * Helper to resolve portrait images.
    *
    * @param path - Relative portrait path.
@@ -225,25 +257,25 @@ export class ScannerStateService {
   }
 
   /**
-   * Helper to resolve real fossil specimen photograph URL.
+   * Helper to resolve real fossil specimen photograph URL with dynamic cache busting.
    *
    * @param dinoOrSlug - Dinosaur entity or slug identifier.
    * @returns Full fossil image URL.
    */
   public getFossilUrl(dinoOrSlug: Dinosaur | string): string {
     const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
-    return this.apiService.getStaticImageUrl(`/static/fossils/${slug}.jpg?v=20261102`);
+    return this.apiService.getStaticImageUrl(`/static/fossils/${slug}.jpg?v=${this.sessionAssetVersion}`);
   }
 
   /**
-   * Helper to resolve paleoart life reconstruction illustration URL.
+   * Helper to resolve paleoart life reconstruction illustration URL with dynamic cache busting.
    *
    * @param dinoOrSlug - Dinosaur entity or slug identifier.
    * @returns Full paleoart illustration URL.
    */
   public getPaleoartUrl(dinoOrSlug: Dinosaur | string): string {
     const slug = typeof dinoOrSlug === 'string' ? dinoOrSlug : dinoOrSlug.slug;
-    return this.apiService.getStaticImageUrl(`/static/paleoart/${slug}.jpg?v=20261102`);
+    return this.apiService.getStaticImageUrl(`/static/paleoart/${slug}.jpg?v=${this.sessionAssetVersion}`);
   }
 
   /**

@@ -91,4 +91,42 @@ describe('ScannerStateService', () => {
     service.closeDinosaurModal();
     expect(service.selectedDinosaur()).toBeNull();
   });
+
+  it('should navigate through dinosaurs cyclically with next and previous', () => {
+    const mockDino2: Dinosaur = {
+      ...mockDino,
+      slug: 'triceratops',
+      common_name: 'Triceratops'
+    };
+    const mockDino3: Dinosaur = {
+      ...mockDino,
+      slug: 'velociraptor',
+      common_name: 'Velociraptor'
+    };
+
+    // Inject 3 dinos
+    service.dinosaurs.set([mockDino, mockDino2, mockDino3]);
+    service.openDinosaurModal(mockDino);
+    expect(service.currentDinosaurIndex()).toBe(0);
+
+    // Next -> mockDino2
+    service.nextDinosaur();
+    expect(service.selectedDinosaur()?.slug).toBe('triceratops');
+    expect(service.currentDinosaurIndex()).toBe(1);
+
+    // Next -> mockDino3
+    service.nextDinosaur();
+    expect(service.selectedDinosaur()?.slug).toBe('velociraptor');
+    expect(service.currentDinosaurIndex()).toBe(2);
+
+    // Next (cycle wrap) -> mockDino
+    service.nextDinosaur();
+    expect(service.selectedDinosaur()?.slug).toBe('tyrannosaurus-rex');
+    expect(service.currentDinosaurIndex()).toBe(0);
+
+    // Previous (cycle wrap backward) -> mockDino3
+    service.previousDinosaur();
+    expect(service.selectedDinosaur()?.slug).toBe('velociraptor');
+    expect(service.currentDinosaurIndex()).toBe(2);
+  });
 });

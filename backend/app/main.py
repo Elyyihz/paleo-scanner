@@ -49,9 +49,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static portraits directory if it exists
+class NoCacheStaticFiles(StaticFiles):
+    """Static file handler adding no-cache headers to ensure immediate local update reflection."""
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache, must-revalidate"
+        return response
+
+
+# Mount static assets directory with no-cache headers
 if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+    app.mount("/static", NoCacheStaticFiles(directory=STATIC_DIR), name="static")
 
 # Include v1 endpoints
 app.include_router(api_router, prefix="/api/v1")

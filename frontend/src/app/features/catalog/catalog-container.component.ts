@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { ScannerStateService } from '../../core/services/scanner-state.service';
 import { DinosaurCardComponent } from './dinosaur-card/dinosaur-card.component';
 import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.component';
@@ -150,10 +150,15 @@ import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.componen
         </div>
 
         <!-- Counter summary -->
-        <div class="text-xs font-mono text-[#94a3b8] flex items-center justify-between">
-          <span>
-            Exibindo <strong class="text-[#c8873a] font-bold">{{ state.filteredDinosaurs().length }}</strong> de {{ state.totalSpeciesCount() }} espécies
-          </span>
+        <div class="text-xs font-mono text-[#94a3b8] flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-3">
+            <span>
+              Exibindo <strong class="text-[#c8873a] font-bold">{{ state.filteredDinosaurs().length }}</strong> de {{ state.totalSpeciesCount() }} espécies
+            </span>
+            <span class="hidden md:inline-flex items-center gap-1 text-[#64748b]">
+              · Navegue com <kbd class="px-1.5 py-0.5 rounded bg-[#16202a] border border-[#222d3a] text-[#c8873a] text-[10px]">←</kbd> <kbd class="px-1.5 py-0.5 rounded bg-[#16202a] border border-[#222d3a] text-[#c8873a] text-[10px]">→</kbd>
+            </span>
+          </div>
           @if (state.searchQuery() || state.selectedBiome() !== 'all' || state.selectedDiet() !== 'all') {
             <button
               type="button"
@@ -203,6 +208,30 @@ import { DinosaurModalComponent } from './dinosaur-modal/dinosaur-modal.componen
 })
 export class CatalogContainerComponent {
   public readonly state = inject(ScannerStateService);
+
+  @HostListener('document:keydown.arrowright', ['$event'])
+  public handleArrowRight(event: Event): void {
+    if (this.isInputElement(event.target) || this.state.selectedDinosaur()) return;
+    const dinos = this.state.filteredDinosaurs();
+    if (dinos.length > 0) {
+      event.preventDefault();
+      this.state.openDinosaurModal(dinos[0]);
+    }
+  }
+
+  @HostListener('document:keydown.arrowleft', ['$event'])
+  public handleArrowLeft(event: Event): void {
+    if (this.isInputElement(event.target) || this.state.selectedDinosaur()) return;
+    const dinos = this.state.filteredDinosaurs();
+    if (dinos.length > 0) {
+      event.preventDefault();
+      this.state.openDinosaurModal(dinos[dinos.length - 1]);
+    }
+  }
+
+  private isInputElement(target: EventTarget | null): boolean {
+    return target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
+  }
 
   public onSearchInput(event: Event): void {
     const target = event.target as HTMLInputElement;
