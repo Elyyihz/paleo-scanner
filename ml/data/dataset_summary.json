@@ -1,8 +1,8 @@
 {
-  "total_species": 38,
-  "total_images": 726,
-  "train_images": 599,
-  "val_images": 127,
+  "total_species": 40,
+  "total_images": 842,
+  "train_images": 693,
+  "val_images": 149,
   "classes": [
     "allosaurus",
     "ankylosaurus",
@@ -32,7 +32,9 @@
     "postosuchus",
     "protoceratops",
     "psittacosaurus",
+    "sarcosuchus",
     "scelidosaurus",
+    "spinosaurus",
     "stegosaurus",
     "styracosaurus",
     "therizinosaurus",
@@ -212,11 +214,23 @@
       "train_samples": 10,
       "val_samples": 2
     },
+    "sarcosuchus": {
+      "common_name": "Sarcosuchus",
+      "total_samples": 62,
+      "train_samples": 50,
+      "val_samples": 12
+    },
     "scelidosaurus": {
       "common_name": "Scelidosaurus",
       "total_samples": 11,
       "train_samples": 9,
       "val_samples": 2
+    },
+    "spinosaurus": {
+      "common_name": "Spinosaurus",
+      "total_samples": 54,
+      "train_samples": 44,
+      "val_samples": 10
     },
     "stegosaurus": {
       "common_name": "Stegosaurus",
