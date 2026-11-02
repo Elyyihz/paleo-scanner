@@ -1,0 +1,13 @@
+<div class="min-h-screen flex flex-col bg-[#080d1a] text-slate-100 selection:bg-cyan-500 selection:text-black">
+  <app-header />
+
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    @if (state.activeTab() === 'scanner') {
+      <app-scanner-container />
+    } @else {
+      <app-catalog-container />
+    }
+  </main>
+
+  <app-footer />
+</div>
