@@ -82,22 +82,13 @@ import { HttpClient } from '@angular/common/http';
             <span class="text-xs font-mono text-[#64748b] px-1 font-medium hidden sm:inline">ou teste por espécie:</span>
 
             <div class="flex flex-wrap items-center gap-1.5">
-              <!-- Parasaurolophus Preset -->
+              <!-- Dilophosaurus Preset -->
               <button
                 type="button"
-                (click)="loadSamplePreset('parasaurolophus')"
+                (click)="loadSamplePreset('dilophosaurus')"
                 class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
-                Parasaurolophus
-              </button>
-
-              <!-- Stegosaurus Preset -->
-              <button
-                type="button"
-                (click)="loadSamplePreset('stegosaurus')"
-                class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
-              >
-                Stegosaurus
+                Dilophosaurus
               </button>
 
               <!-- Triceratops Preset -->
@@ -109,13 +100,13 @@ import { HttpClient } from '@angular/common/http';
                 Triceratops
               </button>
 
-              <!-- T-Rex Preset -->
+              <!-- Archaeopteryx Preset -->
               <button
                 type="button"
-                (click)="loadSamplePreset('tyrannosaurus-rex')"
+                (click)="loadSamplePreset('archaeopteryx')"
                 class="px-2.5 py-1 text-xs font-mono font-medium rounded bg-[#0c1015] hover:bg-[#1a232e] border border-[#222d3a] text-[#ebe6dc] hover:border-[#c8873a] transition-colors cursor-pointer"
               >
-                T-Rex
+                Archaeopteryx
               </button>
             </div>
           </div>

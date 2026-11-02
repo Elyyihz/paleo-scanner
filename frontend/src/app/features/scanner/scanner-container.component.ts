@@ -21,7 +21,7 @@ import { ScanResultsComponent } from './scan-results/scan-results.component';
               <path d="M12 2a10 10 0 0 1 10 10c0 4.418-2.865 8.167-6.839 9.49"/>
               <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
             </svg>
-            <span>RECONHECIMENTO BIO-VISUAL (38 ESPÉCIES)</span>
+            <span>RECONHECIMENTO BIO-VISUAL (40 ESPÉCIES)</span>
           </div>
 
           <h2 class="text-2xl sm:text-3xl font-bold text-[#ebe6dc] tracking-tight">
