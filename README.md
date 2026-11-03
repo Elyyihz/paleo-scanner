@@ -121,21 +121,40 @@ O backend é estritamente desacoplado segundo as diretrizes de Robert C. Martin 
 
 ---
 
-## 🐳 Execução Rápida com Docker
+## 🐳 Execução e Deploy com Docker
 
-O projeto inclui orquestração completa multi-container via **Docker Compose**:
+O projeto oferece suporte tanto para **Container Unificado** (ideal para deploy em nuvem com 1 clique) quanto para **Multi-Container Orquestrado** (ideal para VPS).
 
-### 1. Subir Aplicação Completa (Frontend + Backend + IA)
+### Modalidade A: Container Único de Produção (1-Click Cloud)
+Perfeito para plataformas como **Render**, **Hugging Face Spaces**, **Railway** e **Fly.io**:
+```bash
+# Compilar e executar a aplicação completa na porta 8000
+docker build -t paleo-scanner:latest .
+docker run -p 8000:8000 paleo-scanner:latest
+
+# Acesse o app completo (Frontend SPA + API + IA) em:
+# http://localhost:8000
+```
+
+### Modalidade B: Multi-Container Orquestrado (Docker Compose)
+Ideal para desenvolvimento modular ou servidores VPS com Nginx dedicado:
 ```bash
 # Na raiz do projeto:
 docker compose up --build
+
+# Para customizar portas em caso de conflito, copie o .env.example:
+cp .env.example .env
+# Altere BACKEND_PORT ou FRONTEND_PORT conforme necessário
 ```
 
-### 2. Portas e Endpoints
-* **Frontend Web (Angular + Nginx)**: [http://localhost:4200](http://localhost:4200)
+### Portas e Endpoints
+* **Aplicação Completa (Modo Unificado)**: [http://localhost:8000](http://localhost:8000)
+* **Frontend Web (Modo Compose / Nginx)**: [http://localhost:4200](http://localhost:4200)
 * **Backend API (FastAPI)**: [http://localhost:8000](http://localhost:8000)
 * **Documentação Swagger OpenAPI**: [http://localhost:8000/docs](http://localhost:8000/docs)
 * **Healthcheck do Backend**: [http://localhost:8000/api/v1/health](http://localhost:8000/api/v1/health)
+
+📘 **Guia Completo de Deploy na Nuvem**: Consulte o passo a passo detalhado para Render, Hugging Face Spaces, Railway e VPS em [`docs/DEPLOYMENT_GUIDE.md`](docs/DEPLOYMENT_GUIDE.md).
 
 ---
 
