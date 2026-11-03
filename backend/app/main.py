@@ -64,13 +64,35 @@ if STATIC_DIR.exists():
 # Include v1 endpoints
 app.include_router(api_router, prefix="/api/v1")
 
+# Check for compiled frontend distribution (production container or local build)
+FRONTEND_DIST = (
+    Path("/app/frontend_dist")
+    if Path("/app/frontend_dist").exists()
+    else (Path(__file__).resolve().parents[2] / "frontend" / "dist" / "frontend" / "browser")
+)
 
-@app.get("/", tags=["Root"])
-def root():
-    return {
-        "message": "Bem-vindo à Paleo-Scanner API!",
-        "documentation": "/docs",
-        "health": "/api/v1/health",
-        "dinosaurs": "/api/v1/dinosaurs",
-        "scan": "/api/v1/scan",
-    }
+if FRONTEND_DIST.exists():
+    from fastapi import HTTPException
+    from fastapi.responses import FileResponse
+
+    @app.api_route("/{full_path:path}", methods=["GET", "HEAD"], include_in_schema=False)
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api/") or full_path.startswith("static/") or full_path in ("docs", "redoc", "openapi.json"):
+            raise HTTPException(status_code=404, detail="Not Found")
+        file_path = FRONTEND_DIST / full_path
+        if file_path.is_file():
+            return FileResponse(file_path)
+        index_file = FRONTEND_DIST / "index.html"
+        if index_file.exists():
+            return FileResponse(index_file)
+        return {"error": "Frontend build not found"}
+else:
+    @app.get("/", tags=["Root"])
+    def root():
+        return {
+            "message": "Bem-vindo à Paleo-Scanner API!",
+            "documentation": "/docs",
+            "health": "/api/v1/health",
+            "dinosaurs": "/api/v1/dinosaurs",
+            "scan": "/api/v1/scan",
+        }

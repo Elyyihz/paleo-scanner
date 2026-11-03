@@ -12,8 +12,26 @@ import { Dinosaur, HealthStatus, ScanResponse } from '../models/dinosaur.model';
 })
 export class DinosaurApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = environment.apiUrl;
-  private readonly staticBaseUrl = environment.staticBaseUrl;
+
+  private get baseUrl(): string {
+    if (typeof window !== 'undefined') {
+      const isRemote = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+      if (isRemote) {
+        return '/api/v1';
+      }
+    }
+    return environment.apiUrl;
+  }
+
+  private get staticBaseUrl(): string {
+    if (typeof window !== 'undefined') {
+      const isRemote = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+      if (isRemote) {
+        return '';
+      }
+    }
+    return environment.staticBaseUrl;
+  }
 
   /**
    * Pings the API health check endpoint.
